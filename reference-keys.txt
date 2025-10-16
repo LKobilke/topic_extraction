@@ -160,3 +160,5 @@ center_scale
 z_scale
 tutorial-data-management-with-dplyr
 basic-setup-of-an-rmd-script
+step-1-check-your-current-versions
+step-2-update-r-directly-in-rstudio
