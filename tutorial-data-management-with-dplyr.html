@@ -1210,9 +1210,10 @@ group them by their species (<code>group_by()</code>) and summarize the average 
 </div>
 <div id="printing-more-rows-in-the-console-using-dplyr" class="section level2 hasAnchor" number="5.6">
 <h2><span class="header-section-number">5.6</span> Printing more rows in the console using <code>dplyr</code><a href="tutorial-data-management-with-dplyr.html#printing-more-rows-in-the-console-using-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>By default, when working with tidyverse in <code>R</code>, only 10 rows of your data will be printed to the console. However, sometimes you might want to inspect more rows to get a better understanding of your dataset. You can achieve this with the <code>slice()</code> function in <code>dplyr</code>:</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="tutorial-data-management-with-dplyr.html#cb175-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 20 × 14
+<p>By default, when working with tidyverse in <code>R</code>, only 10 rows of your data will be printed to the console. However, sometimes you might want to inspect more rows to get a better understanding of your dataset. You can achieve this with the <code>print()</code> function:</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="tutorial-data-management-with-dplyr.html#cb175-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span> </span>
+<span id="cb175-2"><a href="tutorial-data-management-with-dplyr.html#cb175-2" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 87 × 14
 ##    name     height  mass hair_color skin_color eye_color birth_year sex   gender
 ##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
 ##  1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…
@@ -1235,6 +1236,7 @@ group them by their species (<code>group_by()</code>) and summarize the average 
 ## 18 Jek Ton…    180   110 brown      fair       blue            NA   &lt;NA&gt;  &lt;NA&gt;  
 ## 19 Yoda         66    17 white      green      brown          896   male  mascu…
 ## 20 Palpati…    170    75 grey       pale       yellow          82   male  mascu…
+## # ℹ 67 more rows
 ## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 ## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <p>Alternatively, you can set the number of displayed rows by adjusting your global options at the beginning of your R script (see our tutorial on <a href="tutorial-installing-understanding-rr-studio.html#optional-setting-global-options-in-r-for-a-customized-workflow">Optional: Setting global options in R for a customized workflow</a>).</p>
