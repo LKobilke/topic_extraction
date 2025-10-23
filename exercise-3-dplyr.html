@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Exercise 2: Base R | Methodenvergleich zur automatisierten Themenextraktion</title>
-  <meta name="description" content="Exercise 2: Base R | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
+  <title>Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion</title>
+  <meta name="description" content="Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Exercise 2: Base R | Methodenvergleich zur automatisierten Themenextraktion" />
+  <meta property="og:title" content="Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Exercise 2: Base R | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
+  <meta property="og:description" content="Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Exercise 2: Base R | Methodenvergleich zur automatisierten Themenextraktion" />
+  <meta name="twitter:title" content="Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion" />
   
-  <meta name="twitter:description" content="Exercise 2: Base R | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
+  <meta name="twitter:description" content="Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
   
 
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tutorial-working-with-data-files.html"/>
-<link rel="next" href="tutorial-data-management-with-dplyr.html"/>
+<link rel="prev" href="tutorial-data-management-with-dplyr.html"/>
+<link rel="next" href="solutions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -303,40 +303,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercise-2-base-r" class="section level1 unnumbered hasAnchor">
-<h1>Exercise 2: Base R<a href="exercise-2-base-r.html#exercise-2-base-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>After working through Exercise 2, you’ll…</strong></p>
+<div id="exercise-3-dplyr" class="section level1 unnumbered hasAnchor">
+<h1>Exercise 3: dplyr<a href="exercise-3-dplyr.html#exercise-3-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>After working through Exercise 3, you’ll…</strong></p>
 <ul>
-<li>have double-checked whether you understand how to import data</li>
-<li>have learned to subset variables in data frames</li>
-<li>have learned to subset observations and values in data frames</li>
+<li>have assessed how well you know <code>dplyr</code></li>
+<li>know what <code>dplyr</code> functions and concepts you might want to repeat
+again</li>
+<li>have managed to apply the <code>dplyr</code> concepts to data</li>
 </ul>
-<div id="task-1-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 1<a href="exercise-2-base-r.html#task-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Download the <em>“WoJ_names.csv”</em> from LRZ Sync &amp; Share (<a href="https://syncandshare.lrz.de/getlink/fiwoSeB27JvNosTM6e6xp/WoJ_names.csv">click here</a>) and
-put it into the folder that you want to use as working directory.</p>
-<p>Set your working directory and load the data into R by saving it into a
-source object called <em>data</em>. Use <code>setwd()</code>.</p>
-<p><strong>Note:</strong> This time, it’s a csv that is separated by semicolons, not by
-commas.</p>
+<div id="task-1-2" class="section level2 unnumbered hasAnchor">
+<h2>Task 1<a href="exercise-3-dplyr.html#task-1-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Below you will see multiple choice questions. Please try to identify the
+correct answers. 1, 2, 3 and 4 correct answers are possible for each
+question.</p>
+<p><strong>1. What are the main characteristics of tidy data?</strong></p>
+<ul>
+<li>Every cell contains values.</li>
+<li>Every cell contains a variable.</li>
+<li>Every observation is a column.</li>
+<li>Every observation is a row.</li>
+</ul>
+<p><strong>2. What are <code>dplyr</code> functions?</strong></p>
+<ul>
+<li><code>summary()</code></li>
+<li><code>describe()</code></li>
+<li><code>mutate()</code></li>
+<li><code>manage()</code></li>
+</ul>
+<p><strong>3. How can you sort the eye_color of Star Wars characters from Z to
+A?</strong></p>
+<ul>
+<li><code>starwars_data %&gt;% arrange(desc(eye_color))</code></li>
+<li><code>starwars_data %&gt;% arrange(eye_color)</code></li>
+<li><code>starwars_data %&gt;% select(arrange(eye_color))</code></li>
+<li><code>starwars_data %&gt;% select(eye_color) %&gt;% arrange(desc(eye_color))</code></li>
+</ul>
+<p><strong>4. Imagine you want to recode the height of these characters. You want
+to have three categories from small and medium to tall. What is a valid
+approach?</strong></p>
+<ul>
+<li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
+<li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
+<li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
+<li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
+</ul>
+<p><strong>5. Imagine you want to provide a systematic overview over all hair
+colors and what species wear these hair colors frequently (not
+accounting for the skewed sampling of species)? What is a valid
+approach?</strong></p>
+<ul>
+<li><code>starwars_data %&gt;% group_by(hair_color) %&gt;% group_by(species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
+<li><code>starwars_data %&gt;% group_by(hair_color, species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
+<li><code>starwars_data %&gt;% group_by(hair_color &amp; species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
+<li><code>starwars_data %&gt;% group_by(hair_color + species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
+</ul>
 </div>
-<div id="task-2-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 2<a href="exercise-2-base-r.html#task-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Now, print only the column to the console that shows the <em>trust in the
-government</em>. Use the <code>$</code> operator first. Then try to achieve the same
-result using the subsetting operators, i.e. <code>[]</code>.</p>
+<div id="task-2-2" class="section level2 unnumbered hasAnchor">
+<h2>Task 2<a href="exercise-3-dplyr.html#task-2-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It’s your turn now. Load the starwars data like this:</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="exercise-3-dplyr.html#cb177-1" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># to activate the dplyr package</span></span>
+<span id="cb177-2"><a href="exercise-3-dplyr.html#cb177-2" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars <span class="co"># to assign the pre-installed starwars data set (dplyr) into a source object in our environment</span></span></code></pre></div>
+<p>How many humans are contained in the starwars data overall? (Hint: use
+<code>summarize(count = n())</code> or <code>count()</code>)</p>
 </div>
-<div id="task-3-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 3<a href="exercise-2-base-r.html#task-3-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Print only the first 6 <em>trust in the government</em> numbers to the console.
-Use the <code>$</code> operator first. Then try to achieve the same result using
-the subsetting operators, i.e. <code>[]</code>.</p>
+<div id="task-3-2" class="section level2 unnumbered hasAnchor">
+<h2>Task 3<a href="exercise-3-dplyr.html#task-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>How many humans are contained in starwars by gender?</p>
 </div>
-<div id="task-4" class="section level2 unnumbered hasAnchor">
-<h2>Task 4<a href="exercise-2-base-r.html#task-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Repeat Task 1, but use an R project this time to set your working directory.</p>
-<p>When you’re ready to look at the solutions, you can find them
-here: <a href="solutions.html#solutions-for-exercise-2">Solutions for Exercise 2</a>.</p>
+<div id="task-4-1" class="section level2 unnumbered hasAnchor">
+<h2>Task 4<a href="exercise-3-dplyr.html#task-4-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>What is the most common eye_color among Star Wars characters? (Hint: use
+<code>arrange()</code>)</p>
+</div>
+<div id="task-5" class="section level2 unnumbered hasAnchor">
+<h2>Task 5<a href="exercise-3-dplyr.html#task-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>What is the average mass of Star Wars characters that are not human and
+have yellow eyes? (Hint: remove all <code>NAs</code>)</p>
+</div>
+<div id="task-6" class="section level2 unnumbered hasAnchor">
+<h2>Task 6<a href="exercise-3-dplyr.html#task-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Compare the mean, median, and standard deviation of mass for all humans
+and droids. (Hint: remove all <code>NAs</code>)</p>
+</div>
+<div id="task-7" class="section level2 unnumbered hasAnchor">
+<h2>Task 7<a href="exercise-3-dplyr.html#task-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Create a new variable in which you store the mass in gram (gr_mass). Add
+it to the data frame. Test whether your solution works by printing your
+data to the console, but only show the name, species, mass, and your new
+variable gr_mass.</p>
+<p>When you’re ready to look at the solutions, you can find them here:
+<a href="solutions.html#solutions-for-exercise-3">Solutions for Exercise 3</a>.</p>
 </div>
 </div>
             </section>
@@ -344,8 +401,8 @@ here: <a href="solutions.html#solutions-for-exercise-2">Solutions for Exercise 2
           </div>
         </div>
       </div>
-<a href="tutorial-working-with-data-files.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tutorial-data-management-with-dplyr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tutorial-data-management-with-dplyr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
