@@ -167,3 +167,6 @@ creating-a-new-r-project
 checking-your-working-directory
 a-recommendation-for-designing-a-good-r-project-structure
 navigating-your-working-directory-like-a-pro-the-concept-of-relative-paths
+helpful-shortcuts-in-r
+tutorial-text-manipulation-with-stringr
+tutorial-tidy-text-analysis
