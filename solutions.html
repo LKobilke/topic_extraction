@@ -257,6 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exercise-3-dplyr.html"><a href="exercise-3-dplyr.html#task-5"><i class="fa fa-check"></i>Task 5</a></li>
 <li class="chapter" data-level="" data-path="exercise-3-dplyr.html"><a href="exercise-3-dplyr.html#task-6"><i class="fa fa-check"></i>Task 6</a></li>
 <li class="chapter" data-level="" data-path="exercise-3-dplyr.html"><a href="exercise-3-dplyr.html#task-7"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="exercise-3-dplyr.html"><a href="exercise-3-dplyr.html#task-8"><i class="fa fa-check"></i>Task 8</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a>
 <ul>
@@ -282,6 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -521,146 +523,148 @@ approach?</strong></p>
 </div>
 <div id="task-2-5" class="section level3 unnumbered hasAnchor">
 <h3>Task 2<a href="solutions.html#task-2-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Now it’s your turn. Load the starwars data like this:</p>
+<p>It’s your turn now. Load the starwars data like this:</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="solutions.html#cb209-1" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># to activate the dplyr package</span></span>
 <span id="cb209-2"><a href="solutions.html#cb209-2" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars <span class="co"># to assign the pre-installed starwars data set (dplyr) into a source object in our environment</span></span></code></pre></div>
-<p>How many humans are contained in the starwars data overall? (Hint: use
-<code>summarize(count = n())</code> or <code>count()</code>)?</p>
 <p><em>Solution:</em></p>
-<p>You can use <code>summarize(count = n())</code>:</p>
+<p>How many humans are contained in the starwars dataset overall?
+First, solve this task using <code>filter()</code> only.</p>
 <div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="solutions.html#cb210-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb210-2"><a href="solutions.html#cb210-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb210-3"><a href="solutions.html#cb210-3" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
+<span id="cb210-2"><a href="solutions.html#cb210-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 35 × 14
+##    name     height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…
+##  2 Darth V…    202   136 none       white      yellow          41.9 male  mascu…
+##  3 Leia Or…    150    49 brown      light      brown           19   fema… femin…
+##  4 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…
+##  5 Beru Wh…    165    75 brown      light      blue            47   fema… femin…
+##  6 Biggs D…    183    84 black      light      brown           24   male  mascu…
+##  7 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…
+##  8 Anakin …    188    84 blond      fair       blue            41.9 male  mascu…
+##  9 Wilhuff…    180    NA auburn, g… fair       blue            64   male  mascu…
+## 10 Han Solo    180    80 brown      fair       brown           29   male  mascu…
+## # ℹ 25 more rows
+## # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>Next, solve it by combining <code>filter()</code> with <code>summarize(count = n())</code>.</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="solutions.html#cb212-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb212-2"><a href="solutions.html#cb212-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb212-3"><a href="solutions.html#cb212-3" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##   count
 ##   &lt;int&gt;
 ## 1    35</code></pre>
-<p>Alternatively, you can use the <code>count()</code> function:</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="solutions.html#cb212-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb212-2"><a href="solutions.html#cb212-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb212-3"><a href="solutions.html#cb212-3" tabindex="-1"></a>  <span class="fu">count</span>(species)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 2
-##   species     n
-##   &lt;chr&gt;   &lt;int&gt;
-## 1 Human      35</code></pre>
+<p>Finally, try to solve it with <code>count()</code>.</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="solutions.html#cb214-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb214-2"><a href="solutions.html#cb214-2" tabindex="-1"></a>  <span class="fu">count</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   `species == &quot;Human&quot;`     n
+##   &lt;lgl&gt;                &lt;int&gt;
+## 1 FALSE                   48
+## 2 TRUE                    35
+## 3 NA                       4</code></pre>
 </div>
 <div id="task-3-5" class="section level3 unnumbered hasAnchor">
 <h3>Task 3<a href="solutions.html#task-3-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>How many humans are contained in starwars by gender?</p>
+<p>Use <code>mutate()</code> and <code>case_when()</code> to create a new column height_group with:</p>
+<ul>
+<li>“short” if height &lt; 140</li>
+<li>“medium” if height &lt; 180</li>
+<li>“tall” otherwise.</li>
+</ul>
 <p><em>Solution:</em></p>
-<p>You can use <code>summarize(count = n())</code>:</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="solutions.html#cb214-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb214-2"><a href="solutions.html#cb214-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb214-3"><a href="solutions.html#cb214-3" tabindex="-1"></a>  <span class="fu">group_by</span>(species, gender) <span class="sc">%&gt;%</span></span>
-<span id="cb214-4"><a href="solutions.html#cb214-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 3
-## # Groups:   species [1]
-##   species gender    count
-##   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;
-## 1 Human   feminine      9
-## 2 Human   masculine    26</code></pre>
-<p>Alternatively, you can use the <code>count()</code> function:</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="solutions.html#cb216-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb216-2"><a href="solutions.html#cb216-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb216-3"><a href="solutions.html#cb216-3" tabindex="-1"></a>  <span class="fu">count</span>(species, gender)</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 3
-##   species gender        n
-##   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;
-## 1 Human   feminine      9
-## 2 Human   masculine    26</code></pre>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="solutions.html#cb216-1" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb216-2"><a href="solutions.html#cb216-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">height_group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb216-3"><a href="solutions.html#cb216-3" tabindex="-1"></a>    height <span class="sc">&lt;</span> <span class="dv">140</span> <span class="sc">~</span> <span class="st">&quot;short&quot;</span>,</span>
+<span id="cb216-4"><a href="solutions.html#cb216-4" tabindex="-1"></a>    height <span class="sc">&lt;</span> <span class="dv">180</span> <span class="sc">~</span> <span class="st">&quot;medium&quot;</span>,</span>
+<span id="cb216-5"><a href="solutions.html#cb216-5" tabindex="-1"></a>    height <span class="sc">&gt;=</span> <span class="dv">180</span> <span class="sc">~</span> <span class="st">&quot;tall&quot;</span></span>
+<span id="cb216-6"><a href="solutions.html#cb216-6" tabindex="-1"></a>  ))</span></code></pre></div>
 </div>
 <div id="task-4-3" class="section level3 unnumbered hasAnchor">
 <h3>Task 4<a href="solutions.html#task-4-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>What is the most common eye_color among Star Wars characters? (Hint: use
-<code>arrange()</code>)__</p>
+<p>How many humans are contained in starwars by height_group? (Hint: You’ll need to chain multiple functions. Remember that <code>summarize()</code> has a best friend that will help you solve this task. :))</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="solutions.html#cb218-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb218-2"><a href="solutions.html#cb218-2" tabindex="-1"></a>  <span class="fu">group_by</span>(eye_color) <span class="sc">%&gt;%</span></span>
-<span id="cb218-3"><a href="solutions.html#cb218-3" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb218-4"><a href="solutions.html#cb218-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
-<pre><code>## # A tibble: 15 × 2
-##    eye_color     count
-##    &lt;chr&gt;         &lt;int&gt;
-##  1 brown            21
-##  2 blue             19
-##  3 yellow           11
-##  4 black            10
-##  5 orange            8
-##  6 red               5
-##  7 hazel             3
-##  8 unknown           3
-##  9 blue-gray         1
-## 10 dark              1
-## 11 gold              1
-## 12 green, yellow     1
-## 13 pink              1
-## 14 red, blue         1
-## 15 white             1</code></pre>
-<p>Alternatively, you can use the <code>count()</code> function:</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="solutions.html#cb220-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb220-2"><a href="solutions.html#cb220-2" tabindex="-1"></a>  <span class="fu">count</span>(eye_color) <span class="sc">%&gt;%</span></span>
-<span id="cb220-3"><a href="solutions.html#cb220-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code></pre></div>
-<pre><code>## # A tibble: 15 × 2
-##    eye_color         n
-##    &lt;chr&gt;         &lt;int&gt;
-##  1 brown            21
-##  2 blue             19
-##  3 yellow           11
-##  4 black            10
-##  5 orange            8
-##  6 red               5
-##  7 hazel             3
-##  8 unknown           3
-##  9 blue-gray         1
-## 10 dark              1
-## 11 gold              1
-## 12 green, yellow     1
-## 13 pink              1
-## 14 red, blue         1
-## 15 white             1</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="solutions.html#cb217-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb217-2"><a href="solutions.html#cb217-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb217-3"><a href="solutions.html#cb217-3" tabindex="-1"></a>  <span class="fu">group_by</span>(height_group) <span class="sc">%&gt;%</span></span>
+<span id="cb217-4"><a href="solutions.html#cb217-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   height_group count
+##   &lt;chr&gt;        &lt;int&gt;
+## 1 medium          13
+## 2 tall            17
+## 3 &lt;NA&gt;             5</code></pre>
 </div>
 <div id="task-5-1" class="section level3 unnumbered hasAnchor">
 <h3>Task 5<a href="solutions.html#task-5-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>What is the average mass of Star Wars characters that are not human and
-have yellow eyes? (Hint: remove all <code>NAs</code>)__</p>
+<p>What is the most common height_group among Star Wars characters? (Hint: You’ll need to chain multiple functions, but one of them should be <code>arrange()</code>)__</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="solutions.html#cb222-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb222-2"><a href="solutions.html#cb222-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">!=</span> <span class="st">&quot;Human&quot;</span> <span class="sc">&amp;</span> eye_color <span class="sc">==</span> <span class="st">&quot;yellow&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb222-3"><a href="solutions.html#cb222-3" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="solutions.html#cb219-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb219-2"><a href="solutions.html#cb219-2" tabindex="-1"></a>  <span class="fu">group_by</span>(height_group) <span class="sc">%&gt;%</span></span>
+<span id="cb219-3"><a href="solutions.html#cb219-3" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb219-4"><a href="solutions.html#cb219-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+##   height_group count
+##   &lt;chr&gt;        &lt;int&gt;
+## 1 tall            44
+## 2 medium          27
+## 3 short           10
+## 4 &lt;NA&gt;             6</code></pre>
+<p>Alternatively, you could use the <code>count()</code> function:</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="solutions.html#cb221-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb221-2"><a href="solutions.html#cb221-2" tabindex="-1"></a>  <span class="fu">count</span>(height_group) <span class="sc">%&gt;%</span></span>
+<span id="cb221-3"><a href="solutions.html#cb221-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+##   height_group     n
+##   &lt;chr&gt;        &lt;int&gt;
+## 1 tall            44
+## 2 medium          27
+## 3 short           10
+## 4 &lt;NA&gt;             6</code></pre>
+</div>
+<div id="task-6-1" class="section level3 unnumbered hasAnchor">
+<h3>Task 6<a href="solutions.html#task-6-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>What is the average mass of Star Wars characters that are not human and
+have yellow eyes? (Hint: You’ll need to calculate descriptive statistics and remove all <code>NAs</code>.)</p>
+<p><em>Solution:</em></p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="solutions.html#cb223-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb223-2"><a href="solutions.html#cb223-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">!=</span> <span class="st">&quot;Human&quot;</span> <span class="sc">&amp;</span> eye_color <span class="sc">==</span> <span class="st">&quot;yellow&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb223-3"><a href="solutions.html#cb223-3" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##   mean_mass
 ##       &lt;dbl&gt;
 ## 1      74.1</code></pre>
 </div>
-<div id="task-6-1" class="section level3 unnumbered hasAnchor">
-<h3>Task 6<a href="solutions.html#task-6-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="task-7-1" class="section level3 unnumbered hasAnchor">
+<h3>Task 7<a href="solutions.html#task-7-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Compare the mean, median, and standard deviation of mass for all humans
-and droids. (Hint: remove all <code>NAs</code>)__</p>
+and droids. (Hint: You’ll need to calculate descriptive statistics and remove all <code>NAs</code>.)</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="solutions.html#cb224-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb224-2"><a href="solutions.html#cb224-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span> <span class="sc">|</span> species <span class="sc">==</span> <span class="st">&quot;Droid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb224-3"><a href="solutions.html#cb224-3" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
-<span id="cb224-4"><a href="solutions.html#cb224-4" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb224-5"><a href="solutions.html#cb224-5" tabindex="-1"></a>    <span class="at">M =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb224-6"><a href="solutions.html#cb224-6" tabindex="-1"></a>    <span class="at">Med =</span> <span class="fu">median</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb224-7"><a href="solutions.html#cb224-7" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb224-8"><a href="solutions.html#cb224-8" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="solutions.html#cb225-1" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb225-2"><a href="solutions.html#cb225-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span> <span class="sc">|</span> species <span class="sc">==</span> <span class="st">&quot;Droid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb225-3"><a href="solutions.html#cb225-3" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
+<span id="cb225-4"><a href="solutions.html#cb225-4" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb225-5"><a href="solutions.html#cb225-5" tabindex="-1"></a>    <span class="at">M =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb225-6"><a href="solutions.html#cb225-6" tabindex="-1"></a>    <span class="at">Med =</span> <span class="fu">median</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb225-7"><a href="solutions.html#cb225-7" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb225-8"><a href="solutions.html#cb225-8" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   species     M   Med    SD
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 Droid    69.8  53.5  51.0
 ## 2 Human    81.3  79    19.3</code></pre>
 </div>
-<div id="task-7-1" class="section level3 unnumbered hasAnchor">
-<h3>Task 7<a href="solutions.html#task-7-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="task-8-1" class="section level3 unnumbered hasAnchor">
+<h3>Task 8<a href="solutions.html#task-8-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Create a new variable in which you store the mass in gram. Add it to the
-data frame.</p>
+dataframe.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="solutions.html#cb226-1" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb226-2"><a href="solutions.html#cb226-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gr_mass =</span> mass <span class="sc">*</span> <span class="dv">1000</span>)</span>
-<span id="cb226-3"><a href="solutions.html#cb226-3" tabindex="-1"></a></span>
-<span id="cb226-4"><a href="solutions.html#cb226-4" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb226-5"><a href="solutions.html#cb226-5" tabindex="-1"></a>  <span class="fu">select</span>(name, species, mass, gr_mass)</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="solutions.html#cb227-1" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb227-2"><a href="solutions.html#cb227-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gr_mass =</span> mass <span class="sc">*</span> <span class="dv">1000</span>)</span>
+<span id="cb227-3"><a href="solutions.html#cb227-3" tabindex="-1"></a></span>
+<span id="cb227-4"><a href="solutions.html#cb227-4" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb227-5"><a href="solutions.html#cb227-5" tabindex="-1"></a>  <span class="fu">select</span>(name, species, mass, gr_mass)</span></code></pre></div>
 <pre><code>## # A tibble: 87 × 4
 ##    name               species  mass gr_mass
 ##    &lt;chr&gt;              &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;

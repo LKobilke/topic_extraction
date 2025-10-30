@@ -257,6 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exercise-3-dplyr.html"><a href="exercise-3-dplyr.html#task-5"><i class="fa fa-check"></i>Task 5</a></li>
 <li class="chapter" data-level="" data-path="exercise-3-dplyr.html"><a href="exercise-3-dplyr.html#task-6"><i class="fa fa-check"></i>Task 6</a></li>
 <li class="chapter" data-level="" data-path="exercise-3-dplyr.html"><a href="exercise-3-dplyr.html#task-7"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="exercise-3-dplyr.html"><a href="exercise-3-dplyr.html#task-8"><i class="fa fa-check"></i>Task 8</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a>
 <ul>
@@ -282,6 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -365,32 +367,40 @@ approach?</strong></p>
 <p>It’s your turn now. Load the starwars data like this:</p>
 <div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="exercise-3-dplyr.html#cb177-1" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># to activate the dplyr package</span></span>
 <span id="cb177-2"><a href="exercise-3-dplyr.html#cb177-2" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars <span class="co"># to assign the pre-installed starwars data set (dplyr) into a source object in our environment</span></span></code></pre></div>
-<p>How many humans are contained in the starwars data overall? (Hint: use
-<code>summarize(count = n())</code> or <code>count()</code>)</p>
+<p>How many humans are contained in the starwars dataset overall?
+First, solve this task using <code>filter()</code> only.
+Next, solve it by combining <code>filter()</code> with <code>summarize(count = n())</code>.
+Finally, try to solve it with <code>count()</code>.</p>
 </div>
 <div id="task-3-2" class="section level2 unnumbered hasAnchor">
 <h2>Task 3<a href="exercise-3-dplyr.html#task-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>How many humans are contained in starwars by gender?</p>
+<p>Use <code>mutate()</code> and <code>case_when()</code> to create a new column height_group with:
+- “short” if height &lt; 140
+- “medium” if height &lt; 180
+- “tall” otherwise.</p>
 </div>
 <div id="task-4-1" class="section level2 unnumbered hasAnchor">
 <h2>Task 4<a href="exercise-3-dplyr.html#task-4-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>What is the most common eye_color among Star Wars characters? (Hint: use
-<code>arrange()</code>)</p>
+<p>How many humans are contained in starwars by height_group? (Hint: You’ll need to chain multiple functions. Remember that <code>summarize()</code> has a best friend that will help you solve this task. :))</p>
 </div>
 <div id="task-5" class="section level2 unnumbered hasAnchor">
 <h2>Task 5<a href="exercise-3-dplyr.html#task-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>What is the average mass of Star Wars characters that are not human and
-have yellow eyes? (Hint: remove all <code>NAs</code>)</p>
+<p>What is the most common height_group among Star Wars characters? (Hint: You’ll need to chain multiple functions, but one of them should be <code>arrange()</code>)</p>
 </div>
 <div id="task-6" class="section level2 unnumbered hasAnchor">
 <h2>Task 6<a href="exercise-3-dplyr.html#task-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Compare the mean, median, and standard deviation of mass for all humans
-and droids. (Hint: remove all <code>NAs</code>)</p>
+<p>What is the average mass of Star Wars characters that are not human and
+have yellow eyes? (Hint: You’ll need to calculate descriptive statistics and remove all <code>NAs</code>.)</p>
 </div>
 <div id="task-7" class="section level2 unnumbered hasAnchor">
 <h2>Task 7<a href="exercise-3-dplyr.html#task-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Compare the mean, median, and standard deviation of mass for all humans
+and droids. (Hint: You’ll need to calculate descriptive statistics and remove all <code>NAs</code>.)</p>
+</div>
+<div id="task-8" class="section level2 unnumbered hasAnchor">
+<h2>Task 8<a href="exercise-3-dplyr.html#task-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Create a new variable in which you store the mass in gram (gr_mass). Add
-it to the data frame. Test whether your solution works by printing your
+it to the dataframe. Test whether your solution works by printing your
 data to the console, but only show the name, species, mass, and your new
 variable gr_mass.</p>
 <p>When you’re ready to look at the solutions, you can find them here:
