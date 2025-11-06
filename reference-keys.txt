@@ -170,3 +170,15 @@ navigating-your-working-directory-like-a-pro-the-concept-of-relative-paths
 helpful-shortcuts-in-r
 tutorial-text-manipulation-with-stringr
 tutorial-tidy-text-analysis
+recoding-and-categorizing-scales
+recode_cat_scale
+equivalent-with-mutatecase_when
+reverse-ordinal-categories
+categorize_scale
+dummify_scale
+setna_scale
+summary-of-all-scaling-functions
+equivalent-with-mutatena_if
+rescaling-of-continuous-scales
+categorizing-and-recoding-categorical-scales
+tutorial-data-management-with-tidycomm
