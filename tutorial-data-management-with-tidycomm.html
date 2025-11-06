@@ -395,8 +395,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 analyses.</li>
 <li>learn how to use tidycomm to transform / rescale variables.</li>
 </ul>
-<p>Load the package:</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="tutorial-data-management-with-tidycomm.html#cb178-1" tabindex="-1"></a><span class="fu">library</span>(tidycomm)</span></code></pre></div>
+<p>If you haven’t installed the package on this machine yet, install it:</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="tutorial-data-management-with-tidycomm.html#cb178-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidycomm&quot;</span>)</span></code></pre></div>
+<p>After installation, load the package:</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="tutorial-data-management-with-tidycomm.html#cb179-1" tabindex="-1"></a><span class="fu">library</span>(tidycomm)</span></code></pre></div>
 <div id="index-generation" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Index generation<a href="tutorial-data-management-with-tidycomm.html#index-generation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>tidycomm</code> package provides a workflow to quickly add mean/sum
@@ -413,13 +415,13 @@ variables to the data. The second argument (or first, if used in a pipe)
 is the name of the index variable to be created. For example, if you
 want to create a mean index named ‘ethical_concerns’ using variables
 ‘ethics_1’ to ‘ethics_4’, you can use the following code:</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="tutorial-data-management-with-tidycomm.html#cb179-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb179-2"><a href="tutorial-data-management-with-tidycomm.html#cb179-2" tabindex="-1"></a>  <span class="fu">add_index</span>(ethical_concerns, ethics_1, ethics_2, ethics_3, ethics_4) <span class="sc">%&gt;%</span></span>
-<span id="cb179-3"><a href="tutorial-data-management-with-tidycomm.html#cb179-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ethical_concerns,</span>
-<span id="cb179-4"><a href="tutorial-data-management-with-tidycomm.html#cb179-4" tabindex="-1"></a>                ethics_1,</span>
-<span id="cb179-5"><a href="tutorial-data-management-with-tidycomm.html#cb179-5" tabindex="-1"></a>                ethics_2,</span>
-<span id="cb179-6"><a href="tutorial-data-management-with-tidycomm.html#cb179-6" tabindex="-1"></a>                ethics_3,</span>
-<span id="cb179-7"><a href="tutorial-data-management-with-tidycomm.html#cb179-7" tabindex="-1"></a>                ethics_4)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="tutorial-data-management-with-tidycomm.html#cb180-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb180-2"><a href="tutorial-data-management-with-tidycomm.html#cb180-2" tabindex="-1"></a>  <span class="fu">add_index</span>(ethical_concerns, ethics_1, ethics_2, ethics_3, ethics_4) <span class="sc">%&gt;%</span></span>
+<span id="cb180-3"><a href="tutorial-data-management-with-tidycomm.html#cb180-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ethical_concerns,</span>
+<span id="cb180-4"><a href="tutorial-data-management-with-tidycomm.html#cb180-4" tabindex="-1"></a>                ethics_1,</span>
+<span id="cb180-5"><a href="tutorial-data-management-with-tidycomm.html#cb180-5" tabindex="-1"></a>                ethics_2,</span>
+<span id="cb180-6"><a href="tutorial-data-management-with-tidycomm.html#cb180-6" tabindex="-1"></a>                ethics_3,</span>
+<span id="cb180-7"><a href="tutorial-data-management-with-tidycomm.html#cb180-7" tabindex="-1"></a>                ethics_4)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 5
 ##    ethical_concerns ethics_1 ethics_2 ethics_3 ethics_4
 ##               &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -435,13 +437,13 @@ want to create a mean index named ‘ethical_concerns’ using variables
 ## 10             3.25        1        4        4        4
 ## # ℹ 1,190 more rows</code></pre>
 <p>To create a sum index instead, set <code>type = "sum"</code>:</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="tutorial-data-management-with-tidycomm.html#cb181-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb181-2"><a href="tutorial-data-management-with-tidycomm.html#cb181-2" tabindex="-1"></a>  <span class="fu">add_index</span>(ethical_flexibility, ethics_1, ethics_2, ethics_3, ethics_4, <span class="at">type =</span> <span class="st">&quot;sum&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb181-3"><a href="tutorial-data-management-with-tidycomm.html#cb181-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ethical_flexibility,</span>
-<span id="cb181-4"><a href="tutorial-data-management-with-tidycomm.html#cb181-4" tabindex="-1"></a>                ethics_1,</span>
-<span id="cb181-5"><a href="tutorial-data-management-with-tidycomm.html#cb181-5" tabindex="-1"></a>                ethics_2,</span>
-<span id="cb181-6"><a href="tutorial-data-management-with-tidycomm.html#cb181-6" tabindex="-1"></a>                ethics_3,</span>
-<span id="cb181-7"><a href="tutorial-data-management-with-tidycomm.html#cb181-7" tabindex="-1"></a>                ethics_4)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="tutorial-data-management-with-tidycomm.html#cb182-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb182-2"><a href="tutorial-data-management-with-tidycomm.html#cb182-2" tabindex="-1"></a>  <span class="fu">add_index</span>(ethical_flexibility, ethics_1, ethics_2, ethics_3, ethics_4, <span class="at">type =</span> <span class="st">&quot;sum&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb182-3"><a href="tutorial-data-management-with-tidycomm.html#cb182-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ethical_flexibility,</span>
+<span id="cb182-4"><a href="tutorial-data-management-with-tidycomm.html#cb182-4" tabindex="-1"></a>                ethics_1,</span>
+<span id="cb182-5"><a href="tutorial-data-management-with-tidycomm.html#cb182-5" tabindex="-1"></a>                ethics_2,</span>
+<span id="cb182-6"><a href="tutorial-data-management-with-tidycomm.html#cb182-6" tabindex="-1"></a>                ethics_3,</span>
+<span id="cb182-7"><a href="tutorial-data-management-with-tidycomm.html#cb182-7" tabindex="-1"></a>                ethics_4)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 5
 ##    ethical_flexibility ethics_1 ethics_2 ethics_3 ethics_4
 ##                  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -458,8 +460,8 @@ want to create a mean index named ‘ethical_concerns’ using variables
 ## # ℹ 1,190 more rows</code></pre>
 <p>Make sure to save your index back into your original data set if you
 want to keep it for later use:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="tutorial-data-management-with-tidycomm.html#cb183-1" tabindex="-1"></a>WoJ <span class="ot">&lt;-</span> WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb183-2"><a href="tutorial-data-management-with-tidycomm.html#cb183-2" tabindex="-1"></a>  <span class="fu">add_index</span>(ethical_concerns, ethics_1, ethics_2, ethics_3, ethics_4)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="tutorial-data-management-with-tidycomm.html#cb184-1" tabindex="-1"></a>WoJ <span class="ot">&lt;-</span> WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb184-2"><a href="tutorial-data-management-with-tidycomm.html#cb184-2" tabindex="-1"></a>  <span class="fu">add_index</span>(ethical_concerns, ethics_1, ethics_2, ethics_3, ethics_4)</span></code></pre></div>
 </div>
 <div id="get_reliability" class="section level3 hasAnchor" number="6.1.2">
 <h3><span class="header-section-number">6.1.2</span> get_reliability()<a href="tutorial-data-management-with-tidycomm.html#get_reliability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -467,8 +469,8 @@ want to keep it for later use:</p>
 consistency estimates for indices created with <code>add_index()</code>. The
 function outputs Cronbach’s α along with descriptives and index
 information.</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="tutorial-data-management-with-tidycomm.html#cb184-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb184-2"><a href="tutorial-data-management-with-tidycomm.html#cb184-2" tabindex="-1"></a>  <span class="fu">get_reliability</span>(ethical_concerns)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="tutorial-data-management-with-tidycomm.html#cb185-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb185-2"><a href="tutorial-data-management-with-tidycomm.html#cb185-2" tabindex="-1"></a>  <span class="fu">get_reliability</span>(ethical_concerns)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 5
 ##   Index            Index_of                              M    SD Cronbachs_Alpha
 ## * &lt;chr&gt;            &lt;chr&gt;                             &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;
@@ -476,8 +478,8 @@ information.</p>
 <p>By default, if you pass no further arguments to the function, it will
 automatically compute reliability estimates for all indices created with
 <code>add_index()</code> found in the data.</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="tutorial-data-management-with-tidycomm.html#cb186-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb186-2"><a href="tutorial-data-management-with-tidycomm.html#cb186-2" tabindex="-1"></a>  <span class="fu">get_reliability</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="tutorial-data-management-with-tidycomm.html#cb187-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb187-2"><a href="tutorial-data-management-with-tidycomm.html#cb187-2" tabindex="-1"></a>  <span class="fu">get_reliability</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 5
 ##   Index            Index_of                              M    SD Cronbachs_Alpha
 ## * &lt;chr&gt;            &lt;chr&gt;                             &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;
@@ -498,9 +500,9 @@ automatically compute reliability estimates for all indices created with
 <h3><span class="header-section-number">6.2.1</span> setna_scale()<a href="tutorial-data-management-with-tidycomm.html#setna_scale" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>setna_scale()</code> allows you to set specific values to <code>NA</code> in selected variables or the entire data frame. It is a more readable alternative to <code>dplyr::mutate(na_if())</code></p>
 <p>It works for numeric, character, and factor variables.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="tutorial-data-management-with-tidycomm.html#cb188-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb188-2"><a href="tutorial-data-management-with-tidycomm.html#cb188-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_emphasis) <span class="sc">%&gt;%</span></span>
-<span id="cb188-3"><a href="tutorial-data-management-with-tidycomm.html#cb188-3" tabindex="-1"></a>  <span class="fu">setna_scale</span>(autonomy_emphasis, <span class="at">value =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="tutorial-data-management-with-tidycomm.html#cb189-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb189-2"><a href="tutorial-data-management-with-tidycomm.html#cb189-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_emphasis) <span class="sc">%&gt;%</span></span>
+<span id="cb189-3"><a href="tutorial-data-management-with-tidycomm.html#cb189-3" tabindex="-1"></a>  <span class="fu">setna_scale</span>(autonomy_emphasis, <span class="at">value =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 2
 ##    autonomy_emphasis autonomy_emphasis_na
 ##  *             &lt;dbl&gt;                &lt;dbl&gt;
@@ -517,9 +519,9 @@ automatically compute reliability estimates for all indices created with
 ## # ℹ 1,190 more rows</code></pre>
 <div id="equivalent-with-mutatena_if" class="section level4 hasAnchor" number="6.2.1.1">
 <h4><span class="header-section-number">6.2.1.1</span> Equivalent with <code>mutate(na_if())</code><a href="tutorial-data-management-with-tidycomm.html#equivalent-with-mutatena_if" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="tutorial-data-management-with-tidycomm.html#cb190-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb190-2"><a href="tutorial-data-management-with-tidycomm.html#cb190-2" tabindex="-1"></a>  <span class="fu">select</span>(autonomy_emphasis) <span class="sc">%&gt;%</span></span>
-<span id="cb190-3"><a href="tutorial-data-management-with-tidycomm.html#cb190-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">autonomy_emphasis =</span> <span class="fu">na_if</span>(autonomy_emphasis, <span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="tutorial-data-management-with-tidycomm.html#cb191-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb191-2"><a href="tutorial-data-management-with-tidycomm.html#cb191-2" tabindex="-1"></a>  <span class="fu">select</span>(autonomy_emphasis) <span class="sc">%&gt;%</span></span>
+<span id="cb191-3"><a href="tutorial-data-management-with-tidycomm.html#cb191-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">autonomy_emphasis =</span> <span class="fu">na_if</span>(autonomy_emphasis, <span class="dv">5</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 1
 ##    autonomy_emphasis
 ##                &lt;dbl&gt;
@@ -535,11 +537,11 @@ automatically compute reliability estimates for all indices created with
 ## 10                 4
 ## # ℹ 1,190 more rows</code></pre>
 <p>To create a new variable instead of overwriting:</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="tutorial-data-management-with-tidycomm.html#cb192-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb192-2"><a href="tutorial-data-management-with-tidycomm.html#cb192-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_emphasis) <span class="sc">%&gt;%</span></span>
-<span id="cb192-3"><a href="tutorial-data-management-with-tidycomm.html#cb192-3" tabindex="-1"></a>  <span class="fu">setna_scale</span>(autonomy_emphasis,</span>
-<span id="cb192-4"><a href="tutorial-data-management-with-tidycomm.html#cb192-4" tabindex="-1"></a>              <span class="at">value =</span> <span class="dv">5</span>,</span>
-<span id="cb192-5"><a href="tutorial-data-management-with-tidycomm.html#cb192-5" tabindex="-1"></a>              <span class="at">name =</span> <span class="st">&quot;new_na_autonomy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="tutorial-data-management-with-tidycomm.html#cb193-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb193-2"><a href="tutorial-data-management-with-tidycomm.html#cb193-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_emphasis) <span class="sc">%&gt;%</span></span>
+<span id="cb193-3"><a href="tutorial-data-management-with-tidycomm.html#cb193-3" tabindex="-1"></a>  <span class="fu">setna_scale</span>(autonomy_emphasis,</span>
+<span id="cb193-4"><a href="tutorial-data-management-with-tidycomm.html#cb193-4" tabindex="-1"></a>              <span class="at">value =</span> <span class="dv">5</span>,</span>
+<span id="cb193-5"><a href="tutorial-data-management-with-tidycomm.html#cb193-5" tabindex="-1"></a>              <span class="at">name =</span> <span class="st">&quot;new_na_autonomy&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 2
 ##    autonomy_emphasis new_na_autonomy
 ##  *             &lt;dbl&gt;           &lt;dbl&gt;
@@ -555,8 +557,8 @@ automatically compute reliability estimates for all indices created with
 ## 10                 4               4
 ## # ℹ 1,190 more rows</code></pre>
 <p>Multiple values can be replaced at once:</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="tutorial-data-management-with-tidycomm.html#cb194-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb194-2"><a href="tutorial-data-management-with-tidycomm.html#cb194-2" tabindex="-1"></a>  <span class="fu">setna_scale</span>(<span class="at">value =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="tutorial-data-management-with-tidycomm.html#cb195-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb195-2"><a href="tutorial-data-management-with-tidycomm.html#cb195-2" tabindex="-1"></a>  <span class="fu">setna_scale</span>(<span class="at">value =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 16
 ##    country   reach employment temp_contract autonomy_selection autonomy_emphasis
 ##  * &lt;fct&gt;     &lt;fct&gt; &lt;chr&gt;      &lt;fct&gt;                      &lt;dbl&gt;             &lt;dbl&gt;
@@ -576,10 +578,10 @@ automatically compute reliability estimates for all indices created with
 ## #   trust_government &lt;dbl&gt;, trust_parties &lt;dbl&gt;, trust_politicians &lt;dbl&gt;,
 ## #   ethical_concerns &lt;dbl&gt;</code></pre>
 <p>It also works for categorical data:</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="tutorial-data-management-with-tidycomm.html#cb196-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb196-2"><a href="tutorial-data-management-with-tidycomm.html#cb196-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(country) <span class="sc">%&gt;%</span></span>
-<span id="cb196-3"><a href="tutorial-data-management-with-tidycomm.html#cb196-3" tabindex="-1"></a>  <span class="fu">setna_scale</span>(country,</span>
-<span id="cb196-4"><a href="tutorial-data-management-with-tidycomm.html#cb196-4" tabindex="-1"></a>              <span class="at">value =</span> <span class="fu">c</span>(<span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Switzerland&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="tutorial-data-management-with-tidycomm.html#cb197-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb197-2"><a href="tutorial-data-management-with-tidycomm.html#cb197-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb197-3"><a href="tutorial-data-management-with-tidycomm.html#cb197-3" tabindex="-1"></a>  <span class="fu">setna_scale</span>(country,</span>
+<span id="cb197-4"><a href="tutorial-data-management-with-tidycomm.html#cb197-4" tabindex="-1"></a>              <span class="at">value =</span> <span class="fu">c</span>(<span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Switzerland&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 2
 ##    country     country_na
 ##  * &lt;fct&gt;       &lt;fct&gt;     
@@ -600,12 +602,12 @@ automatically compute reliability estimates for all indices created with
 <h3><span class="header-section-number">6.2.2</span> reverse_scale()<a href="tutorial-data-management-with-tidycomm.html#reverse_scale" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The easiest one is to reverse your scale. You can just specify the scale and define the scale’s lower and upper end. Take <code>autonomy_emphasis</code> as an example that originally ranges from 1 to 5. We will reverse it to range from 5 to 1.</p>
 <p>The function adds a new column named <code>autonomy_emphasis_rev</code>:</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="tutorial-data-management-with-tidycomm.html#cb198-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb198-2"><a href="tutorial-data-management-with-tidycomm.html#cb198-2" tabindex="-1"></a>  <span class="fu">reverse_scale</span>(autonomy_emphasis,</span>
-<span id="cb198-3"><a href="tutorial-data-management-with-tidycomm.html#cb198-3" tabindex="-1"></a>                <span class="at">lower_end =</span> <span class="dv">1</span>,</span>
-<span id="cb198-4"><a href="tutorial-data-management-with-tidycomm.html#cb198-4" tabindex="-1"></a>                <span class="at">upper_end =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb198-5"><a href="tutorial-data-management-with-tidycomm.html#cb198-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_emphasis,</span>
-<span id="cb198-6"><a href="tutorial-data-management-with-tidycomm.html#cb198-6" tabindex="-1"></a>                autonomy_emphasis_rev)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="tutorial-data-management-with-tidycomm.html#cb199-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb199-2"><a href="tutorial-data-management-with-tidycomm.html#cb199-2" tabindex="-1"></a>  <span class="fu">reverse_scale</span>(autonomy_emphasis,</span>
+<span id="cb199-3"><a href="tutorial-data-management-with-tidycomm.html#cb199-3" tabindex="-1"></a>                <span class="at">lower_end =</span> <span class="dv">1</span>,</span>
+<span id="cb199-4"><a href="tutorial-data-management-with-tidycomm.html#cb199-4" tabindex="-1"></a>                <span class="at">upper_end =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb199-5"><a href="tutorial-data-management-with-tidycomm.html#cb199-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_emphasis,</span>
+<span id="cb199-6"><a href="tutorial-data-management-with-tidycomm.html#cb199-6" tabindex="-1"></a>                autonomy_emphasis_rev)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 2
 ##    autonomy_emphasis autonomy_emphasis_rev
 ##                &lt;dbl&gt;                 &lt;dbl&gt;
@@ -621,13 +623,13 @@ automatically compute reliability estimates for all indices created with
 ## 10                 4                     2
 ## # ℹ 1,190 more rows</code></pre>
 <p>Alternatively, you can also specify the new column name manually:</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="tutorial-data-management-with-tidycomm.html#cb200-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb200-2"><a href="tutorial-data-management-with-tidycomm.html#cb200-2" tabindex="-1"></a>  <span class="fu">reverse_scale</span>(autonomy_emphasis,</span>
-<span id="cb200-3"><a href="tutorial-data-management-with-tidycomm.html#cb200-3" tabindex="-1"></a>                <span class="at">name =</span> <span class="st">&quot;new_emphasis&quot;</span>,</span>
-<span id="cb200-4"><a href="tutorial-data-management-with-tidycomm.html#cb200-4" tabindex="-1"></a>                <span class="at">lower_end =</span> <span class="dv">1</span>,</span>
-<span id="cb200-5"><a href="tutorial-data-management-with-tidycomm.html#cb200-5" tabindex="-1"></a>                <span class="at">upper_end =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb200-6"><a href="tutorial-data-management-with-tidycomm.html#cb200-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_emphasis,</span>
-<span id="cb200-7"><a href="tutorial-data-management-with-tidycomm.html#cb200-7" tabindex="-1"></a>                new_emphasis)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="tutorial-data-management-with-tidycomm.html#cb201-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb201-2"><a href="tutorial-data-management-with-tidycomm.html#cb201-2" tabindex="-1"></a>  <span class="fu">reverse_scale</span>(autonomy_emphasis,</span>
+<span id="cb201-3"><a href="tutorial-data-management-with-tidycomm.html#cb201-3" tabindex="-1"></a>                <span class="at">name =</span> <span class="st">&quot;new_emphasis&quot;</span>,</span>
+<span id="cb201-4"><a href="tutorial-data-management-with-tidycomm.html#cb201-4" tabindex="-1"></a>                <span class="at">lower_end =</span> <span class="dv">1</span>,</span>
+<span id="cb201-5"><a href="tutorial-data-management-with-tidycomm.html#cb201-5" tabindex="-1"></a>                <span class="at">upper_end =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb201-6"><a href="tutorial-data-management-with-tidycomm.html#cb201-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_emphasis,</span>
+<span id="cb201-7"><a href="tutorial-data-management-with-tidycomm.html#cb201-7" tabindex="-1"></a>                new_emphasis)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 2
 ##    autonomy_emphasis new_emphasis
 ##                &lt;dbl&gt;        &lt;dbl&gt;
@@ -646,12 +648,12 @@ automatically compute reliability estimates for all indices created with
 <div id="minmax_scale" class="section level3 hasAnchor" number="6.2.3">
 <h3><span class="header-section-number">6.2.3</span> minmax_scale()<a href="tutorial-data-management-with-tidycomm.html#minmax_scale" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>minmax_scale()</code> just takes your continuous scale to a new range. For example, convert the 1-5 scale of <code>autonomy_emphasis</code> to a 1-10 scale while keeping the distances:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="tutorial-data-management-with-tidycomm.html#cb202-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb202-2"><a href="tutorial-data-management-with-tidycomm.html#cb202-2" tabindex="-1"></a>  <span class="fu">minmax_scale</span>(autonomy_emphasis,</span>
-<span id="cb202-3"><a href="tutorial-data-management-with-tidycomm.html#cb202-3" tabindex="-1"></a>               <span class="at">change_to_min =</span> <span class="dv">1</span>,</span>
-<span id="cb202-4"><a href="tutorial-data-management-with-tidycomm.html#cb202-4" tabindex="-1"></a>               <span class="at">change_to_max =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb202-5"><a href="tutorial-data-management-with-tidycomm.html#cb202-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_emphasis,</span>
-<span id="cb202-6"><a href="tutorial-data-management-with-tidycomm.html#cb202-6" tabindex="-1"></a>                autonomy_emphasis_1to10)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="tutorial-data-management-with-tidycomm.html#cb203-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb203-2"><a href="tutorial-data-management-with-tidycomm.html#cb203-2" tabindex="-1"></a>  <span class="fu">minmax_scale</span>(autonomy_emphasis,</span>
+<span id="cb203-3"><a href="tutorial-data-management-with-tidycomm.html#cb203-3" tabindex="-1"></a>               <span class="at">change_to_min =</span> <span class="dv">1</span>,</span>
+<span id="cb203-4"><a href="tutorial-data-management-with-tidycomm.html#cb203-4" tabindex="-1"></a>               <span class="at">change_to_max =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb203-5"><a href="tutorial-data-management-with-tidycomm.html#cb203-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_emphasis,</span>
+<span id="cb203-6"><a href="tutorial-data-management-with-tidycomm.html#cb203-6" tabindex="-1"></a>                autonomy_emphasis_1to10)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 2
 ##    autonomy_emphasis autonomy_emphasis_1to10
 ##                &lt;dbl&gt;                   &lt;dbl&gt;
@@ -670,10 +672,10 @@ automatically compute reliability estimates for all indices created with
 <div id="center_scale" class="section level3 hasAnchor" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> center_scale()<a href="tutorial-data-management-with-tidycomm.html#center_scale" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>center_scale()</code> moves your continuous scale around a mean of 0:</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="tutorial-data-management-with-tidycomm.html#cb204-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb204-2"><a href="tutorial-data-management-with-tidycomm.html#cb204-2" tabindex="-1"></a>  <span class="fu">center_scale</span>(autonomy_selection) <span class="sc">%&gt;%</span></span>
-<span id="cb204-3"><a href="tutorial-data-management-with-tidycomm.html#cb204-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_selection,</span>
-<span id="cb204-4"><a href="tutorial-data-management-with-tidycomm.html#cb204-4" tabindex="-1"></a>                autonomy_selection_centered)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="tutorial-data-management-with-tidycomm.html#cb205-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb205-2"><a href="tutorial-data-management-with-tidycomm.html#cb205-2" tabindex="-1"></a>  <span class="fu">center_scale</span>(autonomy_selection) <span class="sc">%&gt;%</span></span>
+<span id="cb205-3"><a href="tutorial-data-management-with-tidycomm.html#cb205-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_selection,</span>
+<span id="cb205-4"><a href="tutorial-data-management-with-tidycomm.html#cb205-4" tabindex="-1"></a>                autonomy_selection_centered)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 2
 ##    autonomy_selection autonomy_selection_centered
 ##                 &lt;dbl&gt;                       &lt;dbl&gt;
@@ -692,12 +694,12 @@ automatically compute reliability estimates for all indices created with
 <div id="z_scale" class="section level3 hasAnchor" number="6.2.5">
 <h3><span class="header-section-number">6.2.5</span> z_scale()<a href="tutorial-data-management-with-tidycomm.html#z_scale" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Finally, <code>z_scale()</code> does more or less the same but standardizes the outcome. To visualize this, we look at it with a visualized <code>tab_frequencies()</code>:</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="tutorial-data-management-with-tidycomm.html#cb206-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb206-2"><a href="tutorial-data-management-with-tidycomm.html#cb206-2" tabindex="-1"></a>  <span class="fu">z_scale</span>(autonomy_selection) <span class="sc">%&gt;%</span></span>
-<span id="cb206-3"><a href="tutorial-data-management-with-tidycomm.html#cb206-3" tabindex="-1"></a>  <span class="fu">tab_frequencies</span>(autonomy_selection,</span>
-<span id="cb206-4"><a href="tutorial-data-management-with-tidycomm.html#cb206-4" tabindex="-1"></a>                  autonomy_selection_z) <span class="sc">%&gt;%</span></span>
-<span id="cb206-5"><a href="tutorial-data-management-with-tidycomm.html#cb206-5" tabindex="-1"></a>  <span class="fu">visualize</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="tutorial-data-management-with-tidycomm.html#cb207-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb207-2"><a href="tutorial-data-management-with-tidycomm.html#cb207-2" tabindex="-1"></a>  <span class="fu">z_scale</span>(autonomy_selection) <span class="sc">%&gt;%</span></span>
+<span id="cb207-3"><a href="tutorial-data-management-with-tidycomm.html#cb207-3" tabindex="-1"></a>  <span class="fu">tab_frequencies</span>(autonomy_selection,</span>
+<span id="cb207-4"><a href="tutorial-data-management-with-tidycomm.html#cb207-4" tabindex="-1"></a>                  autonomy_selection_z) <span class="sc">%&gt;%</span></span>
+<span id="cb207-5"><a href="tutorial-data-management-with-tidycomm.html#cb207-5" tabindex="-1"></a>  <span class="fu">visualize</span>()</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
 </div>
 </div>
 <div id="categorizing-and-recoding-categorical-scales" class="section level2 hasAnchor" number="6.3">
@@ -707,13 +709,13 @@ automatically compute reliability estimates for all indices created with
 <h3><span class="header-section-number">6.3.1</span> categorize_scale()<a href="tutorial-data-management-with-tidycomm.html#categorize_scale" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>categorize_scale()</code> converts numeric variables into categorical ones based on specified breaks and labels. The breaks are always included in the lowest category. For example, breaks = c(2, 3) with lower_end = 1 and upper_end = 5 creates intervals from 1 to &lt;= 2, &gt;2 to &lt;= 3, and &gt;3 to &lt;= 5.</p>
 <p>This is useful for grouping continuous data into categories (e.g., <em>Low</em>, <em>Medium</em>, <em>High</em>).</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="tutorial-data-management-with-tidycomm.html#cb207-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb207-2"><a href="tutorial-data-management-with-tidycomm.html#cb207-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(trust_parliament, trust_politicians) <span class="sc">%&gt;%</span></span>
-<span id="cb207-3"><a href="tutorial-data-management-with-tidycomm.html#cb207-3" tabindex="-1"></a>  <span class="fu">categorize_scale</span>(trust_parliament, trust_politicians,</span>
-<span id="cb207-4"><a href="tutorial-data-management-with-tidycomm.html#cb207-4" tabindex="-1"></a>                   <span class="at">lower_end =</span> <span class="dv">1</span>,</span>
-<span id="cb207-5"><a href="tutorial-data-management-with-tidycomm.html#cb207-5" tabindex="-1"></a>                   <span class="at">upper_end =</span> <span class="dv">5</span>,</span>
-<span id="cb207-6"><a href="tutorial-data-management-with-tidycomm.html#cb207-6" tabindex="-1"></a>                   <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb207-7"><a href="tutorial-data-management-with-tidycomm.html#cb207-7" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Low&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;High&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="tutorial-data-management-with-tidycomm.html#cb208-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb208-2"><a href="tutorial-data-management-with-tidycomm.html#cb208-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(trust_parliament, trust_politicians) <span class="sc">%&gt;%</span></span>
+<span id="cb208-3"><a href="tutorial-data-management-with-tidycomm.html#cb208-3" tabindex="-1"></a>  <span class="fu">categorize_scale</span>(trust_parliament, trust_politicians,</span>
+<span id="cb208-4"><a href="tutorial-data-management-with-tidycomm.html#cb208-4" tabindex="-1"></a>                   <span class="at">lower_end =</span> <span class="dv">1</span>,</span>
+<span id="cb208-5"><a href="tutorial-data-management-with-tidycomm.html#cb208-5" tabindex="-1"></a>                   <span class="at">upper_end =</span> <span class="dv">5</span>,</span>
+<span id="cb208-6"><a href="tutorial-data-management-with-tidycomm.html#cb208-6" tabindex="-1"></a>                   <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb208-7"><a href="tutorial-data-management-with-tidycomm.html#cb208-7" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Low&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;High&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 4
 ##    trust_parliament trust_politicians trust_parliament_cat trust_politicians_cat
 ##  *            &lt;dbl&gt;             &lt;dbl&gt; &lt;fct&gt;                &lt;fct&gt;                
@@ -729,14 +731,14 @@ automatically compute reliability estimates for all indices created with
 ## 10                3                 3 Medium               Medium               
 ## # ℹ 1,190 more rows</code></pre>
 <p>You can also give the resulting variable a custom name:</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="tutorial-data-management-with-tidycomm.html#cb209-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb209-2"><a href="tutorial-data-management-with-tidycomm.html#cb209-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_selection) <span class="sc">%&gt;%</span></span>
-<span id="cb209-3"><a href="tutorial-data-management-with-tidycomm.html#cb209-3" tabindex="-1"></a>  <span class="fu">categorize_scale</span>(autonomy_selection,</span>
-<span id="cb209-4"><a href="tutorial-data-management-with-tidycomm.html#cb209-4" tabindex="-1"></a>                   <span class="at">lower_end =</span> <span class="dv">1</span>,</span>
-<span id="cb209-5"><a href="tutorial-data-management-with-tidycomm.html#cb209-5" tabindex="-1"></a>                   <span class="at">upper_end =</span> <span class="dv">5</span>,</span>
-<span id="cb209-6"><a href="tutorial-data-management-with-tidycomm.html#cb209-6" tabindex="-1"></a>                   <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb209-7"><a href="tutorial-data-management-with-tidycomm.html#cb209-7" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Low&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;High&quot;</span>, <span class="st">&quot;Very High&quot;</span>),</span>
-<span id="cb209-8"><a href="tutorial-data-management-with-tidycomm.html#cb209-8" tabindex="-1"></a>                   <span class="at">name =</span> <span class="st">&quot;autonomy_in_categories&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="tutorial-data-management-with-tidycomm.html#cb210-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb210-2"><a href="tutorial-data-management-with-tidycomm.html#cb210-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(autonomy_selection) <span class="sc">%&gt;%</span></span>
+<span id="cb210-3"><a href="tutorial-data-management-with-tidycomm.html#cb210-3" tabindex="-1"></a>  <span class="fu">categorize_scale</span>(autonomy_selection,</span>
+<span id="cb210-4"><a href="tutorial-data-management-with-tidycomm.html#cb210-4" tabindex="-1"></a>                   <span class="at">lower_end =</span> <span class="dv">1</span>,</span>
+<span id="cb210-5"><a href="tutorial-data-management-with-tidycomm.html#cb210-5" tabindex="-1"></a>                   <span class="at">upper_end =</span> <span class="dv">5</span>,</span>
+<span id="cb210-6"><a href="tutorial-data-management-with-tidycomm.html#cb210-6" tabindex="-1"></a>                   <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb210-7"><a href="tutorial-data-management-with-tidycomm.html#cb210-7" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Low&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;High&quot;</span>, <span class="st">&quot;Very High&quot;</span>),</span>
+<span id="cb210-8"><a href="tutorial-data-management-with-tidycomm.html#cb210-8" tabindex="-1"></a>                   <span class="at">name =</span> <span class="st">&quot;autonomy_in_categories&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 2
 ##    autonomy_selection autonomy_in_categories_1
 ##  *              &lt;dbl&gt; &lt;fct&gt;                   
@@ -762,12 +764,12 @@ It’s a simpler alternative to <code>dplyr::mutate(case_when())</code>, especia
 - <code>overwrite</code>: whether to overwrite the original variable<br />
 - <code>name</code>: an optional name for the new variable</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="tutorial-data-management-with-tidycomm.html#cb211-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb211-2"><a href="tutorial-data-management-with-tidycomm.html#cb211-2" tabindex="-1"></a>  <span class="fu">recode_cat_scale</span>(country,</span>
-<span id="cb211-3"><a href="tutorial-data-management-with-tidycomm.html#cb211-3" tabindex="-1"></a>                   <span class="at">assign =</span> <span class="fu">c</span>(<span class="st">&quot;Germany&quot;</span> <span class="ot">=</span> <span class="st">&quot;german&quot;</span>,</span>
-<span id="cb211-4"><a href="tutorial-data-management-with-tidycomm.html#cb211-4" tabindex="-1"></a>                              <span class="st">&quot;Switzerland&quot;</span> <span class="ot">=</span> <span class="st">&quot;swiss&quot;</span>),</span>
-<span id="cb211-5"><a href="tutorial-data-management-with-tidycomm.html#cb211-5" tabindex="-1"></a>                   <span class="at">other =</span> <span class="st">&quot;other&quot;</span>,</span>
-<span id="cb211-6"><a href="tutorial-data-management-with-tidycomm.html#cb211-6" tabindex="-1"></a>                   <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="tutorial-data-management-with-tidycomm.html#cb212-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb212-2"><a href="tutorial-data-management-with-tidycomm.html#cb212-2" tabindex="-1"></a>  <span class="fu">recode_cat_scale</span>(country,</span>
+<span id="cb212-3"><a href="tutorial-data-management-with-tidycomm.html#cb212-3" tabindex="-1"></a>                   <span class="at">assign =</span> <span class="fu">c</span>(<span class="st">&quot;Germany&quot;</span> <span class="ot">=</span> <span class="st">&quot;german&quot;</span>,</span>
+<span id="cb212-4"><a href="tutorial-data-management-with-tidycomm.html#cb212-4" tabindex="-1"></a>                              <span class="st">&quot;Switzerland&quot;</span> <span class="ot">=</span> <span class="st">&quot;swiss&quot;</span>),</span>
+<span id="cb212-5"><a href="tutorial-data-management-with-tidycomm.html#cb212-5" tabindex="-1"></a>                   <span class="at">other =</span> <span class="st">&quot;other&quot;</span>,</span>
+<span id="cb212-6"><a href="tutorial-data-management-with-tidycomm.html#cb212-6" tabindex="-1"></a>                   <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 16
 ##    country reach   employment temp_contract autonomy_selection autonomy_emphasis
 ##  * &lt;fct&gt;   &lt;fct&gt;   &lt;chr&gt;      &lt;fct&gt;                      &lt;dbl&gt;             &lt;dbl&gt;
@@ -789,15 +791,15 @@ It’s a simpler alternative to <code>dplyr::mutate(case_when())</code>, especia
 <div id="equivalent-with-mutatecase_when" class="section level4 hasAnchor" number="6.3.2.1">
 <h4><span class="header-section-number">6.3.2.1</span> Equivalent with <code>mutate(case_when())</code><a href="tutorial-data-management-with-tidycomm.html#equivalent-with-mutatecase_when" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To achieve the same result manually using <code>dplyr::mutate(case_when())</code>:</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="tutorial-data-management-with-tidycomm.html#cb213-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb213-2"><a href="tutorial-data-management-with-tidycomm.html#cb213-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb213-3"><a href="tutorial-data-management-with-tidycomm.html#cb213-3" tabindex="-1"></a>    <span class="at">country =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb213-4"><a href="tutorial-data-management-with-tidycomm.html#cb213-4" tabindex="-1"></a>      country <span class="sc">==</span> <span class="st">&quot;Germany&quot;</span>     <span class="sc">~</span> <span class="st">&quot;german&quot;</span>,</span>
-<span id="cb213-5"><a href="tutorial-data-management-with-tidycomm.html#cb213-5" tabindex="-1"></a>      country <span class="sc">==</span> <span class="st">&quot;Switzerland&quot;</span> <span class="sc">~</span> <span class="st">&quot;swiss&quot;</span>,</span>
-<span id="cb213-6"><a href="tutorial-data-management-with-tidycomm.html#cb213-6" tabindex="-1"></a>      <span class="fu">is.na</span>(country)           <span class="sc">~</span> <span class="cn">NA_character_</span>,  <span class="co"># keep missing as NA</span></span>
-<span id="cb213-7"><a href="tutorial-data-management-with-tidycomm.html#cb213-7" tabindex="-1"></a>      <span class="cn">TRUE</span>                     <span class="sc">~</span> <span class="st">&quot;other&quot;</span>         <span class="co"># everything else → &quot;other&quot;</span></span>
-<span id="cb213-8"><a href="tutorial-data-management-with-tidycomm.html#cb213-8" tabindex="-1"></a>    )</span>
-<span id="cb213-9"><a href="tutorial-data-management-with-tidycomm.html#cb213-9" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="tutorial-data-management-with-tidycomm.html#cb214-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb214-2"><a href="tutorial-data-management-with-tidycomm.html#cb214-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb214-3"><a href="tutorial-data-management-with-tidycomm.html#cb214-3" tabindex="-1"></a>    <span class="at">country =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb214-4"><a href="tutorial-data-management-with-tidycomm.html#cb214-4" tabindex="-1"></a>      country <span class="sc">==</span> <span class="st">&quot;Germany&quot;</span>     <span class="sc">~</span> <span class="st">&quot;german&quot;</span>,</span>
+<span id="cb214-5"><a href="tutorial-data-management-with-tidycomm.html#cb214-5" tabindex="-1"></a>      country <span class="sc">==</span> <span class="st">&quot;Switzerland&quot;</span> <span class="sc">~</span> <span class="st">&quot;swiss&quot;</span>,</span>
+<span id="cb214-6"><a href="tutorial-data-management-with-tidycomm.html#cb214-6" tabindex="-1"></a>      <span class="fu">is.na</span>(country)           <span class="sc">~</span> <span class="cn">NA_character_</span>,  <span class="co"># keep missing as NA</span></span>
+<span id="cb214-7"><a href="tutorial-data-management-with-tidycomm.html#cb214-7" tabindex="-1"></a>      <span class="cn">TRUE</span>                     <span class="sc">~</span> <span class="st">&quot;other&quot;</span>         <span class="co"># everything else → &quot;other&quot;</span></span>
+<span id="cb214-8"><a href="tutorial-data-management-with-tidycomm.html#cb214-8" tabindex="-1"></a>    )</span>
+<span id="cb214-9"><a href="tutorial-data-management-with-tidycomm.html#cb214-9" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 16
 ##    country reach   employment temp_contract autonomy_selection autonomy_emphasis
 ##    &lt;chr&gt;   &lt;fct&gt;   &lt;chr&gt;      &lt;fct&gt;                      &lt;dbl&gt;             &lt;dbl&gt;
@@ -817,15 +819,15 @@ It’s a simpler alternative to <code>dplyr::mutate(case_when())</code>, especia
 ## #   trust_government &lt;dbl&gt;, trust_parties &lt;dbl&gt;, trust_politicians &lt;dbl&gt;,
 ## #   ethical_concerns &lt;dbl&gt;</code></pre>
 <p>If you want to create a <strong>new column</strong> instead of overwriting:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="tutorial-data-management-with-tidycomm.html#cb215-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb215-2"><a href="tutorial-data-management-with-tidycomm.html#cb215-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb215-3"><a href="tutorial-data-management-with-tidycomm.html#cb215-3" tabindex="-1"></a>    <span class="at">country_rec =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb215-4"><a href="tutorial-data-management-with-tidycomm.html#cb215-4" tabindex="-1"></a>      country <span class="sc">==</span> <span class="st">&quot;Germany&quot;</span>     <span class="sc">~</span> <span class="st">&quot;german&quot;</span>,</span>
-<span id="cb215-5"><a href="tutorial-data-management-with-tidycomm.html#cb215-5" tabindex="-1"></a>      country <span class="sc">==</span> <span class="st">&quot;Switzerland&quot;</span> <span class="sc">~</span> <span class="st">&quot;swiss&quot;</span>,</span>
-<span id="cb215-6"><a href="tutorial-data-management-with-tidycomm.html#cb215-6" tabindex="-1"></a>      <span class="fu">is.na</span>(country)           <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb215-7"><a href="tutorial-data-management-with-tidycomm.html#cb215-7" tabindex="-1"></a>      <span class="cn">TRUE</span>                     <span class="sc">~</span> <span class="st">&quot;other&quot;</span></span>
-<span id="cb215-8"><a href="tutorial-data-management-with-tidycomm.html#cb215-8" tabindex="-1"></a>    )</span>
-<span id="cb215-9"><a href="tutorial-data-management-with-tidycomm.html#cb215-9" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="tutorial-data-management-with-tidycomm.html#cb216-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb216-2"><a href="tutorial-data-management-with-tidycomm.html#cb216-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb216-3"><a href="tutorial-data-management-with-tidycomm.html#cb216-3" tabindex="-1"></a>    <span class="at">country_rec =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb216-4"><a href="tutorial-data-management-with-tidycomm.html#cb216-4" tabindex="-1"></a>      country <span class="sc">==</span> <span class="st">&quot;Germany&quot;</span>     <span class="sc">~</span> <span class="st">&quot;german&quot;</span>,</span>
+<span id="cb216-5"><a href="tutorial-data-management-with-tidycomm.html#cb216-5" tabindex="-1"></a>      country <span class="sc">==</span> <span class="st">&quot;Switzerland&quot;</span> <span class="sc">~</span> <span class="st">&quot;swiss&quot;</span>,</span>
+<span id="cb216-6"><a href="tutorial-data-management-with-tidycomm.html#cb216-6" tabindex="-1"></a>      <span class="fu">is.na</span>(country)           <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb216-7"><a href="tutorial-data-management-with-tidycomm.html#cb216-7" tabindex="-1"></a>      <span class="cn">TRUE</span>                     <span class="sc">~</span> <span class="st">&quot;other&quot;</span></span>
+<span id="cb216-8"><a href="tutorial-data-management-with-tidycomm.html#cb216-8" tabindex="-1"></a>    )</span>
+<span id="cb216-9"><a href="tutorial-data-management-with-tidycomm.html#cb216-9" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 17
 ##    country   reach employment temp_contract autonomy_selection autonomy_emphasis
 ##    &lt;fct&gt;     &lt;fct&gt; &lt;chr&gt;      &lt;fct&gt;                      &lt;dbl&gt;             &lt;dbl&gt;
@@ -848,10 +850,10 @@ It’s a simpler alternative to <code>dplyr::mutate(case_when())</code>, especia
 <div id="reverse-ordinal-categories" class="section level4 hasAnchor" number="6.3.2.2">
 <h4><span class="header-section-number">6.3.2.2</span> Reverse ordinal categories<a href="tutorial-data-management-with-tidycomm.html#reverse-ordinal-categories" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>You can also reverse ordinal items easily:</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="tutorial-data-management-with-tidycomm.html#cb217-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb217-2"><a href="tutorial-data-management-with-tidycomm.html#cb217-2" tabindex="-1"></a>  <span class="fu">recode_cat_scale</span>(ethics_1,</span>
-<span id="cb217-3"><a href="tutorial-data-management-with-tidycomm.html#cb217-3" tabindex="-1"></a>                   <span class="at">assign =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">5</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">4</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">3</span>, <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>),</span>
-<span id="cb217-4"><a href="tutorial-data-management-with-tidycomm.html#cb217-4" tabindex="-1"></a>                   <span class="at">overwrite =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="tutorial-data-management-with-tidycomm.html#cb218-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb218-2"><a href="tutorial-data-management-with-tidycomm.html#cb218-2" tabindex="-1"></a>  <span class="fu">recode_cat_scale</span>(ethics_1,</span>
+<span id="cb218-3"><a href="tutorial-data-management-with-tidycomm.html#cb218-3" tabindex="-1"></a>                   <span class="at">assign =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">5</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">4</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">3</span>, <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>),</span>
+<span id="cb218-4"><a href="tutorial-data-management-with-tidycomm.html#cb218-4" tabindex="-1"></a>                   <span class="at">overwrite =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 17
 ##    country   reach employment temp_contract autonomy_selection autonomy_emphasis
 ##  * &lt;fct&gt;     &lt;fct&gt; &lt;chr&gt;      &lt;fct&gt;                      &lt;dbl&gt;             &lt;dbl&gt;
@@ -871,17 +873,17 @@ It’s a simpler alternative to <code>dplyr::mutate(case_when())</code>, especia
 ## #   trust_government &lt;dbl&gt;, trust_parties &lt;dbl&gt;, trust_politicians &lt;dbl&gt;,
 ## #   ethical_concerns &lt;dbl&gt;, ethics_1_rec &lt;fct&gt;</code></pre>
 <p>Equivalent in <code>case_when()</code>:</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="tutorial-data-management-with-tidycomm.html#cb219-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb219-2"><a href="tutorial-data-management-with-tidycomm.html#cb219-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb219-3"><a href="tutorial-data-management-with-tidycomm.html#cb219-3" tabindex="-1"></a>    <span class="at">ethics_1_rev =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb219-4"><a href="tutorial-data-management-with-tidycomm.html#cb219-4" tabindex="-1"></a>      ethics_1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
-<span id="cb219-5"><a href="tutorial-data-management-with-tidycomm.html#cb219-5" tabindex="-1"></a>      ethics_1 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
-<span id="cb219-6"><a href="tutorial-data-management-with-tidycomm.html#cb219-6" tabindex="-1"></a>      ethics_1 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
-<span id="cb219-7"><a href="tutorial-data-management-with-tidycomm.html#cb219-7" tabindex="-1"></a>      ethics_1 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
-<span id="cb219-8"><a href="tutorial-data-management-with-tidycomm.html#cb219-8" tabindex="-1"></a>      ethics_1 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb219-9"><a href="tutorial-data-management-with-tidycomm.html#cb219-9" tabindex="-1"></a>      <span class="fu">is.na</span>(ethics_1) <span class="sc">~</span> <span class="cn">NA_real_</span></span>
-<span id="cb219-10"><a href="tutorial-data-management-with-tidycomm.html#cb219-10" tabindex="-1"></a>    )</span>
-<span id="cb219-11"><a href="tutorial-data-management-with-tidycomm.html#cb219-11" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="tutorial-data-management-with-tidycomm.html#cb220-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb220-2"><a href="tutorial-data-management-with-tidycomm.html#cb220-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb220-3"><a href="tutorial-data-management-with-tidycomm.html#cb220-3" tabindex="-1"></a>    <span class="at">ethics_1_rev =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb220-4"><a href="tutorial-data-management-with-tidycomm.html#cb220-4" tabindex="-1"></a>      ethics_1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb220-5"><a href="tutorial-data-management-with-tidycomm.html#cb220-5" tabindex="-1"></a>      ethics_1 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb220-6"><a href="tutorial-data-management-with-tidycomm.html#cb220-6" tabindex="-1"></a>      ethics_1 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb220-7"><a href="tutorial-data-management-with-tidycomm.html#cb220-7" tabindex="-1"></a>      ethics_1 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb220-8"><a href="tutorial-data-management-with-tidycomm.html#cb220-8" tabindex="-1"></a>      ethics_1 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb220-9"><a href="tutorial-data-management-with-tidycomm.html#cb220-9" tabindex="-1"></a>      <span class="fu">is.na</span>(ethics_1) <span class="sc">~</span> <span class="cn">NA_real_</span></span>
+<span id="cb220-10"><a href="tutorial-data-management-with-tidycomm.html#cb220-10" tabindex="-1"></a>    )</span>
+<span id="cb220-11"><a href="tutorial-data-management-with-tidycomm.html#cb220-11" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 17
 ##    country   reach employment temp_contract autonomy_selection autonomy_emphasis
 ##    &lt;fct&gt;     &lt;fct&gt; &lt;chr&gt;      &lt;fct&gt;                      &lt;dbl&gt;             &lt;dbl&gt;
@@ -905,9 +907,9 @@ It’s a simpler alternative to <code>dplyr::mutate(case_when())</code>, especia
 <h4><span class="header-section-number">6.3.2.3</span> dummify_scale()<a href="tutorial-data-management-with-tidycomm.html#dummify_scale" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><code>dummify_scale()</code> converts categorical variables into <strong>dummy variables</strong> (0/1 indicators).<br />
 Each category becomes its own column.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="tutorial-data-management-with-tidycomm.html#cb221-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb221-2"><a href="tutorial-data-management-with-tidycomm.html#cb221-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(temp_contract) <span class="sc">%&gt;%</span></span>
-<span id="cb221-3"><a href="tutorial-data-management-with-tidycomm.html#cb221-3" tabindex="-1"></a>  <span class="fu">dummify_scale</span>(temp_contract)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="tutorial-data-management-with-tidycomm.html#cb222-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb222-2"><a href="tutorial-data-management-with-tidycomm.html#cb222-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(temp_contract) <span class="sc">%&gt;%</span></span>
+<span id="cb222-3"><a href="tutorial-data-management-with-tidycomm.html#cb222-3" tabindex="-1"></a>  <span class="fu">dummify_scale</span>(temp_contract)</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 3
 ##    temp_contract temp_contract_permanent temp_contract_temporary
 ##  * &lt;fct&gt;                           &lt;int&gt;                   &lt;int&gt;
@@ -923,12 +925,12 @@ Each category becomes its own column.</p>
 ## 10 Permanent                           1                       0
 ## # ℹ 1,190 more rows</code></pre>
 <p>You can also first categorize a numeric variable and then create dummy variables from the categories:</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="tutorial-data-management-with-tidycomm.html#cb223-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb223-2"><a href="tutorial-data-management-with-tidycomm.html#cb223-2" tabindex="-1"></a>  <span class="fu">categorize_scale</span>(autonomy_emphasis,</span>
-<span id="cb223-3"><a href="tutorial-data-management-with-tidycomm.html#cb223-3" tabindex="-1"></a>                   <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb223-4"><a href="tutorial-data-management-with-tidycomm.html#cb223-4" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;low&#39;</span>, <span class="st">&#39;medium&#39;</span>, <span class="st">&#39;high&#39;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb223-5"><a href="tutorial-data-management-with-tidycomm.html#cb223-5" tabindex="-1"></a>  <span class="fu">dummify_scale</span>(autonomy_emphasis_cat) <span class="sc">%&gt;%</span></span>
-<span id="cb223-6"><a href="tutorial-data-management-with-tidycomm.html#cb223-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&#39;autonomy_emphasis&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="tutorial-data-management-with-tidycomm.html#cb224-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb224-2"><a href="tutorial-data-management-with-tidycomm.html#cb224-2" tabindex="-1"></a>  <span class="fu">categorize_scale</span>(autonomy_emphasis,</span>
+<span id="cb224-3"><a href="tutorial-data-management-with-tidycomm.html#cb224-3" tabindex="-1"></a>                   <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb224-4"><a href="tutorial-data-management-with-tidycomm.html#cb224-4" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;low&#39;</span>, <span class="st">&#39;medium&#39;</span>, <span class="st">&#39;high&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb224-5"><a href="tutorial-data-management-with-tidycomm.html#cb224-5" tabindex="-1"></a>  <span class="fu">dummify_scale</span>(autonomy_emphasis_cat) <span class="sc">%&gt;%</span></span>
+<span id="cb224-6"><a href="tutorial-data-management-with-tidycomm.html#cb224-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&#39;autonomy_emphasis&#39;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1,200 × 5
 ##    autonomy_emphasis autonomy_emphasis_cat autonomy_emphasis_cat_low
 ##                &lt;dbl&gt; &lt;fct&gt;                                     &lt;int&gt;
@@ -1029,7 +1031,7 @@ relevant statistics:</p>
 tendency and variability for all variables named in the function call
 (i.e., <strong>mean, standard deviation, min, max, range, and quartiles</strong>).
 Here’s how you use it:</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="tutorial-data-management-with-tidycomm.html#cb225-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span> <span class="fu">describe</span>(autonomy_emphasis, ethics_1, work_experience)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="tutorial-data-management-with-tidycomm.html#cb226-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span> <span class="fu">describe</span>(autonomy_emphasis, ethics_1, work_experience)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 15
 ##   Variable            N Missing     M     SD   Min   Q25   Mdn   Q75   Max Range
 ## * &lt;chr&gt;           &lt;int&gt;   &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -1040,7 +1042,7 @@ Here’s how you use it:</p>
 ## #   Kurtosis &lt;dbl&gt;</code></pre>
 <p>If no variables are passed to <code>describe()</code>, all numeric variables in the
 data are described:</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="tutorial-data-management-with-tidycomm.html#cb227-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span> <span class="fu">describe</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="tutorial-data-management-with-tidycomm.html#cb228-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span> <span class="fu">describe</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 12 × 15
 ##    Variable           N Missing     M     SD   Min   Q25   Mdn   Q75   Max Range
 ##  * &lt;chr&gt;          &lt;int&gt;   &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -1059,9 +1061,9 @@ data are described:</p>
 ## # ℹ 4 more variables: CI_95_LL &lt;dbl&gt;, CI_95_UL &lt;dbl&gt;, Skewness &lt;dbl&gt;,
 ## #   Kurtosis &lt;dbl&gt;</code></pre>
 <p>You can also group data (using <code>dplyr</code>) before describing:</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="tutorial-data-management-with-tidycomm.html#cb229-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb229-2"><a href="tutorial-data-management-with-tidycomm.html#cb229-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
-<span id="cb229-3"><a href="tutorial-data-management-with-tidycomm.html#cb229-3" tabindex="-1"></a>  <span class="fu">describe</span>(autonomy_emphasis)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="tutorial-data-management-with-tidycomm.html#cb230-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb230-2"><a href="tutorial-data-management-with-tidycomm.html#cb230-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb230-3"><a href="tutorial-data-management-with-tidycomm.html#cb230-3" tabindex="-1"></a>  <span class="fu">describe</span>(autonomy_emphasis)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 16
 ## # Groups:   country [5]
 ##   country Variable     N Missing     M    SD   Min   Q25   Mdn   Q75   Max Range
@@ -1075,39 +1077,39 @@ data are described:</p>
 ## #   Kurtosis &lt;dbl&gt;</code></pre>
 <p>Finally, you can create visualizations of your variables by applying the
 <code>visualize()</code> function to your data:</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="tutorial-data-management-with-tidycomm.html#cb231-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb231-2"><a href="tutorial-data-management-with-tidycomm.html#cb231-2" tabindex="-1"></a>  <span class="fu">describe</span>(autonomy_emphasis) <span class="sc">%&gt;%</span></span>
-<span id="cb231-3"><a href="tutorial-data-management-with-tidycomm.html#cb231-3" tabindex="-1"></a>  <span class="fu">visualize</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="tutorial-data-management-with-tidycomm.html#cb232-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb232-2"><a href="tutorial-data-management-with-tidycomm.html#cb232-2" tabindex="-1"></a>  <span class="fu">describe</span>(autonomy_emphasis) <span class="sc">%&gt;%</span></span>
+<span id="cb232-3"><a href="tutorial-data-management-with-tidycomm.html#cb232-3" tabindex="-1"></a>  <span class="fu">visualize</span>()</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
 <p>Second, the <code>tab_percentiles</code> function tabulates percentiles for at
 least one continuous variable:</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="tutorial-data-management-with-tidycomm.html#cb232-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb232-2"><a href="tutorial-data-management-with-tidycomm.html#cb232-2" tabindex="-1"></a>  <span class="fu">tab_percentiles</span>(autonomy_emphasis)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="tutorial-data-management-with-tidycomm.html#cb233-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb233-2"><a href="tutorial-data-management-with-tidycomm.html#cb233-2" tabindex="-1"></a>  <span class="fu">tab_percentiles</span>(autonomy_emphasis)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 11
 ##   Variable            p10   p20   p30   p40   p50   p60   p70   p80   p90  p100
 ## * &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 autonomy_emphasis     3     4     4     4     4     4     4     5     5     5</code></pre>
 <p>You can use it to tabulate percentiles for more than one variable:</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="tutorial-data-management-with-tidycomm.html#cb234-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb234-2"><a href="tutorial-data-management-with-tidycomm.html#cb234-2" tabindex="-1"></a>  <span class="fu">tab_percentiles</span>(autonomy_emphasis, ethics_1)</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="tutorial-data-management-with-tidycomm.html#cb235-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb235-2"><a href="tutorial-data-management-with-tidycomm.html#cb235-2" tabindex="-1"></a>  <span class="fu">tab_percentiles</span>(autonomy_emphasis, ethics_1)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 11
 ##   Variable            p10   p20   p30   p40   p50   p60   p70   p80   p90  p100
 ## * &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 autonomy_emphasis     3     4     4     4     4     4     4     5     5     5
 ## 2 ethics_1              1     1     1     1     1     2     2     2     3     5</code></pre>
 <p>You can also specify your own percentiles:</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="tutorial-data-management-with-tidycomm.html#cb236-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb236-2"><a href="tutorial-data-management-with-tidycomm.html#cb236-2" tabindex="-1"></a>  <span class="fu">tab_percentiles</span>(autonomy_emphasis, ethics_1, <span class="at">levels =</span> <span class="fu">c</span>(<span class="fl">0.16</span>, <span class="fl">0.50</span>, <span class="fl">0.84</span>, <span class="fl">1.0</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="tutorial-data-management-with-tidycomm.html#cb237-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb237-2"><a href="tutorial-data-management-with-tidycomm.html#cb237-2" tabindex="-1"></a>  <span class="fu">tab_percentiles</span>(autonomy_emphasis, ethics_1, <span class="at">levels =</span> <span class="fu">c</span>(<span class="fl">0.16</span>, <span class="fl">0.50</span>, <span class="fl">0.84</span>, <span class="fl">1.0</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Variable            p16   p50   p84  p100
 ## * &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 autonomy_emphasis     3     4     5     5
 ## 2 ethics_1              1     1     2     5</code></pre>
 <p>And you can visualize your percentiles:</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="tutorial-data-management-with-tidycomm.html#cb238-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
-<span id="cb238-2"><a href="tutorial-data-management-with-tidycomm.html#cb238-2" tabindex="-1"></a>  <span class="fu">tab_percentiles</span>(autonomy_emphasis) <span class="sc">%&gt;%</span></span>
-<span id="cb238-3"><a href="tutorial-data-management-with-tidycomm.html#cb238-3" tabindex="-1"></a>  <span class="fu">visualize</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="tutorial-data-management-with-tidycomm.html#cb239-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
+<span id="cb239-2"><a href="tutorial-data-management-with-tidycomm.html#cb239-2" tabindex="-1"></a>  <span class="fu">tab_percentiles</span>(autonomy_emphasis) <span class="sc">%&gt;%</span></span>
+<span id="cb239-3"><a href="tutorial-data-management-with-tidycomm.html#cb239-3" tabindex="-1"></a>  <span class="fu">visualize</span>()</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
 </div>
 </div>
 </div>
