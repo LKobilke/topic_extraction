@@ -23,15 +23,15 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2025-11-06" />
+<meta name="date" content="2025-11-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="exercise-5-ggplot.html"/>
-<link rel="next" href="solutions.html"/>
+<link rel="prev" href="exercise-4-ggplot.html"/>
+<link rel="next" href="tutorial-data-management-with-tidycomm.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -259,61 +259,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exercise-3-dplyr.html"><a href="exercise-3-dplyr.html#task-7"><i class="fa fa-check"></i>Task 7</a></li>
 <li class="chapter" data-level="" data-path="exercise-3-dplyr.html"><a href="exercise-3-dplyr.html#task-8"><i class="fa fa-check"></i>Task 8</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html"><i class="fa fa-check"></i><b>6</b> Tutorial: Data management with tidycomm</a>
+<li class="chapter" data-level="6" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html"><i class="fa fa-check"></i><b>6</b> Tutorial: Data visualization with ggplot</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#index-generation"><i class="fa fa-check"></i><b>6.1</b> Index generation</a>
+<li class="chapter" data-level="6.1" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#why-not-stick-with-base-r-1"><i class="fa fa-check"></i><b>6.1</b> Why not stick with Base R?</a></li>
+<li class="chapter" data-level="6.2" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#components-of-a-ggplot-graph"><i class="fa fa-check"></i><b>6.2</b> Components of a ggplot graph</a></li>
+<li class="chapter" data-level="6.3" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#installing-activating-ggplot"><i class="fa fa-check"></i><b>6.3</b> Installing &amp; activating ggplot</a></li>
+<li class="chapter" data-level="6.4" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#building-your-first-plot"><i class="fa fa-check"></i><b>6.4</b> Building your first plot</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#add_index"><i class="fa fa-check"></i><b>6.1.1</b> add_index():</a></li>
-<li class="chapter" data-level="6.1.2" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#get_reliability"><i class="fa fa-check"></i><b>6.1.2</b> get_reliability()</a></li>
+<li class="chapter" data-level="6.4.1" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#data"><i class="fa fa-check"></i><b>6.4.1</b> Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#aesthetics"><i class="fa fa-check"></i><b>6.4.2</b> Aesthetics</a></li>
+<li class="chapter" data-level="6.4.3" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#geometrics"><i class="fa fa-check"></i><b>6.4.3</b> Geometrics</a></li>
+<li class="chapter" data-level="6.4.4" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#scales"><i class="fa fa-check"></i><b>6.4.4</b> Scales</a></li>
+<li class="chapter" data-level="6.4.5" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#themes"><i class="fa fa-check"></i><b>6.4.5</b> Themes</a></li>
+<li class="chapter" data-level="6.4.6" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#labs"><i class="fa fa-check"></i><b>6.4.6</b> Labs</a></li>
+<li class="chapter" data-level="6.4.7" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#facets"><i class="fa fa-check"></i><b>6.4.7</b> Facets</a></li>
+<li class="chapter" data-level="6.4.8" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#saving-graphs"><i class="fa fa-check"></i><b>6.4.8</b> Saving graphs</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#rescaling-of-continuous-scales"><i class="fa fa-check"></i><b>6.2</b> Rescaling of continuous scales</a>
+<li class="chapter" data-level="6.5" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#other-common-plot-types"><i class="fa fa-check"></i><b>6.5</b> Other common plot types</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#setna_scale"><i class="fa fa-check"></i><b>6.2.1</b> setna_scale()</a></li>
-<li class="chapter" data-level="6.2.2" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#reverse_scale"><i class="fa fa-check"></i><b>6.2.2</b> reverse_scale()</a></li>
-<li class="chapter" data-level="6.2.3" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#minmax_scale"><i class="fa fa-check"></i><b>6.2.3</b> minmax_scale()</a></li>
-<li class="chapter" data-level="6.2.4" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#center_scale"><i class="fa fa-check"></i><b>6.2.4</b> center_scale()</a></li>
-<li class="chapter" data-level="6.2.5" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#z_scale"><i class="fa fa-check"></i><b>6.2.5</b> z_scale()</a></li>
+<li class="chapter" data-level="6.5.1" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#bar-plots"><i class="fa fa-check"></i><b>6.5.1</b> bar plots</a></li>
+<li class="chapter" data-level="6.5.2" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#box-plots"><i class="fa fa-check"></i><b>6.5.2</b> box plots</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#categorizing-and-recoding-categorical-scales"><i class="fa fa-check"></i><b>6.3</b> Categorizing and recoding categorical scales</a>
+<li class="chapter" data-level="6.6" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#take-aways-4"><i class="fa fa-check"></i><b>6.6</b> Take Aways</a></li>
+<li class="chapter" data-level="6.7" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#additional-tutorials-4"><i class="fa fa-check"></i><b>6.7</b> Additional tutorials</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-4-ggplot.html"><a href="exercise-4-ggplot.html"><i class="fa fa-check"></i>Exercise 4: ggplot</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#categorize_scale"><i class="fa fa-check"></i><b>6.3.1</b> categorize_scale()</a></li>
-<li class="chapter" data-level="6.3.2" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#recode_cat_scale"><i class="fa fa-check"></i><b>6.3.2</b> recode_cat_scale()</a></li>
-<li class="chapter" data-level="6.3.3" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#summary-of-all-scaling-functions"><i class="fa fa-check"></i><b>6.3.3</b> Summary of all scaling functions</a></li>
-<li class="chapter" data-level="6.3.4" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#univariate-analysis"><i class="fa fa-check"></i><b>6.3.4</b> Univariate analysis</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html"><i class="fa fa-check"></i><b>7</b> Tutorial: Data visualization with ggplot</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#why-not-stick-with-base-r-1"><i class="fa fa-check"></i><b>7.1</b> Why not stick with Base R?</a></li>
-<li class="chapter" data-level="7.2" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#components-of-a-ggplot-graph"><i class="fa fa-check"></i><b>7.2</b> Components of a ggplot graph</a></li>
-<li class="chapter" data-level="7.3" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#installing-activating-ggplot"><i class="fa fa-check"></i><b>7.3</b> Installing &amp; activating ggplot</a></li>
-<li class="chapter" data-level="7.4" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#building-your-first-plot"><i class="fa fa-check"></i><b>7.4</b> Building your first plot</a>
-<ul>
-<li class="chapter" data-level="7.4.1" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#data"><i class="fa fa-check"></i><b>7.4.1</b> Data</a></li>
-<li class="chapter" data-level="7.4.2" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#aesthetics"><i class="fa fa-check"></i><b>7.4.2</b> Aesthetics</a></li>
-<li class="chapter" data-level="7.4.3" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#geometrics"><i class="fa fa-check"></i><b>7.4.3</b> Geometrics</a></li>
-<li class="chapter" data-level="7.4.4" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#scales"><i class="fa fa-check"></i><b>7.4.4</b> Scales</a></li>
-<li class="chapter" data-level="7.4.5" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#themes"><i class="fa fa-check"></i><b>7.4.5</b> Themes</a></li>
-<li class="chapter" data-level="7.4.6" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#labs"><i class="fa fa-check"></i><b>7.4.6</b> Labs</a></li>
-<li class="chapter" data-level="7.4.7" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#facets"><i class="fa fa-check"></i><b>7.4.7</b> Facets</a></li>
-<li class="chapter" data-level="7.4.8" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#saving-graphs"><i class="fa fa-check"></i><b>7.4.8</b> Saving graphs</a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#other-common-plot-types"><i class="fa fa-check"></i><b>7.5</b> Other common plot types</a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#bar-plots"><i class="fa fa-check"></i><b>7.5.1</b> bar plots</a></li>
-<li class="chapter" data-level="7.5.2" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#box-plots"><i class="fa fa-check"></i><b>7.5.2</b> box plots</a></li>
-</ul></li>
-<li class="chapter" data-level="7.6" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#take-aways-4"><i class="fa fa-check"></i><b>7.6</b> Take Aways</a></li>
-<li class="chapter" data-level="7.7" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#additional-tutorials-4"><i class="fa fa-check"></i><b>7.7</b> Additional tutorials</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exercise-5-ggplot.html"><a href="exercise-5-ggplot.html"><i class="fa fa-check"></i>Exercise 5: ggplot</a>
-<ul>
-<li class="chapter" data-level="" data-path="exercise-5-ggplot.html"><a href="exercise-5-ggplot.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
-<li class="chapter" data-level="" data-path="exercise-5-ggplot.html"><a href="exercise-5-ggplot.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
-<li class="chapter" data-level="" data-path="exercise-5-ggplot.html"><a href="exercise-5-ggplot.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
-<li class="chapter" data-level="" data-path="exercise-5-ggplot.html"><a href="exercise-5-ggplot.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
-<li class="chapter" data-level="" data-path="exercise-5-ggplot.html"><a href="exercise-5-ggplot.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
-<li class="chapter" data-level="" data-path="exercise-5-ggplot.html"><a href="exercise-5-ggplot.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-ggplot.html"><a href="exercise-4-ggplot.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-ggplot.html"><a href="exercise-4-ggplot.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-ggplot.html"><a href="exercise-4-ggplot.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-ggplot.html"><a href="exercise-4-ggplot.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-ggplot.html"><a href="exercise-4-ggplot.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-ggplot.html"><a href="exercise-4-ggplot.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="exercise-6-ggplot.html"><a href="exercise-6-ggplot.html"><i class="fa fa-check"></i>Exercise 6: ggplot</a>
 <ul>
@@ -322,6 +299,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exercise-6-ggplot.html"><a href="exercise-6-ggplot.html#task-3-4"><i class="fa fa-check"></i>Task 3</a></li>
 <li class="chapter" data-level="" data-path="exercise-6-ggplot.html"><a href="exercise-6-ggplot.html#task-4-3"><i class="fa fa-check"></i>Task 4</a></li>
 <li class="chapter" data-level="" data-path="exercise-6-ggplot.html"><a href="exercise-6-ggplot.html#task-5-2"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html"><i class="fa fa-check"></i><b>7</b> Tutorial: Data management with tidycomm</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#index-generation"><i class="fa fa-check"></i><b>7.1</b> Index generation</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#add_index"><i class="fa fa-check"></i><b>7.1.1</b> add_index():</a></li>
+<li class="chapter" data-level="7.1.2" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#get_reliability"><i class="fa fa-check"></i><b>7.1.2</b> get_reliability()</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#rescaling-of-continuous-scales"><i class="fa fa-check"></i><b>7.2</b> Rescaling of continuous scales</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#setna_scale"><i class="fa fa-check"></i><b>7.2.1</b> setna_scale()</a></li>
+<li class="chapter" data-level="7.2.2" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#reverse_scale"><i class="fa fa-check"></i><b>7.2.2</b> reverse_scale()</a></li>
+<li class="chapter" data-level="7.2.3" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#minmax_scale"><i class="fa fa-check"></i><b>7.2.3</b> minmax_scale()</a></li>
+<li class="chapter" data-level="7.2.4" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#center_scale"><i class="fa fa-check"></i><b>7.2.4</b> center_scale()</a></li>
+<li class="chapter" data-level="7.2.5" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#z_scale"><i class="fa fa-check"></i><b>7.2.5</b> z_scale()</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#categorizing-and-recoding-categorical-scales"><i class="fa fa-check"></i><b>7.3</b> Categorizing and recoding categorical scales</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#categorize_scale"><i class="fa fa-check"></i><b>7.3.1</b> categorize_scale()</a></li>
+<li class="chapter" data-level="7.3.2" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#recode_cat_scale"><i class="fa fa-check"></i><b>7.3.2</b> recode_cat_scale()</a></li>
+<li class="chapter" data-level="7.3.3" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#summary-of-all-scaling-functions"><i class="fa fa-check"></i><b>7.3.3</b> Summary of all scaling functions</a></li>
+<li class="chapter" data-level="7.3.4" data-path="tutorial-data-management-with-tidycomm.html"><a href="tutorial-data-management-with-tidycomm.html#univariate-analysis"><i class="fa fa-check"></i><b>7.3.4</b> Univariate analysis</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a>
 <ul>
@@ -397,14 +397,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="task-1-4" class="section level2 unnumbered hasAnchor">
 <h2>Task 1<a href="exercise-6-ggplot.html#task-1-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Please set your working directory and load the WoJ_names.csv.</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="exercise-6-ggplot.html#cb270-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/makis/Documents/IPR/&quot;</span>)</span>
-<span id="cb270-2"><a href="exercise-6-ggplot.html#cb270-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;WoJ_names.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p>(Install + ) load the ggplot2 package.</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="exercise-6-ggplot.html#cb271-1" tabindex="-1"></a><span class="co"># installing/loading the package:</span></span>
-<span id="cb271-2"><a href="exercise-6-ggplot.html#cb271-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(ggplot2)) {</span>
-<span id="cb271-3"><a href="exercise-6-ggplot.html#cb271-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb271-4"><a href="exercise-6-ggplot.html#cb271-4" tabindex="-1"></a>  <span class="fu">require</span>(ggplot2)</span>
-<span id="cb271-5"><a href="exercise-6-ggplot.html#cb271-5" tabindex="-1"></a>} <span class="co"># load / install+load ggplot2</span></span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="exercise-6-ggplot.html#cb208-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/makis/Documents/IPR/&quot;</span>)</span>
+<span id="cb208-2"><a href="exercise-6-ggplot.html#cb208-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;WoJ_names.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>You need to load the <code>ggplot2</code> package:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="exercise-6-ggplot.html#cb209-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <p>Now, create a box plot to visualize the distribution of work experience
 in years for each country in the dataset:</p>
 <ul>
@@ -413,27 +409,27 @@ in years for each country in the dataset:</p>
 <li>Choose an appropriate theme.</li>
 <li>Label the axes and the title appropriately using <code>labs()</code>.</li>
 </ul>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 </div>
 <div id="task-2-4" class="section level2 unnumbered hasAnchor">
 <h2>Task 2<a href="exercise-6-ggplot.html#task-2-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Look at this graph and try to recreate it.</p>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-168-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
 </div>
 <div id="task-3-4" class="section level2 unnumbered hasAnchor">
 <h2>Task 3<a href="exercise-6-ggplot.html#task-3-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Try to create an advanced version of your graph from Task 2 that shows
 the names of the journalists. You can use the geom_text function for the
 labels, like this:</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="exercise-6-ggplot.html#cb272-1" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">check_overlap =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="exercise-6-ggplot.html#cb210-1" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">check_overlap =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>If you’d like to adjust the position of the labels, you can add the
 argument <code>, hjust = 0, vjust = 0</code> to this command, like this:</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="exercise-6-ggplot.html#cb273-1" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">check_overlap =</span> <span class="cn">TRUE</span>, <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="exercise-6-ggplot.html#cb211-1" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">check_overlap =</span> <span class="cn">TRUE</span>, <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>)</span></code></pre></div>
 </div>
 <div id="task-4-3" class="section level2 unnumbered hasAnchor">
 <h2>Task 4<a href="exercise-6-ggplot.html#task-4-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Next, try to recreate this bar plot. Use <code>geom_bar(position = "dodge")</code> to create it. <code>dodge</code>produces the graph below whereas <code>geom_bar(position = "stack")</code> will create a stacked bar chart.</p>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
 </div>
 <div id="task-5-2" class="section level2 unnumbered hasAnchor">
 <h2>Task 5<a href="exercise-6-ggplot.html#task-5-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -451,75 +447,6 @@ and move the labels a bit more to the bottom of the graph. You can use
 the <code>theme()</code> function and adjust the <code>axis.text.x</code> argument. In this
 case, you’d use <code>theme(element_text(angle = 45, hjust = 1))</code> at the end
 of your code.</p>
-<!-- # Exercise 6: dplyr, ggplot, tidycomm {.unnumbered} -->
-<!-- **After working through Exercise 6, you'll...** -->
-<!-- -   have repeated the most important functions of `dplyr` and `ggplot2` -->
-<!-- -   alternatively, you'll have repeatedsome helpful function from `tidycomm` -->
-<!-- In this exercise, we will work with the `mtcars` data that comes pre-installed with `dplyr`. -->
-<!-- ```{r, eval = TRUE, include=TRUE} -->
-<!-- library(tidyverse) -->
-<!-- data <- mtcars -->
-<!-- # To make the data somewhat more interesting, let's set a few values to missing values (you don't need to know this code): -->
-<!-- data <- data %>% -->
-<!--   mutate(wt = na_if(wt, 4.070)) -->
-<!-- data <- data %>% -->
-<!--   mutate(mpg = na_if(mpg, 22.8)) -->
-<!-- ``` -->
-<!-- Let's first get to know this data. We can get some information about the variables that are included in the dataset by using `R`s `help()` -->
-<!-- function: -->
-<!-- ```{r, eval = FALSE, include=TRUE} -->
-<!-- help(mtcars) -->
-<!-- ``` -->
-<!-- |                                                                                                   | -->
-<!-- |:--------------------------------------------------------------------------------------------------| -->
-<!-- | *Image: Output of the help(mtcars) function:*                                                     | -->
-<!-- | ![](C:/Users/makis/SynologyDrive/_Arbeit/Lehre_Hannover/Themenextraktion/Methodenvergleich/LaraKobilke/images/mtcars.JPG){width="30%"} | -->
-<!-- We get to know that this is a data set was created from the *1974 Motor Trend US magazine*, and that it comprises fuel consumption (*mpg*) and -->
-<!-- 10 other aspects (*cyl*, *wt*) of automobile design and performance for -->
-<!-- 32 different cars. -->
-<!-- ## Task 1 {.unnumbered} -->
-<!-- Check the dataset for missing values (*NA*s) and delete all observations that have missing values. -->
-<!-- ## Task 2 {.unnumbered} -->
-<!-- Let's transform the weight *wt* of the cars. Currently, it's given as -->
-<!-- *Weight in 1000 lbs*. I guess you are not used to lbs, so try to mutate -->
-<!-- *wt* to represent *Weight in 1000 kg*. 1000 lbs = 453.59 kg, so we will -->
-<!-- need to divide by 2.20. -->
-<!-- Similarly, I think that you are not very familiar with the unit *Miles -->
-<!-- per gallon* of the *mpg* variable. Let's transform it into *Kilometer -->
-<!-- per liter*. 1 m/g = 0.425144 km/l, so again divide by 2.20. -->
-<!-- ## Task 3 {.unnumbered} -->
-<!-- Now we want to group the weight of the cars in three categories: light, -->
-<!-- medium, heavy. But how to define light, medium, and heavy cars, i.e., at -->
-<!-- what kg should you put the threshold? A reasonable approach is to use -->
-<!-- quantiles (see Tutorial: [summarize() [+ -->
-<!-- group_by()]](#summarize-group_by)). Quantiles divide data. For example, -->
-<!-- the 75% quantile states that exactly 75% of the data values are equal or -->
-<!-- below the quantile value. The rest of the values are equal or above it. -->
-<!-- Use the lower quantile (0.25) and the upper quantile (0.75) to estimate -->
-<!-- two values that divide the weight of the cars in three groups. What are -->
-<!-- these values? -->
-<!-- ## Task 4 {.unnumbered} -->
-<!-- Use the values from Task 3 to create a new variable *wt_cat* that -->
-<!-- divides the cars in three groups: light, medium, and heavy cars. -->
-<!-- ## Task 5 {.unnumbered} -->
-<!-- How many light, medium, and heavy cars are part of the data? -->
-<!-- ## Task 6 {.unnumbered} -->
-<!-- Now sort this count of the car weight classes from highest to lowest. -->
-<!-- ## Task 7 {.unnumbered} -->
-<!-- Make a scatter plot to indicate how many km per liter (*mpg*) a car can -->
-<!-- drive depending on its weight (*wt*). Facet the plot by weight class -->
-<!-- (*wt_cat*). -->
-<!-- ## Task 8 {.unnumbered} -->
-<!-- Recreate the diagram from Task 7, but exclude all cars that weigh -->
-<!-- between 1.4613636 and 1.5636364 \*1000kg from it. -->
-<!-- When you're ready to look at the solutions, you can find them here: -->
-<!-- [Solutions for Exercise 6]. -->
-<!-- We have officially finished our chapters on data management and -->
-<!-- visualization! -->
-<!-- # Tutorial: Text manipulation with stringr -->
-<!-- **After working through Tutorial 9, you'll...** -->
-<!-- # Tutorial: Tidy text analysis# -->
-<!-- **After working through Tutorial 10, you'll...** -->
 </div>
 </div>
             </section>
@@ -527,8 +454,8 @@ of your code.</p>
           </div>
         </div>
       </div>
-<a href="exercise-5-ggplot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercise-4-ggplot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tutorial-data-management-with-tidycomm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
