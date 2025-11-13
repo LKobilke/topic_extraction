@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2025-11-10" />
+<meta name="date" content="2025-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -374,6 +374,9 @@ the final visualization</li>
 to combine graphical components</li>
 <li>know how to make your own data visualizations using <code>ggplot2</code></li>
 </ul>
+<p>You can watch this entire chapter as video, in which I explain everything in detail:</p>
+<iframe src="https://youtu.be/9QE4TU4NyyA" width="672" height="400px" data-external="1">
+</iframe>
 <div id="why-not-stick-with-base-r-1" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Why not stick with Base R?<a href="tutorial-data-visualization-with-ggplot.html#why-not-stick-with-base-r-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>ggplot2</code> package, i.e. the data visualization package of
@@ -410,7 +413,7 @@ can prepare your data selection and manipulation with <code>dplyr</code> and pip
 it directly into <code>ggplot</code> to turn your transformed data into a beautiful
 graph.</p>
 <p>With only a few lines of code, you can produce graphs like this one:</p>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-100-1.png" width="120%" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-101-1.png" width="120%" /></p>
 <p>This is the code. Right now, it might still look a bit overwhelming to
 you, but once you’ve understood the grammar of graphics, it really is a
 just a small jigsaw puzzle. Moreover, you don’t usually start with
@@ -529,7 +532,7 @@ object and apply the <code>ggplot()</code> function to it by using a pipe (i.e.
 %&gt;%).</p>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="tutorial-data-visualization-with-ggplot.html#cb183-1" tabindex="-1"></a>human_droid_data <span class="sc">%&gt;%</span></span>
 <span id="cb183-2"><a href="tutorial-data-visualization-with-ggplot.html#cb183-2" tabindex="-1"></a>  <span class="fu">ggplot</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
 <p>The <code>ggplot()</code> function creates a blank canvas (i.e. first layer). We
 now have to draw on it.</p>
 </div>
@@ -541,7 +544,7 @@ function which variables to assign to the x- and y-axis by using the
 <strong>necessary</strong> in every single plot.</p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="tutorial-data-visualization-with-ggplot.html#cb184-1" tabindex="-1"></a>human_droid_data <span class="sc">%&gt;%</span></span>
 <span id="cb184-2"><a href="tutorial-data-visualization-with-ggplot.html#cb184-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> mass))</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
 <p>The <code>aes()</code> function allows you to specify the following arguments (and
 many more, as you will learn over time):</p>
 <ul>
@@ -574,7 +577,7 @@ make it a scatter plot:</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="tutorial-data-visualization-with-ggplot.html#cb185-1" tabindex="-1"></a>human_droid_data <span class="sc">%&gt;%</span></span>
 <span id="cb185-2"><a href="tutorial-data-visualization-with-ggplot.html#cb185-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> mass)) <span class="sc">+</span></span>
 <span id="cb185-3"><a href="tutorial-data-visualization-with-ggplot.html#cb185-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
 <p>That’s a scatter plot for sure! And you only needed three <strong>necessary</strong>
 components to create it:</p>
 <ol style="list-style-type: decimal">
@@ -606,7 +609,7 @@ the graph with new axis limits.</p>
 <span id="cb186-3"><a href="tutorial-data-visualization-with-ggplot.html#cb186-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb186-4"><a href="tutorial-data-visualization-with-ggplot.html#cb186-4" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">140</span>)) <span class="sc">+</span> <span class="co"># modify the y axis limits</span></span>
 <span id="cb186-5"><a href="tutorial-data-visualization-with-ggplot.html#cb186-5" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">210</span>)) <span class="co"># modify the x axis limits</span></span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
 <p>Second, we’ll add more ticks to make the graph better readable.</p>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="tutorial-data-visualization-with-ggplot.html#cb187-1" tabindex="-1"></a>human_droid_data <span class="sc">%&gt;%</span></span>
 <span id="cb187-2"><a href="tutorial-data-visualization-with-ggplot.html#cb187-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> mass)) <span class="sc">+</span></span>
@@ -615,7 +618,7 @@ the graph with new axis limits.</p>
 <span id="cb187-5"><a href="tutorial-data-visualization-with-ggplot.html#cb187-5" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">210</span>)) <span class="sc">+</span></span>
 <span id="cb187-6"><a href="tutorial-data-visualization-with-ggplot.html#cb187-6" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">100</span>, <span class="dv">120</span>, <span class="dv">140</span>, <span class="dv">160</span>)) <span class="sc">+</span> <span class="co"># choose where the ticks of the y axis appear</span></span>
 <span id="cb187-7"><a href="tutorial-data-visualization-with-ggplot.html#cb187-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">120</span>, <span class="dv">140</span>, <span class="dv">160</span>, <span class="dv">180</span>, <span class="dv">200</span>)) <span class="co"># choose where the ticks of the x axis appear</span></span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
 <p>Until now, we have used <code>scale_</code> to transform only the axes. But we can
 also use it to change the mapping of variables to geometric objects. To
 demonstrate this, we now add another variable to our graph, namely the
@@ -629,7 +632,7 @@ reflect older age.</p>
 <span id="cb188-5"><a href="tutorial-data-visualization-with-ggplot.html#cb188-5" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">210</span>)) <span class="sc">+</span></span>
 <span id="cb188-6"><a href="tutorial-data-visualization-with-ggplot.html#cb188-6" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">100</span>, <span class="dv">120</span>, <span class="dv">140</span>, <span class="dv">160</span>)) <span class="sc">+</span></span>
 <span id="cb188-7"><a href="tutorial-data-visualization-with-ggplot.html#cb188-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">120</span>, <span class="dv">140</span>, <span class="dv">160</span>, <span class="dv">180</span>, <span class="dv">200</span>))</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
 <p>Personally, I feel like these bubbles could use a little bit of
 rescaling to make age differences stand out more. In addition, you could
 get a nicer title for the size legend than “birth_year”. Let’s try that.</p>
@@ -641,7 +644,7 @@ get a nicer title for the size legend than “birth_year”. Let’s try that.</
 <span id="cb189-6"><a href="tutorial-data-visualization-with-ggplot.html#cb189-6" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">100</span>, <span class="dv">120</span>, <span class="dv">140</span>, <span class="dv">160</span>)) <span class="sc">+</span></span>
 <span id="cb189-7"><a href="tutorial-data-visualization-with-ggplot.html#cb189-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">120</span>, <span class="dv">140</span>, <span class="dv">160</span>, <span class="dv">180</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
 <span id="cb189-8"><a href="tutorial-data-visualization-with-ggplot.html#cb189-8" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>), <span class="at">name =</span> <span class="st">&quot;age&quot;</span>) <span class="co"># sets the bubbles&#39; size in a range between 1 and 11 and renames the respective legend title to &quot;age&quot;</span></span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
 <p>Perfect! The legend spells “age” and age differences seem a bit more
 obvious now. Unfortunately, some data points are now overlapping.</p>
 <p>I think this is a good time to introduce you to the differences between
@@ -662,7 +665,7 @@ not depend on a third variable like <em>birth_year</em>.</p>
 <span id="cb190-6"><a href="tutorial-data-visualization-with-ggplot.html#cb190-6" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">100</span>, <span class="dv">120</span>, <span class="dv">140</span>, <span class="dv">160</span>)) <span class="sc">+</span></span>
 <span id="cb190-7"><a href="tutorial-data-visualization-with-ggplot.html#cb190-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">120</span>, <span class="dv">140</span>, <span class="dv">160</span>, <span class="dv">180</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
 <span id="cb190-8"><a href="tutorial-data-visualization-with-ggplot.html#cb190-8" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>), <span class="at">name =</span> <span class="st">&quot;age&quot;</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
 <p>This looks way more readable. I think we are ready to move on to
 <a href="tutorial-data-visualization-with-ggplot.html#themes">Themes</a>.</p>
 </div>
@@ -688,7 +691,7 @@ your taste:</p>
 <span id="cb191-7"><a href="tutorial-data-visualization-with-ggplot.html#cb191-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">120</span>, <span class="dv">140</span>, <span class="dv">160</span>, <span class="dv">180</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
 <span id="cb191-8"><a href="tutorial-data-visualization-with-ggplot.html#cb191-8" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>), <span class="at">name =</span> <span class="st">&quot;age&quot;</span>) <span class="sc">+</span></span>
 <span id="cb191-9"><a href="tutorial-data-visualization-with-ggplot.html#cb191-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
 <p>Personally, I really enjoy the <em>theme_bw()</em> (black-and-white theme). So
 let’s apply it to our graph:</p>
 <div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="tutorial-data-visualization-with-ggplot.html#cb192-1" tabindex="-1"></a>human_droid_data <span class="sc">%&gt;%</span></span>
@@ -700,7 +703,7 @@ let’s apply it to our graph:</p>
 <span id="cb192-7"><a href="tutorial-data-visualization-with-ggplot.html#cb192-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">120</span>, <span class="dv">140</span>, <span class="dv">160</span>, <span class="dv">180</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
 <span id="cb192-8"><a href="tutorial-data-visualization-with-ggplot.html#cb192-8" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>), <span class="at">name =</span> <span class="st">&quot;age&quot;</span>) <span class="sc">+</span></span>
 <span id="cb192-9"><a href="tutorial-data-visualization-with-ggplot.html#cb192-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
 </div>
 <div id="labs" class="section level3 hasAnchor" number="6.4.6">
 <h3><span class="header-section-number">6.4.6</span> Labs<a href="tutorial-data-visualization-with-ggplot.html#labs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -721,7 +724,7 @@ for your plot and to change the labels of the x and y axis.</p>
 <span id="cb193-11"><a href="tutorial-data-visualization-with-ggplot.html#cb193-11" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Mass vs. height of humans and droids in Star Wars&quot;</span>,</span>
 <span id="cb193-12"><a href="tutorial-data-visualization-with-ggplot.html#cb193-12" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Height (cm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (kg)&quot;</span></span>
 <span id="cb193-13"><a href="tutorial-data-visualization-with-ggplot.html#cb193-13" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
 <p>Now that we’ve added a main title, it becomes clear that we can’t really
 distinguish the data points that represent humans from those that
 represent droids.</p>
@@ -751,7 +754,7 @@ variables</strong> which form the rows and columns</li>
 <td><em>Image: The logic of faceting (<a href="https://ggplot2-book.org/facet.html">Source: Wickham et al., 2021</a>):</em></td>
 </tr>
 <tr class="even">
-<td><img src="images/Tut5_faceting.JPG" /></td>
+<td><img src="images/Tut5_faceting.jpg" /></td>
 </tr>
 </tbody>
 </table>
@@ -776,7 +779,7 @@ provide two arguments to <code>facet_wrap()</code>:</p>
 <span id="cb194-12"><a href="tutorial-data-visualization-with-ggplot.html#cb194-12" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Height (cm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (kg)&quot;</span></span>
 <span id="cb194-13"><a href="tutorial-data-visualization-with-ggplot.html#cb194-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb194-14"><a href="tutorial-data-visualization-with-ggplot.html#cb194-14" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species, <span class="at">nrow =</span> <span class="dv">2</span>) <span class="co"># using ~grouping_variable and nrow = 2 shows the two panels on top of each other</span></span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
 <p>Great, finally we can distinguish the data points representing humans
 from those representing droids! On the left side, however, the panel
 with the humans looks a bit empty. Maybe we should put them next to each
@@ -795,7 +798,7 @@ other.</p>
 <span id="cb195-12"><a href="tutorial-data-visualization-with-ggplot.html#cb195-12" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Height (cm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (kg)&quot;</span></span>
 <span id="cb195-13"><a href="tutorial-data-visualization-with-ggplot.html#cb195-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb195-14"><a href="tutorial-data-visualization-with-ggplot.html#cb195-14" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species) <span class="co"># nrow=1 is the default, so you don´t have to call it explicitly</span></span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
 <p>I like that!</p>
 </div>
 <div id="saving-graphs" class="section level3 hasAnchor" number="6.4.8">
@@ -819,7 +822,7 @@ remove the default black ink provided in the <code>geom_point()</code> function.
 <span id="cb196-12"><a href="tutorial-data-visualization-with-ggplot.html#cb196-12" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Height (cm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Weight (kg)&quot;</span></span>
 <span id="cb196-13"><a href="tutorial-data-visualization-with-ggplot.html#cb196-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb196-14"><a href="tutorial-data-visualization-with-ggplot.html#cb196-14" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
 <p>Congratulations! You have just managed to recreate the plot from the
 beginning of this tutorial! The only thing we haven’t covered yet is the
 labeling of all data points, because for that you’d need the <code>ggrepel</code>
@@ -865,14 +868,14 @@ Star Wars characters are male, female, or do not have a sex.</p>
 <div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="tutorial-data-visualization-with-ggplot.html#cb198-1" tabindex="-1"></a>human_droid_data <span class="sc">%&gt;%</span></span>
 <span id="cb198-2"><a href="tutorial-data-visualization-with-ggplot.html#cb198-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex)) <span class="sc">+</span> <span class="co"># We only have to specify the variable that we want to get the count for (i.e. number of observations)</span></span>
 <span id="cb198-3"><a href="tutorial-data-visualization-with-ggplot.html#cb198-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-121-1.png" width="60%" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-122-1.png" width="60%" /></p>
 <p>Next, let’s look at the relationship between <em>sex</em> and the <em>height</em>
 (metric) variable. We will produce a bar plot that displays the mean
 height of each group:</p>
 <div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="tutorial-data-visualization-with-ggplot.html#cb199-1" tabindex="-1"></a>human_droid_data <span class="sc">%&gt;%</span></span>
 <span id="cb199-2"><a href="tutorial-data-visualization-with-ggplot.html#cb199-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> height)) <span class="sc">+</span> <span class="co"># Now we need to specify the variable that we want to summarize with mean statistics</span></span>
 <span id="cb199-3"><a href="tutorial-data-visualization-with-ggplot.html#cb199-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="at">fun.y =</span> <span class="st">&quot;mean&quot;</span>) <span class="co"># apply the summary statistic of y (mean) to the geom_bars</span></span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-122-1.png" width="60%" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-123-1.png" width="60%" /></p>
 <p>The above approach uses <code>geom_bar</code> but overrides its default behavior (which counts the number of cases) by specifying the <code>stat</code> argument as <code>"summary"</code>.
 The function to summarize the y aesthetic is specified with <code>fun.y = "mean"</code>.
 This syntax is very beginner-friendly in the sense that we are using a low-level concept like the “bar” geom and telling it to use summary statistics.</p>
@@ -881,14 +884,14 @@ values. In this writing style, you use <code>stat_summary()</code> with the spec
 <div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="tutorial-data-visualization-with-ggplot.html#cb200-1" tabindex="-1"></a>human_droid_data <span class="sc">%&gt;%</span></span>
 <span id="cb200-2"><a href="tutorial-data-visualization-with-ggplot.html#cb200-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> height)) <span class="sc">+</span></span>
 <span id="cb200-3"><a href="tutorial-data-visualization-with-ggplot.html#cb200-3" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">&quot;bar&quot;</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-123-1.png" width="60%" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-124-1.png" width="60%" /></p>
 <p>In practice, if your main goal is to create a straightforward bar plot representing average values and you’re not looking to add more complexity or additional layers to the plot, the first approach with <code>geom_bar()</code> might feel more natural. However, if you anticipate needing more flexibility in representation, or if you want your code to explicitly convey that you’re working with summarized data, the second approach with <code>stat_summary()</code> is preferable.</p>
 <p>Let’s continue. Maybe we want to sort the bars according to their mean? Let’s reorder the factor levels manually.</p>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="tutorial-data-visualization-with-ggplot.html#cb201-1" tabindex="-1"></a>human_droid_data <span class="sc">%&gt;%</span></span>
 <span id="cb201-2"><a href="tutorial-data-visualization-with-ggplot.html#cb201-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">factor</span>(sex, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;none&quot;</span>))) <span class="sc">%&gt;%</span> <span class="co"># This command reorders the factor levels, male = first level, female = second level, none = third level</span></span>
 <span id="cb201-3"><a href="tutorial-data-visualization-with-ggplot.html#cb201-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> height)) <span class="sc">+</span></span>
 <span id="cb201-4"><a href="tutorial-data-visualization-with-ggplot.html#cb201-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">&quot;bar&quot;</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-124-1.png" width="60%" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-125-1.png" width="60%" /></p>
 <p>And if we would like to have a horizontal bar plot, we can use the
 <code>coord_</code> component of <code>ggplot()</code> to flip the coordinates.</p>
 <div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="tutorial-data-visualization-with-ggplot.html#cb202-1" tabindex="-1"></a>human_droid_data <span class="sc">%&gt;%</span></span>
@@ -896,7 +899,7 @@ values. In this writing style, you use <code>stat_summary()</code> with the spec
 <span id="cb202-3"><a href="tutorial-data-visualization-with-ggplot.html#cb202-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> height)) <span class="sc">+</span></span>
 <span id="cb202-4"><a href="tutorial-data-visualization-with-ggplot.html#cb202-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">&quot;bar&quot;</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>) <span class="sc">+</span></span>
 <span id="cb202-5"><a href="tutorial-data-visualization-with-ggplot.html#cb202-5" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-125-1.png" width="60%" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-126-1.png" width="60%" /></p>
 </div>
 <div id="box-plots" class="section level3 hasAnchor" number="6.5.2">
 <h3><span class="header-section-number">6.5.2</span> box plots<a href="tutorial-data-visualization-with-ggplot.html#box-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -914,7 +917,7 @@ characters who are male, female, or do not have a sex.</p>
 <div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="tutorial-data-visualization-with-ggplot.html#cb203-1" tabindex="-1"></a>human_droid_data <span class="sc">%&gt;%</span></span>
 <span id="cb203-2"><a href="tutorial-data-visualization-with-ggplot.html#cb203-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> height)) <span class="sc">+</span></span>
 <span id="cb203-3"><a href="tutorial-data-visualization-with-ggplot.html#cb203-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-126-1.png" width="60%" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-127-1.png" width="60%" /></p>
 <p>While box plots are a very powerful tool of data visualization, they are
 not understood by statistical laymen. Please don’t use them in
 non-scientific contexts.</p>

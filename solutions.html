@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2025-11-10" />
+<meta name="date" content="2025-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -753,7 +753,7 @@ the plot.</p>
 <div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="solutions.html#cb263-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
 <span id="cb263-2"><a href="solutions.html#cb263-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> work_experience, <span class="at">y =</span> trust_politicians)) <span class="sc">+</span></span>
 <span id="cb263-3"><a href="solutions.html#cb263-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-154-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-155-1.png" width="672" /></p>
 </div>
 <div id="task-2-8" class="section level3 unnumbered hasAnchor">
 <h3>Task 2<a href="solutions.html#task-2-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -766,7 +766,7 @@ this code to your plot to create a regression line:
 <span id="cb264-2"><a href="solutions.html#cb264-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> work_experience, <span class="at">y =</span> trust_politicians)) <span class="sc">+</span></span>
 <span id="cb264-3"><a href="solutions.html#cb264-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb264-4"><a href="solutions.html#cb264-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-155-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
 <p>The regression line shows us that there is no relationship between work
 experience and trust in politicians. In other words, more experienced
 journalists <strong>do not</strong> become less trusting in politicians.</p>
@@ -785,7 +785,7 @@ specific country context?</p>
 <span id="cb265-3"><a href="solutions.html#cb265-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb265-4"><a href="solutions.html#cb265-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb265-5"><a href="solutions.html#cb265-5" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>country)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
 </div>
 <div id="task-4-6" class="section level3 unnumbered hasAnchor">
 <h3>Task 4<a href="solutions.html#task-4-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -797,14 +797,14 @@ you with this graph:</p>
 <div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="solutions.html#cb266-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
 <span id="cb266-2"><a href="solutions.html#cb266-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> work_experience, <span class="at">y =</span> trust_politicians)) <span class="sc">+</span></span>
 <span id="cb266-3"><a href="solutions.html#cb266-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-158-1.png" width="672" /></p>
 <p>Now, display every country in a separate color by using the <code>color</code>
 argument inside the <code>aes()</code> function.</p>
 <p><em>Solution:</em></p>
 <div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="solutions.html#cb267-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span></span>
 <span id="cb267-2"><a href="solutions.html#cb267-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> work_experience, <span class="at">y =</span> trust_politicians, <span class="at">color =</span> country)) <span class="sc">+</span></span>
 <span id="cb267-3"><a href="solutions.html#cb267-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-158-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
 </div>
 <div id="task-5-4" class="section level3 unnumbered hasAnchor">
 <h3>Task 5<a href="solutions.html#task-5-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -823,7 +823,7 @@ Scale”. The label for the color legend should be “Country”.</p>
 <span id="cb268-7"><a href="solutions.html#cb268-7" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Years of Work Experience in Journalism&quot;</span>,</span>
 <span id="cb268-8"><a href="solutions.html#cb268-8" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Country&quot;</span></span>
 <span id="cb268-9"><a href="solutions.html#cb268-9" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
 </div>
 <div id="task-6-3" class="section level3 unnumbered hasAnchor">
 <h3>Task 6<a href="solutions.html#task-6-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -839,7 +839,7 @@ Scale”. The label for the color legend should be “Country”.</p>
 <span id="cb269-7"><a href="solutions.html#cb269-7" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Country&quot;</span></span>
 <span id="cb269-8"><a href="solutions.html#cb269-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb269-9"><a href="solutions.html#cb269-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
 </div>
 </div>
 <div id="solutions-for-exercise-5" class="section level2 unnumbered hasAnchor">
@@ -852,7 +852,7 @@ Scale”. The label for the color legend should be “Country”.</p>
 <span id="cb270-3"><a href="solutions.html#cb270-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb270-4"><a href="solutions.html#cb270-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb270-5"><a href="solutions.html#cb270-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Country&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Work Experience (Years)&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Distribution of Work Experience by Country&quot;</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
 </div>
 <div id="task-2-9" class="section level3 unnumbered hasAnchor">
 <h3>Task 2<a href="solutions.html#task-2-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -862,7 +862,7 @@ Scale”. The label for the color legend should be “Country”.</p>
 <span id="cb271-3"><a href="solutions.html#cb271-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb271-4"><a href="solutions.html#cb271-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb271-5"><a href="solutions.html#cb271-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Work Experience (Years)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Trust in Government&quot;</span>, <span class="at">color =</span> <span class="st">&quot;Country&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Trust in Government by Work Experience and Country&quot;</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
 </div>
 <div id="task-3-9" class="section level3 unnumbered hasAnchor">
 <h3>Task 3<a href="solutions.html#task-3-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -873,7 +873,7 @@ Scale”. The label for the color legend should be “Country”.</p>
 <span id="cb272-4"><a href="solutions.html#cb272-4" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">check_overlap =</span> <span class="cn">TRUE</span>, <span class="at">max.overlaps =</span> <span class="cn">Inf</span>, <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb272-5"><a href="solutions.html#cb272-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb272-6"><a href="solutions.html#cb272-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Work Experience (Years)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Trust in Government&quot;</span>, <span class="at">color =</span> <span class="st">&quot;Country&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Trust in Government by Work Experience and Country&quot;</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
 </div>
 <div id="task-4-7" class="section level3 unnumbered hasAnchor">
 <h3>Task 4<a href="solutions.html#task-4-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -883,7 +883,7 @@ Scale”. The label for the color legend should be “Country”.</p>
 <span id="cb273-3"><a href="solutions.html#cb273-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
 <span id="cb273-4"><a href="solutions.html#cb273-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb273-5"><a href="solutions.html#cb273-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Country&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Employment Type&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Employment Types by Country&quot;</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
 <p><em>Alternative Solution:</em> Those who prefer the width of the bars to be
 aligned can use this code:</p>
 <div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="solutions.html#cb274-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
@@ -891,7 +891,7 @@ aligned can use this code:</p>
 <span id="cb274-3"><a href="solutions.html#cb274-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">preserve =</span> <span class="st">&quot;single&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb274-4"><a href="solutions.html#cb274-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb274-5"><a href="solutions.html#cb274-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Country&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Employment Type&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Employment Types by Country&quot;</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
 </div>
 <div id="task-5-5" class="section level3 unnumbered hasAnchor">
 <h3>Task 5<a href="solutions.html#task-5-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -914,7 +914,7 @@ separate step:</p>
 <span id="cb275-12"><a href="solutions.html#cb275-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Country&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Employment Type&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Employment Types by Country and Level of Experience&quot;</span>) <span class="sc">+</span></span>
 <span id="cb275-13"><a href="solutions.html#cb275-13" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>experience_level) <span class="sc">+</span></span>
 <span id="cb275-14"><a href="solutions.html#cb275-14" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-168-1.png" width="672" /></p>
 <p>The more elegant solution is to perform your data management in one go
 without saving the variable experience_level back into your original
 data set. Using this approach will help declutter your data because you
@@ -932,7 +932,7 @@ single visualization:</p>
 <span id="cb276-10"><a href="solutions.html#cb276-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Country&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Employment Type&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Employment Types by Country and Level of Experience&quot;</span>) <span class="sc">+</span></span>
 <span id="cb276-11"><a href="solutions.html#cb276-11" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>experience_level) <span class="sc">+</span></span>
 <span id="cb276-12"><a href="solutions.html#cb276-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-168-1.png" width="672" /></p>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-169-1.png" width="672" /></p>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="solutions.html#cb277-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/makis/SynologyDrive/_Arbeit/Lehre_Hannover/Themenextraktion/Methodenvergleich/LaraKobilke/&quot;</span>)</span></code></pre></div>
 <!-- ## Solutions for Exercise 6 {.unnumbered} -->
 <!-- In this exercise, we will work with the `mtcars` data that comes pre-installed with `dplyr`. -->
