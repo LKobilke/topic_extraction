@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 2 Tutorial: Installing &amp; Understanding R/R Studio | Methodenvergleich zur automatisierten Themenextraktion</title>
-  <meta name="description" content=" 2 Tutorial: Installing &amp; Understanding R/R Studio | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
+  <title>Exercise 7: dplyr, ggplot, tidycomm | Methodenvergleich zur automatisierten Themenextraktion</title>
+  <meta name="description" content="Exercise 7: dplyr, ggplot, tidycomm | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 2 Tutorial: Installing &amp; Understanding R/R Studio | Methodenvergleich zur automatisierten Themenextraktion" />
+  <meta property="og:title" content="Exercise 7: dplyr, ggplot, tidycomm | Methodenvergleich zur automatisierten Themenextraktion" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content=" 2 Tutorial: Installing &amp; Understanding R/R Studio | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
+  <meta property="og:description" content="Exercise 7: dplyr, ggplot, tidycomm | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 2 Tutorial: Installing &amp; Understanding R/R Studio | Methodenvergleich zur automatisierten Themenextraktion" />
+  <meta name="twitter:title" content="Exercise 7: dplyr, ggplot, tidycomm | Methodenvergleich zur automatisierten Themenextraktion" />
   
-  <meta name="twitter:description" content=" 2 Tutorial: Installing &amp; Understanding R/R Studio | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
+  <meta name="twitter:description" content="Exercise 7: dplyr, ggplot, tidycomm | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
   
 
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="tutorial-using-r-as-a-calculator.html"/>
+<link rel="prev" href="exercise-6-tidycomm.html"/>
+<link rel="next" href="solutions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -442,608 +442,98 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tutorial-installing-understanding-rr-studio" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number"> 2</span> Tutorial: Installing &amp; Understanding R/R Studio<a href="tutorial-installing-understanding-rr-studio.html#tutorial-installing-understanding-rr-studio" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>After working through Tutorial 2, you’ll… </strong></p>
+<div id="exercise-7-dplyr-ggplot-tidycomm" class="section level1 unnumbered hasAnchor">
+<h1>Exercise 7: dplyr, ggplot, tidycomm<a href="exercise-7-dplyr-ggplot-tidycomm.html#exercise-7-dplyr-ggplot-tidycomm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>After working through Exercise 7, you’ll…</strong></p>
 <ul>
-<li>know how to install R and RStudio</li>
-<li>know how to update R and RStudio</li>
-<li>understand the layout of RStudio</li>
+<li>have repeated the most important functions of <code>dplyr</code> and <code>ggplot2</code></li>
+<li>alternatively, you’ll have repeated some helpful function from <code>tidycomm</code></li>
 </ul>
-<div id="what-is-r" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> What is R?<a href="tutorial-installing-understanding-rr-studio.html#what-is-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>R is the programming language we’ll use to import, edit, and analyze
-data. It’s original form is called Base R. A more recent and streamlined
-syntax for R is called the tidyverse. Base R and the tidyverse are both
-popular approaches to data manipulation and analysis in R, but they
-differ in their philosophies and syntax.</p>
-<p>Base R is the set of core functions that come with the R programming
-language without any additional installations. These functions allow you
-to perform a wide range of data manipulation and analysis tasks,
-including reading and writing data, transforming and summarizing data,
-and creating visualizations. Base R is designed to be efficient and
-flexible, and it provides a lot of low-level functionality for working
-with data.</p>
-<p>The tidyverse, on the other hand, is a collection of R packages (thus
-called a “meta-package”) developed by Hadley Wickham and his team at
-RStudio. The tidyverse is very readable code: You can usually read the
-code out loud and understand what it is doing. Moreover, the tidyverse
-is built around a set of principles and syntax that emphasize the
-importance of tidy data, i.e. data that is organized into rows and
-columns, where each column represents a variable and each row represents
-an observation. As you can see: tidy data looks just like your typical
-SPSS data window!</p>
-<p>Our approach to teaching BA students is to use the tidycomm package
-developed by Julian Unkel. It uses the tidyverse style of coding, but
-incorporates many convenience functions for communication researchers,
-such as calculating ICR tests (e.g., Krippendorff’s alpha or Fretwurst’s
-lotus). Julian, Mario Haim, and I are currently enhancing the package to
-greatly simplify data analysis for our students as compared to using
-SPSS. For example, with each significance test tidycomm will
-automatically provide students suitable graphical visualizations. To
-convince yourself of the ease of working with tidycomm, please refer to
-the following section: [Using R is easy!]</p>
-<p>A hint for best practice: Usually, R users decide to use either Base R
-or the tidyverse at some point. When writing code, it’s a good practice
-to stick two one of the two approaches, Base R or tidyverse, and not mix
-them up because that makes the code less readable (just like writing in
-German dialect, Bavarian and East Frisian are both German, but a
-Bavarian will struggle more when reading a text that is partly written
-in East Frisian).</p>
-<p>The approach of this tutorial is to use the first lesson to teach you a
-little bit of Base R – just enough that you are able to identify code
-as being written in Base. This way, you can distinguish helpful answers
-in online forums that are written in “your dialect” (i.e. tidyverse R)
-from those that are not written in your dialect (i.e., Base R). After
-that first lesson, we will stick to the tidyverse approach because it is
-so much more similar to SPSS and much more readable and easy-to-learn
-for beginners.</p>
+<p>In this exercise, we will work with the <code>mtcars</code> data that comes pre-installed with <code>dplyr</code>.</p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb283-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb283-2"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb283-2" tabindex="-1"></a></span>
+<span id="cb283-3"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb283-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(mtcars)</span></code></pre></div>
+<p>To make the data somewhat more interesting and challenging, let’s set a few values to missing values with our newly-learned <code>tidycomm</code> skills:</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb284-1" tabindex="-1"></a><span class="fu">library</span>(tidycomm)</span>
+<span id="cb284-2"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb284-2" tabindex="-1"></a></span>
+<span id="cb284-3"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb284-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb284-4"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb284-4" tabindex="-1"></a>  <span class="fu">setna_scale</span>(wt, <span class="at">value =</span> <span class="fl">4.070</span>,</span>
+<span id="cb284-5"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb284-5" tabindex="-1"></a>              <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb284-6"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb284-6" tabindex="-1"></a></span>
+<span id="cb284-7"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb284-7" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb284-8"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb284-8" tabindex="-1"></a>  <span class="fu">setna_scale</span>(mpg, <span class="at">value =</span> <span class="fl">22.8</span>,</span>
+<span id="cb284-9"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb284-9" tabindex="-1"></a>              <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Let’s first get to know this data. We can get some information about the variables that are included in the dataset by using <code>R</code>s <code>help()</code>
+function:</p>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="exercise-7-dplyr-ggplot-tidycomm.html#cb285-1" tabindex="-1"></a><span class="fu">help</span>(mtcars)</span></code></pre></div>
 <table>
 <colgroup>
 <col width="100%" />
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left"><em>R and (meta-)packages covered in this course:</em></td>
+<td align="left"><em>Image: Output of the help(mtcars) function:</em></td>
 </tr>
 <tr class="even">
-<td align="left"><img src="images/Visualisierung_von_R.jpg" /></td>
+<td align="left"><img src="images/mtcars.JPG" style="width:30.0%" /></td>
 </tr>
 </tbody>
 </table>
+<p>We get to know that this is a data set was created from the <em>1974 Motor Trend US magazine</em>, and that it comprises fuel consumption (<em>mpg</em>) and 10 other aspects (<em>cyl</em>, <em>wt</em>) of automobile design and performance for 32 different cars.</p>
+<div id="task-1-6" class="section level2 unnumbered hasAnchor">
+<h2>Task 1<a href="exercise-7-dplyr-ggplot-tidycomm.html#task-1-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Check the dataset for missing values (<em>NA</em>s) and delete all observations that have missing values.</p>
 </div>
-<div id="installing-r" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Installing R<a href="tutorial-installing-understanding-rr-studio.html#installing-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>When you are ready to install R, use <a href="https://cran.r-project.org/">Cran</a> to install the newest version of R and its GUI (graphical user
-interface) (version 4.5.1, “Great Square Root”, released on 2025-06-13). You’ll have to specify your operation system to download the right version:</p>
-<ul>
-<li><a href="https://cran.r-project.org/bin/windows/base/R-4.5.1-win.exe">Installer for Windows</a></li>
-<li><a href="https://cran.r-project.org/bin/macosx/big-sur-arm64/base/R-4.5.1-arm64.pkg">Installer for macOS 11 (Big Sur) and higher</a></li>
-<li><a href="https://cran.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.5.1-x86_64.pkg">Installer for older macOS, use only if you have no other option</a></li>
-</ul>
-<p><strong>Mac Users: Please read the <a href="https://cran.r-project.org/bin/macosx/">documentation of the installers on this site</a>. You might need to install
-other dependencies to make R work.</strong></p>
+<div id="task-2-6" class="section level2 unnumbered hasAnchor">
+<h2>Task 2<a href="exercise-7-dplyr-ggplot-tidycomm.html#task-2-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s transform the weight <em>wt</em> of the cars. Currently, it’s given as
+<em>Weight in 1000 lbs</em>. I guess you are not used to lbs, so try to mutate <em>wt</em> to represent <em>Weight in 1000 kg</em>. 1000 lbs = 453.59 kg, so we will need to divide by 2.20.</p>
+<p>Similarly, I think that you are not very familiar with the unit <em>Miles per gallon</em> of the <em>mpg</em> variable. Let’s transform it into <em>Kilometer per liter</em>. 1 m/g = 0.425144 km/l, so again divide by 2.20.</p>
 </div>
-<div id="installing-r-studio" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Installing R Studio<a href="tutorial-installing-understanding-rr-studio.html#installing-r-studio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Next, install R Studio. R Studio is a desktop application with a
-graphical interface that facilitates programming with R. The newest
-version of R Studio can be downloaded via this
-<a href="https://www.rstudio.com/products/rstudio/download/#download">Link</a>.</p>
+<div id="task-3-6" class="section level2 unnumbered hasAnchor">
+<h2>Task 3<a href="exercise-7-dplyr-ggplot-tidycomm.html#task-3-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now we want to group the weight of the cars in three categories: light, medium, heavy. But how to define light, medium, and heavy cars, i.e., at what kg should you put the threshold? A reasonable approach is to use quantiles (see Tutorial: <a href="tutorial-data-management-with-dplyr.html#summarize-group_by">summarize() [+
+group_by()]</a>). Quantiles divide data. For example, the 75% quantile states that exactly 75% of the data values are equal or below the quantile value. The rest of the values are equal or above it.</p>
+<p>Use the lower quantile (0.25) and the upper quantile (0.75) to estimate two values that divide the weight of the cars in three groups. What are these values?</p>
 </div>
-<div id="updating-r-and-r-studio" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Updating R and R Studio<a href="tutorial-installing-understanding-rr-studio.html#updating-r-and-r-studio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>If you have already installed R and RStudio, please update your current
-version to the latest version. This way, we’ll all know that our
-versions are compatible.</p>
-<div id="on-windows" class="section level3 hasAnchor" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> On Windows<a href="tutorial-installing-understanding-rr-studio.html#on-windows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If you already have R and RStudio installed, it’s best to make sure both are up to date.<br />
-You can now do this directly from RStudio.</p>
-<div id="step-1-check-your-current-versions" class="section level4 hasAnchor" number="2.4.1.1">
-<h4><span class="header-section-number">2.4.1.1</span> Step 1: Check your current versions<a href="tutorial-installing-understanding-rr-studio.html#step-1-check-your-current-versions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Open RStudio and run the following commands in the <strong>Console</strong> to see your current versions:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="tutorial-installing-understanding-rr-studio.html#cb3-1" tabindex="-1"></a>R.version.string  <span class="co"># shows your R version</span></span>
-<span id="cb3-2"><a href="tutorial-installing-understanding-rr-studio.html#cb3-2" tabindex="-1"></a><span class="fu">RStudio.Version</span>()<span class="sc">$</span>version  <span class="co"># shows your RStudio version</span></span></code></pre></div>
+<div id="task-4-5" class="section level2 unnumbered hasAnchor">
+<h2>Task 4<a href="exercise-7-dplyr-ggplot-tidycomm.html#task-4-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Use the values from Task 3 to create a new variable <em>wt_cat</em> that
+divides the cars in three groups: light, medium, and heavy cars.</p>
 </div>
-<div id="step-2-update-r-directly-in-rstudio" class="section level4 hasAnchor" number="2.4.1.2">
-<h4><span class="header-section-number">2.4.1.2</span> Step 2: Update R directly in RStudio<a href="tutorial-installing-understanding-rr-studio.html#step-2-update-r-directly-in-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>You can now update R directly from within RStudio.</p>
-<p>Follow these steps:</p>
-<ol style="list-style-type: decimal">
-<li>Open RStudio.</li>
-<li>Go to Tools → Global Options → General → R version → Change…</li>
-<li>Click “Install a new version of R” — this will open the official CRAN R installer.</li>
-<li>Follow the installation prompts to install the latest version of R.</li>
-</ol>
-<p>After installation, restart RStudio. It should automatically use the new R version.</p>
-<p>You can verify your RStudio version by running:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="tutorial-installing-understanding-rr-studio.html#cb4-1" tabindex="-1"></a><span class="fu">RStudio.Version</span>()<span class="sc">$</span>version</span></code></pre></div>
+<div id="task-5-4" class="section level2 unnumbered hasAnchor">
+<h2>Task 5<a href="exercise-7-dplyr-ggplot-tidycomm.html#task-5-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>How many light, medium, and heavy cars are part of the data?</p>
 </div>
+<div id="task-6-3" class="section level2 unnumbered hasAnchor">
+<h2>Task 6<a href="exercise-7-dplyr-ggplot-tidycomm.html#task-6-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now sort this count of the car weight classes from highest to lowest.</p>
 </div>
-<div id="on-mac" class="section level3 hasAnchor" number="2.4.2">
-<h3><span class="header-section-number">2.4.2</span> On MAC<a href="tutorial-installing-understanding-rr-studio.html#on-mac" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Go to <a href="https://www.r-project.org/">CRAN</a> and install the newer package
-installer.</p>
-<p>After that update R Studio. Updating RStudio is easy, just open RStudio
-and go to <code>Help &gt; Check for Updates</code> to install a newer version.</p>
+<div id="task-7-2" class="section level2 unnumbered hasAnchor">
+<h2>Task 7<a href="exercise-7-dplyr-ggplot-tidycomm.html#task-7-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Make a scatter plot to indicate how many km per liter (<em>mpg</em>) a car can drive depending on its weight (<em>wt</em>). Facet the plot by weight class (<em>wt_cat</em>).</p>
 </div>
+<div id="task-8-2" class="section level2 unnumbered hasAnchor">
+<h2>Task 8<a href="exercise-7-dplyr-ggplot-tidycomm.html#task-8-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recreate the diagram from Task 7, but exclude all cars that weigh
+between 1.4613636 and 1.5636364 *1000kg from it.</p>
+<p>When you’re ready to look at the solutions, you can find them here:
+<a href="solutions.html#solutions-for-exercise-7">Solutions for Exercise 7</a>.</p>
+<!-- # Tutorial: Text manipulation with stringr -->
+<!-- **After working through Tutorial 9, you'll...** -->
+<!-- We have officially finished our chapters on data management and -->
+<!-- visualization! -->
+<!-- # Tutorial: Tidy text analysis# -->
+<!-- **After working through Tutorial 10, you'll...** -->
 </div>
-<div id="how-does-r-work" class="section level2 hasAnchor" number="2.5">
-<h2><span class="header-section-number">2.5</span> How does R work?<a href="tutorial-installing-understanding-rr-studio.html#how-does-r-work" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>R is an object- and function-oriented programming language. Chambers
-<a href="https://arxiv.org/pdf/1409.3531.pdf">(2014, p. 4)</a> explains “object-
-and function-oriented” like this:</p>
-<ul>
-<li>Everything that exists is an object.</li>
-<li>Everything that happens is a function call.</li>
-</ul>
-<p>In R, you will assign values (for instance, single numbers/letters,
-several numbers/letters, or whole data files) to objects in R to work
-with them. For example, this command will assign the letters “hello” to
-an object called <em>word</em> by using the <em>assign operator</em> <em>&lt;-</em> (a function
-used to assign values to objects):</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="tutorial-installing-understanding-rr-studio.html#cb5-1" tabindex="-1"></a>word <span class="ot">&lt;-</span> <span class="st">&quot;hello&quot;</span></span></code></pre></div>
-<p>The type of each object will dictate what sorts of computations you may
-perform with this object. The object <em>word</em>, for example, is
-distinguished by the fact that it is made up of characters (i.e., it is
-a word) - which may make it impossible to compute the object’s mean
-value, for example (which is possible only for objects consisting of
-numerical data).</p>
-</div>
-<div id="why-should-i-use-r" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> Why should I use R?<a href="tutorial-installing-understanding-rr-studio.html#why-should-i-use-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are several reasons why I’m an advocate of R (or similar
-programming languages such as Python) over programs such as SPSS.</p>
-<ol style="list-style-type: decimal">
-<li><p>R is <strong>free.</strong> Other than most (statistical) programs, you do
-not need to buy it (or rely on an university license, that is likely
-to run out once you leave your department).</p></li>
-<li><p>R is an <strong>open source</strong> program. Other than most programs, the
-source code - i.e., the basis of the program - is freely available.
-So are the hundred of packages (we’ll get to those later – these
-are basically additional functions you may need for more specific
-analyses) on CRAN that you can use to extend R’s base functions.</p></li>
-<li><p>R offers you <strong>flexibility</strong>. You can work with almost any type of
-data and rely on a large (!) set of functions to import, edit, or
-analyze such data. You can perform “complex” statistical modeling
-like SEM, panel analysis, multilevel analysis, and computational
-methods in R. And if the function you need to do so hasn’t been
-implemented (or simply does not exist yet), you can write it
-yourself! R supports package development!</p></li>
-<li><p>Learning R increases your chances (and that of our students who’ll learn R) on the <strong>job market</strong>. For many
-jobs (e.g., market research, data science, data journalism),
-applicants are required to know at least one programming language.</p></li>
-<li><p>You can even write entire papers / theses in R (using <code>RMarkdown</code>). This
-allows for the complete reproducibility of your analysis and report.
-All of the code, data, and visualizations can be easily shared and
-reproduced, ensuring <strong>transparency and enhancing the credibility</strong>
-of your work. Conveniently, documents can <strong>automatically update
-tables and graphs</strong> when changes are made to the underlying data or
-analysis. This saves time and reduces the likelihood of errors when
-updating results.</p></li>
-</ol>
-</div>
-<div id="how-does-r-studio-work" class="section level2 hasAnchor" number="2.7">
-<h2><span class="header-section-number">2.7</span> How does R Studio work?<a href="tutorial-installing-understanding-rr-studio.html#how-does-r-studio-work" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As mentioned before, R Studio is a graphical interface which facilitates
-programming with R. It contains up to four main windows, which allow for
-different things:</p>
-<ul>
-<li>Writing your own code (Window 1: Source). <em>Important</em>: When first
-installing R/R Studio and opening R Studio, you may not see this
-window right away. In this case, simply open it by clicking on
-<em>File/New File/R Script</em>.</li>
-<li>Executing your own code (Window 2: Console)</li>
-<li>Inspecting objects (Window 3: Environment)</li>
-<li>Visualizing data, searching for help, updating packages etc. (Window
-4: Files/Plots/Packages etc.)</li>
-</ul>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Image: Four main windows in R</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="images/Tut1_Overview.jpg" /></td>
-</tr>
-</tbody>
-</table>
-<p>Please note that the specific set-up of your R Studio may look different
-(the order of windows may vary and so may the windows’ names). I have
-made the experience that having these four windows open works best for
-me. This may be different for you. If you want to modify the appearance
-of your R Studio, simply choose <em>“Tools/Global Options/Pane Layout”</em>. In
-the options menu, you can perform various cool customizations, such as
-enabling rainbow parentheses (highly recommended). With this feature, a
-starting parenthesis will be displayed in the same color as its
-corresponding closing parenthesis.</p>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Image: Changing the Layout</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="images/Tut1_Change.JPG" /></td>
-</tr>
-</tbody>
-</table>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Image: Activating rainbow parantheses</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="C:/Users/makis/SynologyDrive/_Arbeit/Lehre_Hannover/Themenextraktion/Methodenvergleich/images/rainbow_parantheses.png" /></td>
-</tr>
-</tbody>
-</table>
-<div id="source-writing-your-own-code" class="section level3 hasAnchor" number="2.7.1">
-<h3><span class="header-section-number">2.7.1</span> Source: Writing your own code<a href="tutorial-installing-understanding-rr-studio.html#source-writing-your-own-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Using the window “Source”, you’ll write your own code to execute
-whichever task you want R to fulfill.</p>
-<div id="writing-code" class="section level4 hasAnchor" number="2.7.1.1">
-<h4><span class="header-section-number">2.7.1.1</span> Writing Code<a href="tutorial-installing-understanding-rr-studio.html#writing-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Let’s start with an easy example: Assume you simply want R to print the
-word “hello”. In this case, you would first write a simple command that
-assigns the word “hello” to an object called <em>word</em>. The assignment of
-values to named objects is done via either the operator “&lt;-” or the
-operator “=”. The left side of that command contains the object that
-should be created; its right side the values that should be assigned to
-this object.</p>
-<p>In short, this command tells R to assign the world “hello” to an object
-called <em>word</em>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="tutorial-installing-understanding-rr-studio.html#cb6-1" tabindex="-1"></a>word <span class="ot">&lt;-</span> <span class="st">&quot;hello&quot;</span></span></code></pre></div>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Image: “Source”</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="images/Tut1_Source_Panel.jpg" /></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="annotating-code" class="section level4 hasAnchor" number="2.7.1.2">
-<h4><span class="header-section-number">2.7.1.2</span> Annotating Code<a href="tutorial-installing-understanding-rr-studio.html#annotating-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Another helpful aspect of R is that you can comment your own code.
-Often, this is very helpful for understanding your code later (if you
-write several hundred lines of codes, you may not remember their exact
-meaning months later).</p>
-<p>Comments or notes can be made via hashtags <code>#</code>. Anything following a
-hashtag will not be considered code by R but be ignored instead.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="tutorial-installing-understanding-rr-studio.html#cb7-1" tabindex="-1"></a>word <span class="ot">&lt;-</span> <span class="st">&quot;hello&quot;</span> <span class="co"># this line of code assigns the word &quot;hello&quot; to an object called word</span></span></code></pre></div>
-</div>
-<div id="executing-code" class="section level4 hasAnchor" number="2.7.1.3">
-<h4><span class="header-section-number">2.7.1.3</span> Executing Code<a href="tutorial-installing-understanding-rr-studio.html#executing-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>We now want to execute our code. Doing so is simple:</p>
-<ul>
-<li>Mark the parts of the code you want to run (for instance, single
-rows of code or blocks of code across several rows)</li>
-<li>Either press <em>Run</em> (see upper right side of the same window) or
-press <strong>Ctrl / Command + Enter</strong> (On Mac OS X, hold the command key
-and press return instead).</li>
-</ul>
-<p>R should now execute exactly those lines of codes that you marked
-(hereby creating the object <em>word</em>). If you haven’t marked any specific
-code, all lines of code will be executed.</p>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Image: Executing Code</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="images/Tut1_Execute.jpg" /></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="saving-code" class="section level4 hasAnchor" number="2.7.1.4">
-<h4><span class="header-section-number">2.7.1.4</span> Saving Code<a href="tutorial-installing-understanding-rr-studio.html#saving-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>A great feature of R is that it makes analyses easily reproducible -
-given that you save your code. When reopening R Studio and your script,
-you can simply “rerun” the code with one click and your analysis will be
-reproduced.</p>
-<p>To save code, you have two options:</p>
-<ul>
-<li>Choose the menu option <em>File/Save as</em>. <strong>Important</strong>: Code needs to
-be saved with the ending <strong>“.R”</strong>.</li>
-<li>Chose the <em>Save</em>-button in the <em>source</em> window and save your code in
-the correct format, for instance as “MyCode.R” (some advice: try to
-avoid numbers or dates as file names because this can break the
-saving process).</li>
-</ul>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Image: Saving code</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="images/Tut2_save.JPG" /></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="console-printing-results" class="section level3 hasAnchor" number="2.7.2">
-<h3><span class="header-section-number">2.7.2</span> Console: Printing results<a href="tutorial-installing-understanding-rr-studio.html#console-printing-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Results of executing code are printed in a second window called
-“Console”, which includes the code you ran and the object you may have
-called when doing so.</p>
-<p>Previously, we defined an object called word, which consists of the
-single word “hello”. Thus, R prints our code as well as objects called
-when running this code (here, the object word) in the console.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="tutorial-installing-understanding-rr-studio.html#cb8-1" tabindex="-1"></a>word <span class="ot">&lt;-</span> <span class="st">&quot;hello&quot;</span></span>
-<span id="cb8-2"><a href="tutorial-installing-understanding-rr-studio.html#cb8-2" tabindex="-1"></a>word</span></code></pre></div>
-<pre><code>## [1] &quot;hello&quot;</code></pre>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Image: Window “Console”</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="images/Tut1_Konsole%20Panel.JPG" /></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="environment-overview-of-objects" class="section level3 hasAnchor" number="2.7.3">
-<h3><span class="header-section-number">2.7.3</span> Environment: Overview of objects<a href="tutorial-installing-understanding-rr-studio.html#environment-overview-of-objects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The third window is called “Environment”<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. This window displays all
-the objects currently existing - in our case, only the object “word”. As
-soon as you start creating more objects, this environment will fill up.</p>
-<p>If you are an SPSS user, you may find this window very similar to what
-is referred to as the <em>Datenansicht / Data overview</em> in SPSS. However,
-the R version of this view is much more flexible as it can contain
-multiple datasets simultaneously in one environment.</p>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Image: Window “Environment”</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="images/Tut1_Environment_Panel.JPG" /></td>
-</tr>
-</tbody>
-</table>
-<p>It is important to note that we can visually examine any object in R by
-using the <em>View()</em> command. Upon running this command, a new tab will
-open in the “Source” window. While this may not seem particularly useful
-at the moment, it becomes immensely helpful when working with larger
-datasets that have multiple observations and variables.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="tutorial-installing-understanding-rr-studio.html#cb10-1" tabindex="-1"></a><span class="fu">View</span>(word)</span></code></pre></div>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Image: Window “View”</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="images/Tut1_View.jpg" /></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="plotshelppackages-do-everything-else" class="section level3 hasAnchor" number="2.7.4">
-<h3><span class="header-section-number">2.7.4</span> Plots/Help/Packages: Do everything else<a href="tutorial-installing-understanding-rr-studio.html#plotshelppackages-do-everything-else" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The fourth window in the standard R Studio interface, which contains
-several sub-sections like “Files”, “Plots”, or “Packages”, has specific
-functions that you will understand later. For example, it can be used to
-plot and visualize results or to see which packages are currently
-loaded.</p>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Image: Window “Files/Plots/Packages”</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="images/Tut1_Files_Plots_Packages.JPG" /></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="why-arent-we-using-a-gui-for-point-and-click-analyses" class="section level2 hasAnchor" number="2.8">
-<h2><span class="header-section-number">2.8</span> Why aren’t we using a GUI for point-and-click analyses?<a href="tutorial-installing-understanding-rr-studio.html#why-arent-we-using-a-gui-for-point-and-click-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>If you know SPSS, you might miss having a graphical user interface (GUI)
-in RStudio for point-and-click analyses. For those who prefer such a
-GUI, they can install <code>jamovi</code>, which is a GUI for R. However, I’d
-recommend against using <code>jamovi</code>.</p>
-<p>The reason for this is that coding skills allow for faster adaptation of
-the written syntax to fit individual needs. Those who first learn to
-handle a statistics program through point-and-click may have a weaker
-understanding of the resulting code. If adjustments to the code need to
-be made later on, you may not be able to do so, and analyses may need to
-be redone completely by clicking instead of quickly adapting them
-throughout the script (e.g., with<code>Search + Replace</code>).</p>
-<p>Thus, starting to code early helps with understanding and efficiency.</p>
-</div>
-<div id="packages" class="section level2 hasAnchor" number="2.9">
-<h2><span class="header-section-number">2.9</span> Packages<a href="tutorial-installing-understanding-rr-studio.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>While <code>Base R</code>, i.e., the standard version of R, already includes many
-helpful functions, you may at times need other, additional functions.
-For instance, if we want to perform text analysis in R we’ll need to use
-specific packages including additional functions.</p>
-<p><strong>Packages are collections of topic-specific functions that extend the
-functions implemented in Base R</strong>.</p>
-<p>In the spirit of “open science”, anyone can write and publish these
-additional functions and related packages and anyone can also access the
-code used to do so.</p>
-<p>You’ll find a list of all of R packages
-<a href="https://cran.r-project.org/web/packages/">here</a>. In this seminar, we’ll
-for instance use packages like
-<a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> for
-advanced data management.</p>
-<div id="installing-packages" class="section level3 hasAnchor" number="2.9.1">
-<h3><span class="header-section-number">2.9.1</span> Installing packages<a href="tutorial-installing-understanding-rr-studio.html#installing-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To use a package, you have to install it first. Let’s say you’re
-interested in using the package
-<a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>. Using
-the command <code>install.packages()</code>, you can install the package on your
-computer. You’ll have to give the function the name of the package you
-are interested in installing.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="tutorial-installing-understanding-rr-studio.html#cb11-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
-<p>After the installation, the package is now available locally on your
-computer. It is important to note that the <code>install.packages()</code> command
-only needs to be executed <strong>once</strong> for each package. In subsequent R
-sessions (e.g., after closing RSTudio and reopening it the next day),
-you only need to activate the installed package, which we will learn in
-the following section.</p>
-</div>
-<div id="activating-packages" class="section level3 hasAnchor" number="2.9.2">
-<h3><span class="header-section-number">2.9.2</span> Activating packages<a href="tutorial-installing-understanding-rr-studio.html#activating-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Before we are able to use a package, we need to activate it <strong>in each
-session</strong>. Thus, you should not only define a working directory at the
-beginning of each session but also activate the packages you want to use
-via the <em>library</em>()_ command. Again, you’ll have to give R the name of
-the package you want to activate:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="tutorial-installing-understanding-rr-studio.html#cb12-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
-<p>You can also use the name of the package followed by two colons <em>::</em> to
-activate a package directly before calling one of its functions. For
-instance, I do not need use to activate the <code>dplyr</code> package (by using
-the <em>library()</em> function) to use the function <code>summarize()</code> if I use the
-following code:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="tutorial-installing-understanding-rr-studio.html#cb13-1" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">summarize</span>()</span></code></pre></div>
-</div>
-<div id="getting-information-about-packages" class="section level3 hasAnchor" number="2.9.3">
-<h3><span class="header-section-number">2.9.3</span> Getting information about packages<a href="tutorial-installing-understanding-rr-studio.html#getting-information-about-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The package is installed and activated - but how can we use it? To get
-an overview of functions included in a given package, you can consult
-its corresponding “reference manual” (overview document containing all
-of a package’s functions) or, if available, its “vignette” (tutorials on
-how to use selected functions for the corresponding package) provided by
-a package’s author on a website called “CRAN”.</p>
-<p>The easiest way to finding these manuals/vignettes is Google: Simply
-google <em>CRAN dplyr</em>, for instance, and you’ll be guided to the following
-<a href="https://cran.r-project.org/web/packages/dplyr/index.html">website</a>:</p>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Image: Cran Overview dplyr package</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="images/Tut2_packages.JPG" /></td>
-</tr>
-</tbody>
-</table>
-<p>The first paragraph (circled in red) gives you an overview of aspects
-for which this package may be useful. The second red-circled area links
-to the reference manual and the vignette. You can, for instance, check
-out the reference manual to get an idea of the many functions the
-<code>dplyr</code> package contains.</p>
-</div>
-</div>
-<div id="optional-setting-global-options-in-r-for-a-customized-workflow" class="section level2 hasAnchor" number="2.10">
-<h2><span class="header-section-number">2.10</span> Optional: Setting global options in R for a customized workflow<a href="tutorial-installing-understanding-rr-studio.html#optional-setting-global-options-in-r-for-a-customized-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Now that you’ve set up <code>R</code> + <code>RStudio</code> and are eager to dive into data management, it’s essential to understand that R provides a way to modify its default settings to cater to your specific requirements. By setting global options at the beginning of your R script, you can customize how R behaves throughout <strong>your active session</strong> (this means that this customization needs to be reactivated whenever you close &amp; restart RStudio). This tutorial will guide you through adjusting some of these global settings to enhance your R experience.</p>
-<div id="understanding-options" class="section level3 hasAnchor" number="2.10.1">
-<h3><span class="header-section-number">2.10.1</span> Understanding <code>options()</code><a href="tutorial-installing-understanding-rr-studio.html#understanding-options" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>R has a function called <code>options()</code> that allows you to query or set a list of global options. These options influence the behavior of the base and many other R packages. You can see the current settings by simply calling the function without any arguments:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="tutorial-installing-understanding-rr-studio.html#cb14-1" tabindex="-1"></a><span class="fu">options</span>()</span></code></pre></div>
-<p>This will give a list of all the current settings. If you’re curious about a particular option, you can retrieve its value by:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="tutorial-installing-understanding-rr-studio.html#cb15-1" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;option_name&quot;</span>) <span class="co"># insert the option name here that you&#39;d like to learn about</span></span></code></pre></div>
-<p>For example, to see the current setting for “scipen” (i.e., the scientific notation option in <code>R</code>):</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="tutorial-installing-understanding-rr-studio.html#cb16-1" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;scipen&quot;</span>)</span></code></pre></div>
-<pre><code>## $scipen
-## [1] 999</code></pre>
-</div>
-<div id="turn-off-scientific-notation" class="section level3 hasAnchor" number="2.10.2">
-<h3><span class="header-section-number">2.10.2</span> Turn off scientific notation<a href="tutorial-installing-understanding-rr-studio.html#turn-off-scientific-notation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>By default, R might show large or small numbers in scientific notation (e.g., 1.23e+4). If you prefer to see the full number:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="tutorial-installing-understanding-rr-studio.html#cb18-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>)</span></code></pre></div>
-</div>
-<div id="customizing-tibble-display" class="section level3 hasAnchor" number="2.10.3">
-<h3><span class="header-section-number">2.10.3</span> Customizing tibble display<a href="tutorial-installing-understanding-rr-studio.html#customizing-tibble-display" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Later in this course, when you’ve learned how to work with tibbles (a modern reimagining of the data from the <code>tidyverse</code>), you can adjust their display.</p>
-<p>By default, tibbles display 10 rows of your data. If you want to see 20:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="tutorial-installing-understanding-rr-studio.html#cb19-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tibble.print_max =</span> <span class="dv">20</span>)</span></code></pre></div>
-<p>In addition, when a tibble is printed to the console, it might display fewer significant digits by default, providing a general sense of the data instead of precise values. To modify this behavior, use <code>pillar.sigfig</code> and set its value to the desired number of decimal points (e.g., 2 decimal points):</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="tutorial-installing-understanding-rr-studio.html#cb20-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">pillar.sigfig =</span> <span class="dv">2</span>)</span></code></pre></div>
-</div>
-<div id="resetting-to-default" class="section level3 hasAnchor" number="2.10.4">
-<h3><span class="header-section-number">2.10.4</span> Resetting to default<a href="tutorial-installing-understanding-rr-studio.html#resetting-to-default" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If at any point you feel like you’ve tinkered too much and want to revert to the default settings, you can restart your <code>R</code> session. In <code>RStudio</code>, you can do this via the menu Session &gt; Restart R or by pressing Ctrl+Shift+F10.</p>
-</div>
-</div>
-<div id="take-aways" class="section level2 hasAnchor" number="2.11">
-<h2><span class="header-section-number">2.11</span> Take-Aways<a href="tutorial-installing-understanding-rr-studio.html#take-aways" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><strong>Window “Source”</strong>: used to write/execute code in R</li>
-<li><strong>Window “Console”</strong>: used to return results of executed code</li>
-<li><strong>Window “Environment”</strong>: used to inspect objects on which to use
-functions</li>
-<li><strong>Window “Files/Plots/Packages etc.”</strong>: used for additional
-functions, for instance visualizations/searching for help/activating
-or updating packages</li>
-</ul>
-</div>
-<div id="additional-tutorials" class="section level2 hasAnchor" number="2.12">
-<h2><span class="header-section-number">2.12</span> Additional tutorials<a href="tutorial-installing-understanding-rr-studio.html#additional-tutorials" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You still have questions? The following tutorials &amp; papers can help you
-with that:</p>
-<ul>
-<li><a href="https://bookdown.org/ndphillips/YaRrr/started.html">YaRrr! The Pirate’s Guide to R by N.D.Phillips, Tutorial
-2</a></li>
-<li><a href="https://bookdown.org/joone/ComputationalMethods/firststeps.html">Computational Methods in der politischen Kommunikationsforschung
-by J. Unkel, Tutorial
-1</a></li>
-<li><a href="https://sicss.io/boot_camp#install">SICSS Boot Camp by C. Bail, Video
-1</a></li>
-<li><a href="https://youtu.be/p6f4oq08z48">wegweisR by M. Haim, Video 1</a></li>
-<li><a href="https://rc2e.com/gettingstarted#recipe-id001">R Cookbook by Long et al., Tutorial
-1</a></li>
-</ul>
-<p>Now that you know the layout of R, we can get started with some real
-action: <a href="tutorial-using-r-as-a-calculator.html#tutorial-using-r-as-a-calculator">Tutorial: Using R as a calculator</a></p>
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>again, this only applies for the way I set up my R Studio. You can
-change this via <em>“Tools/Global Options/Pane Layout”</em><a href="tutorial-installing-understanding-rr-studio.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tutorial-using-r-as-a-calculator.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercise-6-tidycomm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
