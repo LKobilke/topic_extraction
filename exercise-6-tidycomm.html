@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion</title>
-  <meta name="description" content="Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
+  <title>Exercise 6: tidycomm | Methodenvergleich zur automatisierten Themenextraktion</title>
+  <meta name="description" content="Exercise 6: tidycomm | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion" />
+  <meta property="og:title" content="Exercise 6: tidycomm | Methodenvergleich zur automatisierten Themenextraktion" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
+  <meta property="og:description" content="Exercise 6: tidycomm | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion" />
+  <meta name="twitter:title" content="Exercise 6: tidycomm | Methodenvergleich zur automatisierten Themenextraktion" />
   
-  <meta name="twitter:description" content="Exercise 3: dplyr | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
+  <meta name="twitter:description" content="Exercise 6: tidycomm | Methodenvergleich zur automatisierten Themenextraktion - Seminar at the HMTM, WiSe 2025/26" />
   
 
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tutorial-data-management-with-dplyr.html"/>
-<link rel="next" href="tutorial-data-visualization-with-ggplot.html"/>
+<link rel="prev" href="tutorial-data-management-with-tidycomm.html"/>
+<link rel="next" href="solutions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -415,105 +415,150 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercise-3-dplyr" class="section level1 unnumbered hasAnchor">
-<h1>Exercise 3: dplyr<a href="exercise-3-dplyr.html#exercise-3-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>After working through Exercise 3, you’ll…</strong></p>
+<div id="exercise-6-tidycomm" class="section level1 unnumbered hasAnchor">
+<h1>Exercise 6: tidycomm<a href="exercise-6-tidycomm.html#exercise-6-tidycomm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>After working through Exercise 6, you’ll…</strong></p>
 <ul>
-<li>have assessed how well you know <code>dplyr</code></li>
-<li>know what <code>dplyr</code> functions and concepts you might want to repeat
-again</li>
-<li>have managed to apply the <code>dplyr</code> concepts to data</li>
+<li>have practiced the most important functions of <code>tidycomm</code></li>
+<li>have decided whether you prefer <code>tidycomm</code> or <code>dplyr</code> to solve some problems in R</li>
 </ul>
-<div id="task-1-2" class="section level2 unnumbered hasAnchor">
-<h2>Task 1<a href="exercise-3-dplyr.html#task-1-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Below you will see multiple choice questions. Please try to identify the
-correct answers. 1, 2, 3 and 4 correct answers are possible for each
-question.</p>
-<p><strong>1. What are the main characteristics of tidy data?</strong></p>
+<p>First, you’ll need to load the statwars_data:</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="exercise-6-tidycomm.html#cb274-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb274-2"><a href="exercise-6-tidycomm.html#cb274-2" tabindex="-1"></a></span>
+<span id="cb274-3"><a href="exercise-6-tidycomm.html#cb274-3" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>starwars</span></code></pre></div>
+<p>Please, also activate the <code>tidycomm</code> package:</p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="exercise-6-tidycomm.html#cb275-1" tabindex="-1"></a><span class="fu">library</span>(tidycomm)</span></code></pre></div>
+<div id="task-1-5" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Task 1<a href="exercise-6-tidycomm.html#task-1-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>How many characters are contained in the <em>starwars_data</em> that have no <em>hair_color</em>, i.e. <em>hair_color</em> that are equal to “none”?
+Solve this task using <code>tidycomm::tab_frequencies()</code> and then keeping only the row that you are interested in by combining it with <code>dplyr::filter()</code>.</p>
+</div>
+<div id="task-2-5" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Task 2<a href="exercise-6-tidycomm.html#task-2-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Replace all values of <em>hair_color</em> that are equal to “none” with <code>NA</code>, i.e., define them as missings. Remember to check the <code>overwrite</code> argument. :)</p>
+</div>
+<div id="task-3-5" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Task 3<a href="exercise-6-tidycomm.html#task-3-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Reverse the variable <em>mass</em>, and call the new variable “<em>skinnyness</em>”.
+Reverse the variable <em>height</em>, and call the new variable “<em>tinyness</em>”.</p>
+</div>
+<div id="task-4-4" class="section level2 hasAnchor" number="7.7">
+<h2><span class="header-section-number">7.7</span> Task 4<a href="exercise-6-tidycomm.html#task-4-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Scale <em>skinnyness</em> to a new range from 0 to 1. The function should automatically create a variable called <em>skinnyness_0to1</em>.
+Display only the variables <em>name</em>, <em>skinnyness</em>, and <em>skinnyness_0to1</em>.</p>
+</div>
+<div id="task-7-1" class="section level2 hasAnchor" number="7.8">
+<h2><span class="header-section-number">7.8</span> Task 7<a href="exercise-6-tidycomm.html#task-7-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Create two new variables: <em>skinnyness_centered</em> with <code>center_scale()</code> and <em>skinnyness_z</em> with <code>z_scale()</code>.
+Display all the variables <em>name</em>, <em>skinnyness</em>, <em>skinnyness_0to1</em>, <em>skinnyness_centered</em>, <em>skinnyness_z</em>.</p>
+</div>
+<div id="task-8-1" class="section level2 hasAnchor" number="7.9">
+<h2><span class="header-section-number">7.9</span> Task 8<a href="exercise-6-tidycomm.html#task-8-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Visualize the variables <em>skinnyness</em>, <em>skinnyness_0to1</em>, <em>skinnyness_centered</em>, <em>skinnyness_z</em> using <code>tidycomm::tab_frequencies)</code> and <code>tidycomm::visualize()</code>.</p>
+</div>
+<div id="task-9" class="section level2 hasAnchor" number="7.10">
+<h2><span class="header-section-number">7.10</span> Task 9<a href="exercise-6-tidycomm.html#task-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Categorize <em>skinnyness</em> into three groups:
+- <strong>“Heavy”</strong> for values <strong>≤ 1200</strong><br />
+- <strong>“Slim”</strong> for values <strong>&gt; 1200 and ≤ 1300</strong><br />
+- <strong>“Skinny”</strong> for values <strong>&gt; 1300</strong></p>
+<p>Use <code>tidycomm::categorize_scale()</code>. The function should automatically create a variable called <em>skinnyness_cat</em>. Display the variables <em>name</em>, <em>skinnyness</em>, and <em>skinnyness_cat</em>.</p>
+</div>
+<div id="task-10" class="section level2 hasAnchor" number="7.11">
+<h2><span class="header-section-number">7.11</span> Task 10<a href="exercise-6-tidycomm.html#task-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Use <code>tidycomm::recode_cat_scale()</code> to recode <em>skinnyness_cat</em> like this:</p>
 <ul>
-<li>Every cell contains values.</li>
-<li>Every cell contains a variable.</li>
-<li>Every observation is a column.</li>
-<li>Every observation is a row.</li>
+<li><code>"Heavy"</code> → <code>"high_mass"</code><br />
+</li>
+<li><code>"Slim"</code> → <code>"medium_mass"</code><br />
+</li>
+<li><code>"Skinny"</code> → <code>"low_mass"</code></li>
 </ul>
-<p><strong>2. What are <code>dplyr</code> functions?</strong></p>
-<ul>
-<li><code>summary()</code></li>
-<li><code>describe()</code></li>
-<li><code>mutate()</code></li>
-<li><code>manage()</code></li>
-</ul>
-<p><strong>3. How can you sort the eye_color of Star Wars characters from Z to
-A?</strong></p>
-<ul>
-<li><code>starwars_data %&gt;% arrange(desc(eye_color))</code></li>
-<li><code>starwars_data %&gt;% arrange(eye_color)</code></li>
-<li><code>starwars_data %&gt;% select(arrange(eye_color))</code></li>
-<li><code>starwars_data %&gt;% select(eye_color) %&gt;% arrange(desc(eye_color))</code></li>
-</ul>
-<p><strong>4. Imagine you want to recode the height of these characters. You want
-to have three categories from small and medium to tall. What is a valid
-approach?</strong></p>
-<ul>
-<li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
-<li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
-<li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
-<li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
-</ul>
-<p><strong>5. Imagine you want to provide a systematic overview over all hair
-colors and what species wear these hair colors frequently (not
-accounting for the skewed sampling of species)? What is a valid
-approach?</strong></p>
-<ul>
-<li><code>starwars_data %&gt;% group_by(hair_color) %&gt;% group_by(species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
-<li><code>starwars_data %&gt;% group_by(hair_color, species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
-<li><code>starwars_data %&gt;% group_by(hair_color &amp; species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
-<li><code>starwars_data %&gt;% group_by(hair_color + species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
-</ul>
+<p>Do <strong>not</strong> overwrite the original variable. Instead, let <code>recode_cat_scale()</code> create a new variable automatically.<br />
+Display the variables <em>name</em>, <em>skinnyness</em>, <em>skinnyness_cat</em>, and the recoded variable.</p>
 </div>
-<div id="task-2-2" class="section level2 unnumbered hasAnchor">
-<h2>Task 2<a href="exercise-3-dplyr.html#task-2-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>It’s your turn now. Load the starwars data like this:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="exercise-3-dplyr.html#cb177-1" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># to activate the dplyr package</span></span>
-<span id="cb177-2"><a href="exercise-3-dplyr.html#cb177-2" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars <span class="co"># to assign the pre-installed starwars data set (dplyr) into a source object in our environment</span></span></code></pre></div>
-<p>How many humans are contained in the starwars dataset overall?
-First, solve this task using <code>filter()</code> only.
-Next, solve it by combining <code>filter()</code> with <code>summarize(count = n())</code>.
-Finally, try to solve it with <code>count()</code>.</p>
+<div id="task-11" class="section level2 hasAnchor" number="7.12">
+<h2><span class="header-section-number">7.12</span> Task 11<a href="exercise-6-tidycomm.html#task-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Create a mean index called <em>smallness_index</em> using the variables <em>skinnyness</em> and <em>tinyness</em>.
+Then display only the mean index and the original variables that were used to create it.</p>
 </div>
-<div id="task-3-2" class="section level2 unnumbered hasAnchor">
-<h2>Task 3<a href="exercise-3-dplyr.html#task-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Use <code>mutate()</code> and <code>case_when()</code> to create a new column height_group with:
-- “short” if height &lt; 140
-- “medium” if height &lt; 180
-- “tall” otherwise.</p>
+<div id="task-12" class="section level2 hasAnchor" number="7.13">
+<h2><span class="header-section-number">7.13</span> Task 12<a href="exercise-6-tidycomm.html#task-12" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now create a sum index with the same variables and call it <em>smallness_sum_index</em>.
+Then display only the mean AND sum index and the original variables that were used to create it.</p>
 </div>
-<div id="task-4-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 4<a href="exercise-3-dplyr.html#task-4-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>How many humans are contained in starwars by height_group? (Hint: You’ll need to chain multiple functions. Remember that <code>summarize()</code> has a best friend that will help you solve this task. :))</p>
-</div>
-<div id="task-5" class="section level2 unnumbered hasAnchor">
-<h2>Task 5<a href="exercise-3-dplyr.html#task-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>What is the most common height_group among Star Wars characters? (Hint: You’ll need to chain multiple functions, but one of them should be <code>arrange()</code>)</p>
-</div>
-<div id="task-6" class="section level2 unnumbered hasAnchor">
-<h2>Task 6<a href="exercise-3-dplyr.html#task-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>What is the average mass of Star Wars characters that are not human and
-have yellow eyes? (Hint: You’ll need to calculate descriptive statistics and remove all <code>NAs</code>.)</p>
-</div>
-<div id="task-7" class="section level2 unnumbered hasAnchor">
-<h2>Task 7<a href="exercise-3-dplyr.html#task-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Compare the mean, median, and standard deviation of mass for all humans
-and droids. (Hint: You’ll need to calculate descriptive statistics and remove all <code>NAs</code>.)</p>
-</div>
-<div id="task-8" class="section level2 unnumbered hasAnchor">
-<h2>Task 8<a href="exercise-3-dplyr.html#task-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Create a new variable in which you store the mass in gram (gr_mass). Add
-it to the dataframe. Test whether your solution works by printing your
-data to the console, but only show the name, species, mass, and your new
-variable gr_mass.</p>
-<p>When you’re ready to look at the solutions, you can find them here:
-<a href="solutions.html#solutions-for-exercise-3">Solutions for Exercise 3</a>.</p>
+<div id="task-13" class="section level2 hasAnchor" number="7.14">
+<h2><span class="header-section-number">7.14</span> Task 13<a href="exercise-6-tidycomm.html#task-13" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Compute reliability estimates for the mean index <em>smallness_index</em>.</p>
+<!-- # Exercise 6: dplyr, ggplot, tidycomm {.unnumbered} -->
+<!-- **After working through Exercise 6, you'll...** -->
+<!-- -   have repeated the most important functions of `dplyr` and `ggplot2` -->
+<!-- -   alternatively, you'll have repeatedsome helpful function from `tidycomm` -->
+<!-- In this exercise, we will work with the `mtcars` data that comes pre-installed with `dplyr`. -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- library(tidyverse) -->
+<!-- data <- as_tibble(mtcars) -->
+<!-- # To make the data somewhat more interesting, let's set a few values to missing values (you don't need to know this code): -->
+<!-- data <- data %>% -->
+<!--   mutate(wt = na_if(wt, 4.070)) -->
+<!-- data <- data %>% -->
+<!--   mutate(mpg = na_if(mpg, 22.8)) -->
+<!-- ``` -->
+<!-- Let's first get to know this data. We can get some information about the variables that are included in the dataset by using `R`s `help()` -->
+<!-- function: -->
+<!-- ```{r, eval = FALSE, include=TRUE} -->
+<!-- help(mtcars) -->
+<!-- ``` -->
+<!-- |                                                                                                   | -->
+<!-- |:--------------------------------------------------------------------------------------------------| -->
+<!-- | *Image: Output of the help(mtcars) function:*                                                     | -->
+<!-- | ![](C:/Users/makis/SynologyDrive/_Arbeit/Lehre_Hannover/Themenextraktion/Methodenvergleich/LaraKobilke/images/mtcars.JPG){width="30%"} | -->
+<!-- We get to know that this is a data set was created from the *1974 Motor Trend US magazine*, and that it comprises fuel consumption (*mpg*) and -->
+<!-- 10 other aspects (*cyl*, *wt*) of automobile design and performance for -->
+<!-- 32 different cars. -->
+<!-- ## Task 1 {.unnumbered} -->
+<!-- Check the dataset for missing values (*NA*s) and delete all observations that have missing values. -->
+<!-- ## Task 2 {.unnumbered} -->
+<!-- Let's transform the weight *wt* of the cars. Currently, it's given as -->
+<!-- *Weight in 1000 lbs*. I guess you are not used to lbs, so try to mutate -->
+<!-- *wt* to represent *Weight in 1000 kg*. 1000 lbs = 453.59 kg, so we will -->
+<!-- need to divide by 2.20. -->
+<!-- Similarly, I think that you are not very familiar with the unit *Miles -->
+<!-- per gallon* of the *mpg* variable. Let's transform it into *Kilometer -->
+<!-- per liter*. 1 m/g = 0.425144 km/l, so again divide by 2.20. -->
+<!-- ## Task 3 {.unnumbered} -->
+<!-- Now we want to group the weight of the cars in three categories: light, -->
+<!-- medium, heavy. But how to define light, medium, and heavy cars, i.e., at -->
+<!-- what kg should you put the threshold? A reasonable approach is to use -->
+<!-- quantiles (see Tutorial: [summarize() [+ -->
+<!-- group_by()]](#summarize-group_by)). Quantiles divide data. For example, -->
+<!-- the 75% quantile states that exactly 75% of the data values are equal or -->
+<!-- below the quantile value. The rest of the values are equal or above it. -->
+<!-- Use the lower quantile (0.25) and the upper quantile (0.75) to estimate -->
+<!-- two values that divide the weight of the cars in three groups. What are -->
+<!-- these values? -->
+<!-- ## Task 4 {.unnumbered} -->
+<!-- Use the values from Task 3 to create a new variable *wt_cat* that -->
+<!-- divides the cars in three groups: light, medium, and heavy cars. -->
+<!-- ## Task 5 {.unnumbered} -->
+<!-- How many light, medium, and heavy cars are part of the data? -->
+<!-- ## Task 6 {.unnumbered} -->
+<!-- Now sort this count of the car weight classes from highest to lowest. -->
+<!-- ## Task 7 {.unnumbered} -->
+<!-- Make a scatter plot to indicate how many km per liter (*mpg*) a car can -->
+<!-- drive depending on its weight (*wt*). Facet the plot by weight class -->
+<!-- (*wt_cat*). -->
+<!-- ## Task 8 {.unnumbered} -->
+<!-- Recreate the diagram from Task 7, but exclude all cars that weigh -->
+<!-- between 1.4613636 and 1.5636364 \*1000kg from it. -->
+<!-- When you're ready to look at the solutions, you can find them here: -->
+<!-- [Solutions for Exercise 6]. -->
+<!-- We have officially finished our chapters on data management and -->
+<!-- visualization! -->
+<!-- # Tutorial: Text manipulation with stringr -->
+<!-- **After working through Tutorial 9, you'll...** -->
+<!-- # Tutorial: Tidy text analysis# -->
+<!-- **After working through Tutorial 10, you'll...** -->
 </div>
 </div>
             </section>
@@ -521,8 +566,8 @@ variable gr_mass.</p>
           </div>
         </div>
       </div>
-<a href="tutorial-data-management-with-dplyr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tutorial-data-visualization-with-ggplot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tutorial-data-management-with-tidycomm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

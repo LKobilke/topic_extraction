@@ -182,3 +182,14 @@ equivalent-with-mutatena_if
 rescaling-of-continuous-scales
 categorizing-and-recoding-categorical-scales
 tutorial-data-management-with-tidycomm
+task-1-5
+task-2-5
+task-3-5
+task-4-4
+task-7-1
+task-8-1
+task-9
+task-10
+task-11
+task-12
+task-13
