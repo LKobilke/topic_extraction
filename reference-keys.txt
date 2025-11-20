@@ -193,3 +193,5 @@ task-10
 task-11
 task-12
 task-13
+describe-categorical-variables
+how-to-easily-copy-paste-tidycomm-commands
