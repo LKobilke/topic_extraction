@@ -522,7 +522,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="tidy-text-analysis" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number"> 9</span> Tidy text analysis<a href="tidy-text-analysis.html#tidy-text-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>After working through Tutorial 10, you’ll…</p>
+<p>After working through Tutorial 9, you’ll…</p>
 <ul>
 <li>understand the concept of tidy text</li>
 <li>know how to combine tidy text management approaches with regular
@@ -1268,7 +1268,7 @@ document. Choosing a good value for <em>K</em> is extremely important and
 consequential, since it will impact your results. Usually, small <em>K</em>s
 produce very distinct, but generalizable topics, while high <em>K</em>s produce
 overlapping themes, but are also more event- and issue-specific.</p>
-<p>Let’s create a topic model. More specifically, let’s create a six-topic
+<p>Let’s create a topic model. More specifically, let’s create a three-topic
 LDA model using <code>topicmodels</code>. In practice, you would often use a higher
 <em>K</em>, but for our use case, three should suffice.</p>
 <div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="tidy-text-analysis.html#cb393-1" tabindex="-1"></a>lda <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dfm, <span class="at">k =</span> <span class="dv">3</span>, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">123</span>)) <span class="co"># the control argument uses a random number (123) to seed the assignment of topics to each word in the corpus (this helps to create reproducability in an otherwise random process!)</span></span></code></pre></div>
