@@ -398,15 +398,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>9.4.3</b> Inspect the topics</a></li>
 <li class="chapter" data-level="9.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>9.4.4</b> STMs</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>9.5</b> Sentiment analysis</a>
-<ul>
-<li class="chapter" data-level="9.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time"><i class="fa fa-check"></i><b>9.5.1</b> Sentiment over time</a></li>
-<li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-sentiment-over-time"><i class="fa fa-check"></i>Practice: Sentiment over time</a></li>
-<li class="chapter" data-level="9.5.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-periods"><i class="fa fa-check"></i><b>9.5.2</b> Sentiment over time periods</a></li>
-<li class="chapter" data-level="9.5.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>9.5.3</b> Sentiment of individual users</a></li>
-</ul></li>
-<li class="chapter" data-level="9.6" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#take-aways-6"><i class="fa fa-check"></i><b>9.6</b> Take-Aways</a></li>
-<li class="chapter" data-level="9.7" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#additional-tutorials-6"><i class="fa fa-check"></i><b>9.7</b> Additional tutorials</a></li>
+<li class="chapter" data-level="9.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#take-aways-6"><i class="fa fa-check"></i><b>9.5</b> Take-Aways</a></li>
+<li class="chapter" data-level="9.6" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#additional-tutorials-6"><i class="fa fa-check"></i><b>9.6</b> Additional tutorials</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a>
 <ul>
@@ -492,8 +485,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-model-estimation"><i class="fa fa-check"></i>Task 5: Model estimation</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-word-topic-probabilities"><i class="fa fa-check"></i>Task 6: Word-topic probabilities</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-7-document-topic-probabilities"><i class="fa fa-check"></i>Task 7: Document-topic probabilities</a></li>
-<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-8-sentiment-over-time"><i class="fa fa-check"></i>Task 8: Sentiment over time</a></li>
-<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-9-sentiment-over-time-periods"><i class="fa fa-check"></i>Task 9: Sentiment over time periods</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -1567,263 +1558,202 @@ the field. One very popular technique is <em>Structural Topic Modeling</em>
 latent topics in the corpus.</p>
 <p>You can estimate STMs with the <code>stm</code> package. We will not discuss STMs
 in this tutorial due to time restrictions. However, the <a href="tidy-text-analysis.html#additional-tutorials-6">Additional tutorials</a> section features two excellent external STM tutorials that you might want to have a look at.</p>
+<!-- ## Sentiment analysis -->
+<!-- The process of analyzing valence or emotions in text data is called -->
+<!-- *sentiment analysis*. One way to approach sentiment analysis is to -->
+<!-- understand text as a collection of individual words and assign each word -->
+<!-- with a negativity / emotion score. The text's overall sentiment is -->
+<!-- interpreted as the sum of these individual scores. Professional, -->
+<!-- peer-reviewed "dictionaries" determine what score should be assigned to -->
+<!-- each individual word and they always look somewhat like this example: -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- tidytext::get_sentiments("bing") -->
+<!-- ``` -->
+<!-- If you want to use a dictionary, you might need to download and agree to -->
+<!-- their license first. Make sure that licenses match the requirements for -->
+<!-- your analysis (i.e., non-commercial use only). -->
+<!-- In the next section, we will apply different dictionaries to our Ukraine -->
+<!-- data. -->
+<!-- ### Sentiment over time -->
+<!-- First, we need to create a data set that contains the word list of the -->
+<!-- `bing` dictionary. We will then add the sentiment evaluations of the -->
+<!-- `bing` word list to our tokenized data set: -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- bing <- tidytext::get_sentiments("bing") -->
+<!-- data_tknzd_bing <- data_tknzd %>% -->
+<!--   inner_join(bing) -->
+<!-- head(data_tknzd_bing) -->
+<!-- ``` -->
+<!-- Now we can estimate the sentiment of the tweets over time, i.e., see how -->
+<!-- the sentiment developed over time. -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- data_tknzd %>% -->
+<!--   inner_join(get_sentiments("bing")) %>% -->
+<!--   count(sentiment, time) %>% -->
+<!--   pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) %>%  -->
+<!--   mutate(sentiment = positive - negative) %>% -->
+<!--   ggplot(aes(x = time, y = sentiment)) + -->
+<!--   labs(title = "Bing dictionary") + -->
+<!--   theme_bw() + -->
+<!--   geom_col(show.legend = FALSE) -->
+<!-- ``` -->
+<!-- Overall, the tone of tweets is negative. Only a few tweets have a -->
+<!-- positive valence. Let's check whether these results are characteristic -->
+<!-- for the `bing` dictionary and compare them to another dictionary, namely -->
+<!-- the `afinn` dictionary. Let's load the `afinn` dictionary next. It's -->
+<!-- included in the `tidytext` package, so you can agree to the licence and -->
+<!-- load it that way. I have added the `afinn` dictionary to a .csv to -->
+<!-- import it more effortlessly, so I'll use this approach. -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- afinn <- read.csv("./data/afinn_dictionary.csv") -->
+<!-- data_tknzd %>% -->
+<!--   inner_join(afinn) %>% -->
+<!--   group_by(time) %>%  -->
+<!--   summarize(sentiment = sum(value)) %>%  -->
+<!--   ggplot(aes(x = time, y = sentiment)) + -->
+<!--   labs(title = "Afinn dictionary") + -->
+<!--   theme_bw() + -->
+<!--   geom_col(show.legend = FALSE) -->
+<!-- ``` -->
+<!-- Even though both dictionaries produce similar results, we can see that -->
+<!-- `afinn` estimates a greater amount of positive tweets, while the `bing` -->
+<!-- dictionary estimates larger blocks of uninterrupted negative sentiment. -->
+<!-- This behavior of both dictionaries is known, for instance, see this -->
+<!-- quote: -->
+<!-- > "Different lexicons for calculating sentiment give results that are -->
+<!-- > different in an absolute sense but have similar relative trajectories -->
+<!-- > . . . The AFINN lexicon gives the largest absolute values, with high -->
+<!-- > positive values. The lexicon from Bing et al. has lower absolute -->
+<!-- > values and seems to label larger blocks of contiguous positive or -->
+<!-- > negative text." (Silge & Robinson, -->
+<!-- > [Link](https://www.tidytextmining.com/sentiment.html)) -->
+<!-- Finally, other options include the `nrc` dictionary that can can -->
+<!-- estimate 1) negative and positive valence or 2) emotions such anger, -->
+<!-- sadness, joy, etc. For now, let's import the valence word lists from -->
+<!-- `nrc`and repeat our analysis one last time. -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- nrc <- read.csv("./data/nrc_dictionary.csv") -->
+<!-- nrc <- nrc %>%  -->
+<!--   filter(sentiment == "positive" | sentiment == "negative") -->
+<!-- data_tknzd %>% -->
+<!--   inner_join(nrc) %>% -->
+<!--   count(sentiment, time) %>% -->
+<!--   pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) %>% -->
+<!--   mutate(sentiment = positive - negative) %>% -->
+<!--   ggplot(aes(x = time, y = sentiment)) + -->
+<!--   labs(title = "NRC dictionary") + -->
+<!--   theme_bw() + -->
+<!--   geom_col(show.legend = FALSE) -->
+<!-- ``` -->
+<!-- Obviously, the `nrc` dictionary estimates a much greater amount of positive tweets than `bing` and `afinn`. This is why you should handle dictionary-based approaches carefully. As [Pipal et al. (2022)](https://www.tandfonline.com/doi/full/10.1080/21670811.2022.2036623) put it: -->
+<!-- > "Many widely used tools for sentiment analysis have been developed by psychologists to measure emotions in free-form writing (such as in product reviews and micro blogs) in the form of pre-defined lexicons (e.g. Tausczik and Pennebaker 2010), yet they are often conveniently used to measure complex latent constructs in highly structured news articles and speeches despite the content-dependent nature of the tools (Puschmann and Powell 2018; Pipal, Schoonvelde, and Schumacher 2022). Different tools embody different methodological assumptions and particular contexts within which they are initially developed from, leading to diverging consequences across different tools." -->
+<!-- To this day, most dictionaries cannot compete with manual annotation. Therefore you should manually validate the estimations before applying sentiment tools to your use case. For a very good comparison between dictionaries and manual annotation, see this article: [Link](https://www.tandfonline.com/doi/full/10.1080/19312458.2020.1869198). -->
+<!-- __Two hands-on learnings:__ 1) Don't trust sentiment analyses of pre-designed sentiment reports too much. If you don't know how these sentiment scores were produced and how reliable those estimations are, you can't evaluate their quality. 2) My suggestion is that you tailor your own dictionary to your specific use case (e.g., for your company some words might be positive that are negative for other companies) and validate it with manual coding until you are satisfied with its reliability. This is a one-time effort that can really pay-off, especially for smaller businesses. -->
+<!-- ### Practice: Sentiment over time {.unnumbered} -->
+<!-- Alright, we are ready to perform a sentiment analysis for the Kliemann data. Again, we cannot use the `tidytext` dictionaries because they were developed only for the English language. However, I've prepared a German dictionary for you that is based on [this article by Christian Rauh](https://www.tandfonline.com/doi/full/10.1080/19331681.2018.1485608). You can find the dictionary as a .csv on Moodle. Use it to analyze the sentiment of the Kliemann data over time. __Hint:__ You will need to follow the sum(value) approach that I used on the `afinn` dictionary because the dictionary comes with a `value` column (metric variable) instead of a `sentiment` column (nominal variable). -->
+<!-- **Tip for advanced students:** One big problem with the above presented dictionary approaches is that they do not take into account sentence structure, but treat each sentence as a bag of words. For those dictionary-approaches, word order does not matter to transport sentiment. If you want to run more complex sentiment analyses in the future, try the `vader` package. `vader` is not just dictionary-based, but it is so a so-called "rule-based sentiment analysis tool". This means that it takes into account sentence structure, e.g., negations. We all agree that "not cute" transports a negative sentiment, but the above presented dictionary approaches treat "not" as a stop word and evaluate "cute" as positive. -->
+<!-- ### Sentiment over time periods -->
+<!-- You can define time periods and get the sentiment for each individual -->
+<!-- time frame. Let's create three time periods (1 = first 3 min, 2 = 3rd to -->
+<!-- 6th min, 3 = whole 10 min) and compare the sentiment that both *bing* -->
+<!-- and *afinn* estimate for these three time periods. -->
+<!-- Here are the results for *bing*: -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- data_tknzd %>% -->
+<!--   inner_join(get_sentiments("bing")) %>% -->
+<!--   mutate(period = case_when( -->
+<!--     time <= ymd_hms('2022-02-25 18:03:30') ~ "Period 1", -->
+<!--     time >= ymd_hms('2022-02-25 18:03:31') &  -->
+<!--     time <= ymd_hms('2022-02-25 18:06:30') ~ "Period 2", -->
+<!--     time >= ymd_hms('2022-02-25 18:06:31') &  -->
+<!--     time <= ymd_hms('2022-02-25 18:10:59') ~ "Period 3")) %>%  -->
+<!--   count(period, sentiment) -->
+<!-- ``` -->
+<!-- And here are the results for *afinn*: -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- data_tknzd %>% -->
+<!--   inner_join(afinn) %>% -->
+<!--   mutate(period = case_when( -->
+<!--     time <= ymd_hms('2022-02-25 18:03:30') ~ "Period 1", -->
+<!--     time >= ymd_hms('2022-02-25 18:03:31') &  -->
+<!--     time <= ymd_hms('2022-02-25 18:06:30') ~ "Period 2", -->
+<!--     time >= ymd_hms('2022-02-25 18:06:31') &  -->
+<!--     time <= ymd_hms('2022-02-25 18:10:59') ~ "Period 3")) %>% -->
+<!--   mutate(sentiment = case_when( -->
+<!--     value < 0 ~ "negative", -->
+<!--     value > 0 ~ "positive" -->
+<!--   )) %>% -->
+<!--   count(period, sentiment) -->
+<!-- ``` -->
+<!-- #### Practice: Sentiment over time periods {-} -->
+<!-- Using the German `SentiWS_Rauh` dictionary, try to do a similar analysis with the Kliemann data and investigate the sentiment for each individual month starting and ending with the 6th day of this month. Our data from stretches from 6th of May to 3rd of July, so you have to include these three days of July in the June time period. -->
+<!-- ### Sentiment of individual users -->
+<!-- Now we can calculate the sentiment for each individual user. Let's try -->
+<!-- it. -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- data_tknzd_bing <- data_tknzd_bing %>% -->
+<!--   count(user, sentiment, time) %>% -->
+<!--   pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) %>%  -->
+<!--   mutate(sentiment = positive - negative) -->
+<!-- data_tknzd_bing %>% -->
+<!--   filter(user == "common_sense54" | user == "EdCutter1" | user == "BaloIreen" | user == "LateNighter5") -->
+<!-- ``` -->
+<!-- ...and turn it into a visualization of our most active users over time: -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- data_tknzd_bing %>%  -->
+<!--   group_by(user, time) %>% -->
+<!--   filter(user == "common_sense54" | user == "EdCutter1" | user == "BaloIreen" | user == "LateNighter5") %>% -->
+<!--   ggplot(aes(x = time, y = sentiment, fill = user)) + -->
+<!--   geom_col(show.legend = FALSE) + -->
+<!--   labs(title = "Bing: The sentiment of the most active users") + -->
+<!--   theme_bw() + -->
+<!--   facet_wrap(~user) -->
+<!-- ``` -->
+<!-- According to the *bing* dictionary the sentiment of our most active -->
+<!-- twitter users was positive and stayed positive over the 10-minute time -->
+<!-- frame that we are currently looking at. Positive sentiment while talking -->
+<!-- about the outbreak of war? Those are odd results. Maybe the positive -->
+<!-- sentiment is characteristic of more active users? -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- data_tknzd %>% -->
+<!--   inner_join(get_sentiments("bing")) %>% -->
+<!--   count(sentiment, time) %>% -->
+<!--   pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) %>%  -->
+<!--   mutate(sentiment = positive - negative) %>% -->
+<!--   ggplot(aes(x = time, y = sentiment)) + -->
+<!--   labs(title = "Bing dictionary") + -->
+<!--   theme_bw() + -->
+<!--   geom_col(show.legend = FALSE) -->
+<!-- ``` -->
+<!-- Overall, the tone of tweets is negative, which implies that the most -->
+<!-- active users are characterized by a more positive sentiment. That's an -->
+<!-- interesting result and might be an indicator that very active accounts -->
+<!-- are trying to push the public opinion in some specific direction. We -->
+<!-- could run more in-depth analyses of more users and longer time-periods -->
+<!-- to prove that, but for now we want to focus on alternative dictionaries. -->
+<!-- Knowing this, let's check how similar the results are for our most -->
+<!-- active users. -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- data_tknzd %>%  -->
+<!--   inner_join(afinn) %>% -->
+<!--   group_by(user, time) %>% -->
+<!--   summarize(sentiment = sum(value)) %>% -->
+<!--   filter(user == "common_sense54" | user == "EdCutter1" | user == "BaloIreen" | user == "LateNighter5") %>% -->
+<!--   ggplot(aes(x = time, y = sentiment, fill = user)) + -->
+<!--   geom_col(show.legend = FALSE) + -->
+<!--   labs(title = "Afinn: The sentiment of the most active users") + -->
+<!--   theme_bw() + -->
+<!--   facet_wrap(~user) -->
+<!-- ``` -->
+<!-- That looks good, both `bing` and `afinn` come to similar conclusions, -->
+<!-- i.e., the most active users publish tweets with a positive sentiment. -->
+<!-- The dictionary approaches that treat sentiment as the sum of the -->
+<!-- individual negativity/emotion ratings of words are consistent with each -->
+<!-- other. -->
 </div>
 </div>
-<div id="sentiment-analysis" class="section level2 hasAnchor" number="9.5">
-<h2><span class="header-section-number">9.5</span> Sentiment analysis<a href="tidy-text-analysis.html#sentiment-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The process of analyzing valence or emotions in text data is called
-<em>sentiment analysis</em>. One way to approach sentiment analysis is to
-understand text as a collection of individual words and assign each word
-with a negativity / emotion score. The text’s overall sentiment is
-interpreted as the sum of these individual scores. Professional,
-peer-reviewed “dictionaries” determine what score should be assigned to
-each individual word and they always look somewhat like this example:</p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="tidy-text-analysis.html#cb406-1" tabindex="-1"></a>tidytext<span class="sc">::</span><span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 6,786 × 2
-##    word        sentiment
-##    &lt;chr&gt;       &lt;chr&gt;    
-##  1 2-faces     negative 
-##  2 abnormal    negative 
-##  3 abolish     negative 
-##  4 abominable  negative 
-##  5 abominably  negative 
-##  6 abominate   negative 
-##  7 abomination negative 
-##  8 abort       negative 
-##  9 aborted     negative 
-## 10 aborts      negative 
-## # ℹ 6,776 more rows</code></pre>
-<p>If you want to use a dictionary, you might need to download and agree to
-their license first. Make sure that licenses match the requirements for
-your analysis (i.e., non-commercial use only).</p>
-<p>In the next section, we will apply different dictionaries to our Ukraine
-data.</p>
-<div id="sentiment-over-time" class="section level3 hasAnchor" number="9.5.1">
-<h3><span class="header-section-number">9.5.1</span> Sentiment over time<a href="tidy-text-analysis.html#sentiment-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>First, we need to create a data set that contains the word list of the
-<code>bing</code> dictionary. We will then add the sentiment evaluations of the
-<code>bing</code> word list to our tokenized data set:</p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="tidy-text-analysis.html#cb408-1" tabindex="-1"></a>bing <span class="ot">&lt;-</span> tidytext<span class="sc">::</span><span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)</span>
-<span id="cb408-2"><a href="tidy-text-analysis.html#cb408-2" tabindex="-1"></a></span>
-<span id="cb408-3"><a href="tidy-text-analysis.html#cb408-3" tabindex="-1"></a>data_tknzd_bing <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb408-4"><a href="tidy-text-analysis.html#cb408-4" tabindex="-1"></a>  <span class="fu">inner_join</span>(bing)</span>
-<span id="cb408-5"><a href="tidy-text-analysis.html#cb408-5" tabindex="-1"></a></span>
-<span id="cb408-6"><a href="tidy-text-analysis.html#cb408-6" tabindex="-1"></a><span class="fu">head</span>(data_tknzd_bing)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 6
-##   time                user         full_text               tweet word  sentiment
-##   &lt;dttm&gt;              &lt;chr&gt;        &lt;chr&gt;                   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;    
-## 1 2022-02-25 18:10:59 peekay14     &quot;@vonderleyen @EU_Comm…     1 usel… negative 
-## 2 2022-02-25 18:10:59 peekay14     &quot;@vonderleyen @EU_Comm…     1 sever negative 
-## 3 2022-02-25 18:10:59 peekay14     &quot;@vonderleyen @EU_Comm…     1 atta… negative 
-## 4 2022-02-25 18:10:59 koba19822012 &quot;@WorldNewsWWIII God b…    12 bless positive 
-## 5 2022-02-25 18:10:59 nexta_tv     &quot;Zelensky stays in #Ky…    24 misi… negative 
-## 6 2022-02-25 18:10:59 ananthoo1    &quot;What a speech! By Ukr…    31 love  positive</code></pre>
-<p>Now we can estimate the sentiment of the tweets over time, i.e., see how
-the sentiment developed over time.</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="tidy-text-analysis.html#cb410-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb410-2"><a href="tidy-text-analysis.html#cb410-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb410-3"><a href="tidy-text-analysis.html#cb410-3" tabindex="-1"></a>  <span class="fu">count</span>(sentiment, time) <span class="sc">%&gt;%</span></span>
-<span id="cb410-4"><a href="tidy-text-analysis.html#cb410-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb410-5"><a href="tidy-text-analysis.html#cb410-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative) <span class="sc">%&gt;%</span></span>
-<span id="cb410-6"><a href="tidy-text-analysis.html#cb410-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb410-7"><a href="tidy-text-analysis.html#cb410-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Bing dictionary&quot;</span>) <span class="sc">+</span></span>
-<span id="cb410-8"><a href="tidy-text-analysis.html#cb410-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb410-9"><a href="tidy-text-analysis.html#cb410-9" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-256-1.png" width="672" /></p>
-<p>Overall, the tone of tweets is negative. Only a few tweets have a
-positive valence. Let’s check whether these results are characteristic
-for the <code>bing</code> dictionary and compare them to another dictionary, namely
-the <code>afinn</code> dictionary. Let’s load the <code>afinn</code> dictionary next. It’s
-included in the <code>tidytext</code> package, so you can agree to the licence and
-load it that way. I have added the <code>afinn</code> dictionary to a .csv to
-import it more effortlessly, so I’ll use this approach.</p>
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="tidy-text-analysis.html#cb411-1" tabindex="-1"></a>afinn <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/afinn_dictionary.csv&quot;</span>)</span>
-<span id="cb411-2"><a href="tidy-text-analysis.html#cb411-2" tabindex="-1"></a></span>
-<span id="cb411-3"><a href="tidy-text-analysis.html#cb411-3" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb411-4"><a href="tidy-text-analysis.html#cb411-4" tabindex="-1"></a>  <span class="fu">inner_join</span>(afinn) <span class="sc">%&gt;%</span></span>
-<span id="cb411-5"><a href="tidy-text-analysis.html#cb411-5" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span> </span>
-<span id="cb411-6"><a href="tidy-text-analysis.html#cb411-6" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sentiment =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span> </span>
-<span id="cb411-7"><a href="tidy-text-analysis.html#cb411-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb411-8"><a href="tidy-text-analysis.html#cb411-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Afinn dictionary&quot;</span>) <span class="sc">+</span></span>
-<span id="cb411-9"><a href="tidy-text-analysis.html#cb411-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb411-10"><a href="tidy-text-analysis.html#cb411-10" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-257-1.png" width="672" /></p>
-<p>Even though both dictionaries produce similar results, we can see that
-<code>afinn</code> estimates a greater amount of positive tweets, while the <code>bing</code>
-dictionary estimates larger blocks of uninterrupted negative sentiment.
-This behavior of both dictionaries is known, for instance, see this
-quote:</p>
-<blockquote>
-<p>“Different lexicons for calculating sentiment give results that are
-different in an absolute sense but have similar relative trajectories
-. . . The AFINN lexicon gives the largest absolute values, with high
-positive values. The lexicon from Bing et al. has lower absolute
-values and seems to label larger blocks of contiguous positive or
-negative text.” (Silge &amp; Robinson,
-<a href="https://www.tidytextmining.com/sentiment.html">Link</a>)</p>
-</blockquote>
-<p>Finally, other options include the <code>nrc</code> dictionary that can can
-estimate 1) negative and positive valence or 2) emotions such anger,
-sadness, joy, etc. For now, let’s import the valence word lists from
-<code>nrc</code>and repeat our analysis one last time.</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="tidy-text-analysis.html#cb412-1" tabindex="-1"></a>nrc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/nrc_dictionary.csv&quot;</span>)</span>
-<span id="cb412-2"><a href="tidy-text-analysis.html#cb412-2" tabindex="-1"></a></span>
-<span id="cb412-3"><a href="tidy-text-analysis.html#cb412-3" tabindex="-1"></a>nrc <span class="ot">&lt;-</span> nrc <span class="sc">%&gt;%</span> </span>
-<span id="cb412-4"><a href="tidy-text-analysis.html#cb412-4" tabindex="-1"></a>  <span class="fu">filter</span>(sentiment <span class="sc">==</span> <span class="st">&quot;positive&quot;</span> <span class="sc">|</span> sentiment <span class="sc">==</span> <span class="st">&quot;negative&quot;</span>)</span>
-<span id="cb412-5"><a href="tidy-text-analysis.html#cb412-5" tabindex="-1"></a></span>
-<span id="cb412-6"><a href="tidy-text-analysis.html#cb412-6" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb412-7"><a href="tidy-text-analysis.html#cb412-7" tabindex="-1"></a>  <span class="fu">inner_join</span>(nrc) <span class="sc">%&gt;%</span></span>
-<span id="cb412-8"><a href="tidy-text-analysis.html#cb412-8" tabindex="-1"></a>  <span class="fu">count</span>(sentiment, time) <span class="sc">%&gt;%</span></span>
-<span id="cb412-9"><a href="tidy-text-analysis.html#cb412-9" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb412-10"><a href="tidy-text-analysis.html#cb412-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative) <span class="sc">%&gt;%</span></span>
-<span id="cb412-11"><a href="tidy-text-analysis.html#cb412-11" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb412-12"><a href="tidy-text-analysis.html#cb412-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;NRC dictionary&quot;</span>) <span class="sc">+</span></span>
-<span id="cb412-13"><a href="tidy-text-analysis.html#cb412-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb412-14"><a href="tidy-text-analysis.html#cb412-14" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-258-1.png" width="672" /></p>
-<p>Obviously, the <code>nrc</code> dictionary estimates a much greater amount of positive tweets than <code>bing</code> and <code>afinn</code>. This is why you should handle dictionary-based approaches carefully. As <a href="https://www.tandfonline.com/doi/full/10.1080/21670811.2022.2036623">Pipal et al. (2022)</a> put it:</p>
-<blockquote>
-<p>“Many widely used tools for sentiment analysis have been developed by psychologists to measure emotions in free-form writing (such as in product reviews and micro blogs) in the form of pre-defined lexicons (e.g. Tausczik and Pennebaker 2010), yet they are often conveniently used to measure complex latent constructs in highly structured news articles and speeches despite the content-dependent nature of the tools (Puschmann and Powell 2018; Pipal, Schoonvelde, and Schumacher 2022). Different tools embody different methodological assumptions and particular contexts within which they are initially developed from, leading to diverging consequences across different tools.”</p>
-</blockquote>
-<p>To this day, most dictionaries cannot compete with manual annotation. Therefore you should manually validate the estimations before applying sentiment tools to your use case. For a very good comparison between dictionaries and manual annotation, see this article: <a href="https://www.tandfonline.com/doi/full/10.1080/19312458.2020.1869198">Link</a>.</p>
-<p><strong>Two hands-on learnings:</strong> 1) Don’t trust sentiment analyses of pre-designed sentiment reports too much. If you don’t know how these sentiment scores were produced and how reliable those estimations are, you can’t evaluate their quality. 2) My suggestion is that you tailor your own dictionary to your specific use case (e.g., for your company some words might be positive that are negative for other companies) and validate it with manual coding until you are satisfied with its reliability. This is a one-time effort that can really pay-off, especially for smaller businesses.</p>
-</div>
-<div id="practice-sentiment-over-time" class="section level3 unnumbered hasAnchor">
-<h3>Practice: Sentiment over time<a href="tidy-text-analysis.html#practice-sentiment-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Alright, we are ready to perform a sentiment analysis for the Kliemann data. Again, we cannot use the <code>tidytext</code> dictionaries because they were developed only for the English language. However, I’ve prepared a German dictionary for you that is based on <a href="https://www.tandfonline.com/doi/full/10.1080/19331681.2018.1485608">this article by Christian Rauh</a>. You can find the dictionary as a .csv on Moodle. Use it to analyze the sentiment of the Kliemann data over time. <strong>Hint:</strong> You will need to follow the sum(value) approach that I used on the <code>afinn</code> dictionary because the dictionary comes with a <code>value</code> column (metric variable) instead of a <code>sentiment</code> column (nominal variable).</p>
-<p><strong>Tip for advanced students:</strong> One big problem with the above presented dictionary approaches is that they do not take into account sentence structure, but treat each sentence as a bag of words. For those dictionary-approaches, word order does not matter to transport sentiment. If you want to run more complex sentiment analyses in the future, try the <code>vader</code> package. <code>vader</code> is not just dictionary-based, but it is so a so-called “rule-based sentiment analysis tool”. This means that it takes into account sentence structure, e.g., negations. We all agree that “not cute” transports a negative sentiment, but the above presented dictionary approaches treat “not” as a stop word and evaluate “cute” as positive.</p>
-</div>
-<div id="sentiment-over-time-periods" class="section level3 hasAnchor" number="9.5.2">
-<h3><span class="header-section-number">9.5.2</span> Sentiment over time periods<a href="tidy-text-analysis.html#sentiment-over-time-periods" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>You can define time periods and get the sentiment for each individual
-time frame. Let’s create three time periods (1 = first 3 min, 2 = 3rd to
-6th min, 3 = whole 10 min) and compare the sentiment that both <em>bing</em>
-and <em>afinn</em> estimate for these three time periods.</p>
-<p>Here are the results for <em>bing</em>:</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="tidy-text-analysis.html#cb413-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb413-2"><a href="tidy-text-analysis.html#cb413-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb413-3"><a href="tidy-text-analysis.html#cb413-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period =</span> <span class="fu">case_when</span>(</span>
-<span id="cb413-4"><a href="tidy-text-analysis.html#cb413-4" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 1&quot;</span>,</span>
-<span id="cb413-5"><a href="tidy-text-analysis.html#cb413-5" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:31&#39;</span>) <span class="sc">&amp;</span> </span>
-<span id="cb413-6"><a href="tidy-text-analysis.html#cb413-6" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 2&quot;</span>,</span>
-<span id="cb413-7"><a href="tidy-text-analysis.html#cb413-7" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:31&#39;</span>) <span class="sc">&amp;</span> </span>
-<span id="cb413-8"><a href="tidy-text-analysis.html#cb413-8" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:10:59&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 3&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb413-9"><a href="tidy-text-analysis.html#cb413-9" tabindex="-1"></a>  <span class="fu">count</span>(period, sentiment)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 3
-##   period   sentiment     n
-##   &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt;
-## 1 Period 1 negative    928
-## 2 Period 1 positive    513
-## 3 Period 2 negative   1697
-## 4 Period 2 positive    976
-## 5 Period 3 negative   2545
-## 6 Period 3 positive   1516</code></pre>
-<p>And here are the results for <em>afinn</em>:</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="tidy-text-analysis.html#cb415-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb415-2"><a href="tidy-text-analysis.html#cb415-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(afinn) <span class="sc">%&gt;%</span></span>
-<span id="cb415-3"><a href="tidy-text-analysis.html#cb415-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period =</span> <span class="fu">case_when</span>(</span>
-<span id="cb415-4"><a href="tidy-text-analysis.html#cb415-4" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 1&quot;</span>,</span>
-<span id="cb415-5"><a href="tidy-text-analysis.html#cb415-5" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:31&#39;</span>) <span class="sc">&amp;</span> </span>
-<span id="cb415-6"><a href="tidy-text-analysis.html#cb415-6" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 2&quot;</span>,</span>
-<span id="cb415-7"><a href="tidy-text-analysis.html#cb415-7" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:31&#39;</span>) <span class="sc">&amp;</span> </span>
-<span id="cb415-8"><a href="tidy-text-analysis.html#cb415-8" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:10:59&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 3&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb415-9"><a href="tidy-text-analysis.html#cb415-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> <span class="fu">case_when</span>(</span>
-<span id="cb415-10"><a href="tidy-text-analysis.html#cb415-10" tabindex="-1"></a>    value <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;negative&quot;</span>,</span>
-<span id="cb415-11"><a href="tidy-text-analysis.html#cb415-11" tabindex="-1"></a>    value <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;positive&quot;</span></span>
-<span id="cb415-12"><a href="tidy-text-analysis.html#cb415-12" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
-<span id="cb415-13"><a href="tidy-text-analysis.html#cb415-13" tabindex="-1"></a>  <span class="fu">count</span>(period, sentiment)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 3
-##   period   sentiment     n
-##   &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt;
-## 1 Period 1 negative   1239
-## 2 Period 1 positive    743
-## 3 Period 2 negative   2182
-## 4 Period 2 positive   1301
-## 5 Period 3 negative   3302
-## 6 Period 3 positive   2033</code></pre>
-<div id="practice-sentiment-over-time-periods" class="section level4 unnumbered hasAnchor">
-<h4>Practice: Sentiment over time periods<a href="tidy-text-analysis.html#practice-sentiment-over-time-periods" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Using the German <code>SentiWS_Rauh</code> dictionary, try to do a similar analysis with the Kliemann data and investigate the sentiment for each individual month starting and ending with the 6th day of this month. Our data from stretches from 6th of May to 3rd of July, so you have to include these three days of July in the June time period.</p>
-</div>
-</div>
-<div id="sentiment-of-individual-users" class="section level3 hasAnchor" number="9.5.3">
-<h3><span class="header-section-number">9.5.3</span> Sentiment of individual users<a href="tidy-text-analysis.html#sentiment-of-individual-users" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Now we can calculate the sentiment for each individual user. Let’s try
-it.</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="tidy-text-analysis.html#cb417-1" tabindex="-1"></a>data_tknzd_bing <span class="ot">&lt;-</span> data_tknzd_bing <span class="sc">%&gt;%</span></span>
-<span id="cb417-2"><a href="tidy-text-analysis.html#cb417-2" tabindex="-1"></a>  <span class="fu">count</span>(user, sentiment, time) <span class="sc">%&gt;%</span></span>
-<span id="cb417-3"><a href="tidy-text-analysis.html#cb417-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb417-4"><a href="tidy-text-analysis.html#cb417-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative)</span>
-<span id="cb417-5"><a href="tidy-text-analysis.html#cb417-5" tabindex="-1"></a></span>
-<span id="cb417-6"><a href="tidy-text-analysis.html#cb417-6" tabindex="-1"></a>data_tknzd_bing <span class="sc">%&gt;%</span></span>
-<span id="cb417-7"><a href="tidy-text-analysis.html#cb417-7" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 63 × 5
-##    user      time                positive negative sentiment
-##    &lt;chr&gt;     &lt;dttm&gt;                 &lt;int&gt;    &lt;int&gt;     &lt;int&gt;
-##  1 BaloIreen 2022-02-25 18:02:33        2        1         1
-##  2 BaloIreen 2022-02-25 18:02:51        2        1         1
-##  3 BaloIreen 2022-02-25 18:02:59        2        1         1
-##  4 BaloIreen 2022-02-25 18:03:07        2        1         1
-##  5 BaloIreen 2022-02-25 18:03:21        2        1         1
-##  6 BaloIreen 2022-02-25 18:03:34        2        1         1
-##  7 BaloIreen 2022-02-25 18:03:44        2        1         1
-##  8 BaloIreen 2022-02-25 18:09:01        2        1         1
-##  9 BaloIreen 2022-02-25 18:09:28        2        1         1
-## 10 BaloIreen 2022-02-25 18:06:08        1        0         1
-## # ℹ 53 more rows</code></pre>
-<p>…and turn it into a visualization of our most active users over time:</p>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="tidy-text-analysis.html#cb419-1" tabindex="-1"></a>data_tknzd_bing <span class="sc">%&gt;%</span> </span>
-<span id="cb419-2"><a href="tidy-text-analysis.html#cb419-2" tabindex="-1"></a>  <span class="fu">group_by</span>(user, time) <span class="sc">%&gt;%</span></span>
-<span id="cb419-3"><a href="tidy-text-analysis.html#cb419-3" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb419-4"><a href="tidy-text-analysis.html#cb419-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment, <span class="at">fill =</span> user)) <span class="sc">+</span></span>
-<span id="cb419-5"><a href="tidy-text-analysis.html#cb419-5" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb419-6"><a href="tidy-text-analysis.html#cb419-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Bing: The sentiment of the most active users&quot;</span>) <span class="sc">+</span></span>
-<span id="cb419-7"><a href="tidy-text-analysis.html#cb419-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb419-8"><a href="tidy-text-analysis.html#cb419-8" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>user)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-262-1.png" width="672" /></p>
-<p>According to the <em>bing</em> dictionary the sentiment of our most active
-twitter users was positive and stayed positive over the 10-minute time
-frame that we are currently looking at. Positive sentiment while talking
-about the outbreak of war? Those are odd results. Maybe the positive
-sentiment is characteristic of more active users?</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="tidy-text-analysis.html#cb420-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb420-2"><a href="tidy-text-analysis.html#cb420-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb420-3"><a href="tidy-text-analysis.html#cb420-3" tabindex="-1"></a>  <span class="fu">count</span>(sentiment, time) <span class="sc">%&gt;%</span></span>
-<span id="cb420-4"><a href="tidy-text-analysis.html#cb420-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb420-5"><a href="tidy-text-analysis.html#cb420-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative) <span class="sc">%&gt;%</span></span>
-<span id="cb420-6"><a href="tidy-text-analysis.html#cb420-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb420-7"><a href="tidy-text-analysis.html#cb420-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Bing dictionary&quot;</span>) <span class="sc">+</span></span>
-<span id="cb420-8"><a href="tidy-text-analysis.html#cb420-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb420-9"><a href="tidy-text-analysis.html#cb420-9" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-263-1.png" width="672" /></p>
-<p>Overall, the tone of tweets is negative, which implies that the most
-active users are characterized by a more positive sentiment. That’s an
-interesting result and might be an indicator that very active accounts
-are trying to push the public opinion in some specific direction. We
-could run more in-depth analyses of more users and longer time-periods
-to prove that, but for now we want to focus on alternative dictionaries.</p>
-<p>Knowing this, let’s check how similar the results are for our most
-active users.</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="tidy-text-analysis.html#cb421-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span> </span>
-<span id="cb421-2"><a href="tidy-text-analysis.html#cb421-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(afinn) <span class="sc">%&gt;%</span></span>
-<span id="cb421-3"><a href="tidy-text-analysis.html#cb421-3" tabindex="-1"></a>  <span class="fu">group_by</span>(user, time) <span class="sc">%&gt;%</span></span>
-<span id="cb421-4"><a href="tidy-text-analysis.html#cb421-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sentiment =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span></span>
-<span id="cb421-5"><a href="tidy-text-analysis.html#cb421-5" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb421-6"><a href="tidy-text-analysis.html#cb421-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment, <span class="at">fill =</span> user)) <span class="sc">+</span></span>
-<span id="cb421-7"><a href="tidy-text-analysis.html#cb421-7" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb421-8"><a href="tidy-text-analysis.html#cb421-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Afinn: The sentiment of the most active users&quot;</span>) <span class="sc">+</span></span>
-<span id="cb421-9"><a href="tidy-text-analysis.html#cb421-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb421-10"><a href="tidy-text-analysis.html#cb421-10" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>user)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-264-1.png" width="672" /></p>
-<p>That looks good, both <code>bing</code> and <code>afinn</code> come to similar conclusions,
-i.e., the most active users publish tweets with a positive sentiment.
-The dictionary approaches that treat sentiment as the sum of the
-individual negativity/emotion ratings of words are consistent with each
-other.</p>
-</div>
-</div>
-<div id="take-aways-6" class="section level2 hasAnchor" number="9.6">
-<h2><span class="header-section-number">9.6</span> Take-Aways<a href="tidy-text-analysis.html#take-aways-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="take-aways-6" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Take-Aways<a href="tidy-text-analysis.html#take-aways-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><strong>Text normalization</strong>: You can perform the entire preprocessing of
 your documents using the <code>tidy text approach</code> (tokenization, stop
@@ -1841,8 +1771,8 @@ lists.</li>
 topic lists.</li>
 </ul>
 </div>
-<div id="additional-tutorials-6" class="section level2 hasAnchor" number="9.7">
-<h2><span class="header-section-number">9.7</span> Additional tutorials<a href="tidy-text-analysis.html#additional-tutorials-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="additional-tutorials-6" class="section level2 hasAnchor" number="9.6">
+<h2><span class="header-section-number">9.6</span> Additional tutorials<a href="tidy-text-analysis.html#additional-tutorials-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>You still have questions? The following tutorials, books, &amp; papers may
 help you:</p>
 <ul>
