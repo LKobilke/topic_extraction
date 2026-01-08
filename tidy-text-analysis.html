@@ -1408,7 +1408,7 @@ tweet text.</p>
 <span id="cb396-4"><a href="tidy-text-analysis.html#cb396-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)  <span class="sc">%&gt;%</span></span>
 <span id="cb396-5"><a href="tidy-text-analysis.html#cb396-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
 <pre><code>## [1] &quot;⭕️ @EBU_HQ says no Russian act will participate in #Eurovision2022, as “in light of the unprecedented crisis in #Ukraine🇺🇦, the inclusion of a Russian entry in  #ESC2022 would bring the competition into disrepute”\n\nℹ️  Read more 👇\n\nhttps://t.co/TG1wDFs0NN&quot;</code></pre>
-<p>Interesting! Both tweets are about diplomatic (instead of military) actions, i.e. which countries are in support of the Ukraine joining NATO and of the sovereignty of Ukraine. Of course, we should check more tweets to validate this, but it’s a good start.</p>
+<p>Interesting! Both tweets are about dthe Eurovision.</p>
 <p>For comparison, let’s also look at documents that score high on Topic 1.</p>
 <div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="tidy-text-analysis.html#cb398-1" tabindex="-1"></a>tidy_lda2 <span class="sc">%&gt;%</span></span>
 <span id="cb398-2"><a href="tidy-text-analysis.html#cb398-2" tabindex="-1"></a>  <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
@@ -1440,7 +1440,7 @@ tweet text.</p>
 <span id="cb402-4"><a href="tidy-text-analysis.html#cb402-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)  <span class="sc">%&gt;%</span></span>
 <span id="cb402-5"><a href="tidy-text-analysis.html#cb402-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
 <pre><code>## [1] &quot;@POTUS THE BIDEN ADMINISTRATION AND THE DEMOCRATS HAVE NOTHING THAT THEY CAN POINT TO AS BEING SUCCESSFUL. AFGHAN &amp;amp; UKRAINE CRISES, RISING ENERGY AND COMMODITY PRICES, OPEN BORDERS, SUPPORT FOR SANCTUARY CITIES, CASHLESS BAIL REFORM &amp;amp; POLICE DEFUNDING WITH RESULTANT RISING CRIME.&quot;</code></pre>
-<p>Thematically, these two tweets do not fit well together, but they both use a lot of brutal words, e.g., kill and deadly. Most likely this is the reason why they have been clustered together. Obviously, we should rerun this analysis with a greater number of topics because our current model does not differentiate well enough between different geographic regions and prominent actors. In most use cases, we would assume that 20-50 topics are a more accurate reflection of real-world conversations.</p>
+<p>Obviously, these are two copies of the same message that contain mentions aimed at involving political actors. This appears to be an attempt at coordinated online action, since retweets have already been excluded. The messages therefore seem to result from a purposeful copy-and-paste action.</p>
 </div>
 <div id="practice-document-topic-probabilities" class="section level4 unnumbered hasAnchor">
 <h4>Practice: Document-topic probabilities<a href="tidy-text-analysis.html#practice-document-topic-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h4>
