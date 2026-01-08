@@ -1254,7 +1254,7 @@ for tidy text analysis.</p>
 ## 4     1 russia 0.00274
 ## 5     2 russia 0.0682 
 ## 6     3 russia 0.0534</code></pre>
-<p>The new column, β (“beta”), shows the per-topic-per-word probabilities,
+<p>The new column, β (“beta”), shows the <strong>per-topic-per-word probabilities</strong>,
 i.e., the probability that the respective feature / word is being
 generated from the topic under examination. To put it another way, it’s
 the <strong>probability that a feature is common in a certain topic</strong>. The
@@ -1284,9 +1284,9 @@ topic modeling is usually more difficult for tweets than for news texts,
 so it’s unclear whether we’ll be able to significantly enhance the
 results anyway.</p>
 <ol style="list-style-type: decimal">
-<li><strong>Topic 1</strong>: May have the focus on a possible world war III or on the fact that the whole world should support Ukraine, but maybe not in a militaristic way because there are no words like “forces”, “troops” or “military” present. Maybe it focuses on both (an indicator that we need more topics than three)? Interestingly, this topic does not include “Russia” as a feature, so maybe it’s not about WWIII?</li>
-<li><strong>Topic 2</strong>: This topic is directed at the NATO / U.S. America to end the conflict between Ukraine and Russia. Here, Russia is a prominent feature!</li>
-<li><strong>Topic 3</strong>: This topic is hard to interpret, but it seems to be directed at U.S. president Joe Biden and asks for timely intervention? Amp could refer to Ukrainian war amps, i.e., soldiers who had to get body party amputated. So maybe this topic is about consequences for the life of Ukranians / Ukranian citizens?</li>
+<li><strong>Topic 1</strong>: Appears to focus on the immediate outbreak of the war and real-time reactions to the invasion. Central elements include references to Ukraine, Kyiv, Putin, war, invasion, and calls to stop the conflict or express support. Rather than discussing strategic military operations or international alliances, this topic reflects moral condemnation, urgency, and solidarity with Ukraine. The absence of broader geopolitical actors (e.g., NATO or the U.S.) suggests that this topic is less about escalation scenarios such as World War III and more about immediate responses to Russian aggression.</li>
+<li><strong>Topic 2</strong>: Emphasizes the international and geopolitical response to the invasion. In addition to Ukraine and Russia, references to NATO, countries, and support indicate discussions about collective action and international alignment. The presence of U.S.-related terms (e.g., Trump) suggests that the global response is sometimes framed through the lens of domestic U.S. politics. Overall, this topic reflects debates about who should act, how international alliances should respond, and how responsibility is distributed across political actors and states.</li>
+<li><strong>Topic 3</strong>: Frames the invasion in a global and leadership-oriented perspective. References to the world, countries, and people suggest a broad international framing, while mentions of Biden and president point to discussions of executive responsibility and global leadership. This topic emphasizes the invasion as a world-political crisis and evaluates the role of political leaders in responding to it.</li>
 </ol>
 <p>Now that we have a first impression about what the topics are dealing with, let’s take a look
 at the less frequent terms in each topic to check if our interpretation
@@ -1309,9 +1309,9 @@ topics again.</p>
 <p><img src="Intro-to-R_files/figure-html/unnamed-chunk-244-1.png" width="672" /></p>
 <p>Excluding these top performers gives away more information. We might read the topics somewhat like this:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Topic 1</strong>: The focus seems to be on war escalation (pro war). Here, tweets propose that the world (not U.S. America / NATO!) should join the fight?</li>
-<li><strong>Topic 2</strong>: May have the focus on war deescalation (anti war). Here, tweets propose that U.S. America / NATO should stop the war?</li>
-<li><strong>Topic 3</strong>: Maybe this topic has a focus on European border control that President Biden should provide? Still hard to interpret.</li>
+<li><strong>Topic 1</strong>: Dominant terms include war, stop, support, peace, Kyiv, NATO, and military. This topic reflects tweets that directly address the invasion as a violent event and express urgency, solidarity with Ukraine, and appeals to stop the war. Although references to NATO and the military appear, the overall framing is not strategic or operational but rather normative and reactive, emphasizing peace, time pressure, and moral condemnation.</li>
+<li><strong>Topic 2</strong>: Topic 2 focuses on international actors and political alignment, particularly in relation to NATO and the United States. Salient terms such as NATO, America, countries, forces, support, and Trump suggest discussions about who should intervene and how collective action should be organized. Compared to Topic 1, this topic is more explicitly geopolitical and alliance-oriented, linking the invasion to questions of military forces, international responsibility, and U.S. domestic politics.</li>
+<li><strong>Topic 3</strong>: Frames the invasion from a global and leadership-oriented perspective. Key terms include people, world, countries, Biden, president, fight, and invasion. This topic appears to evaluate the war as a world-political crisis and emphasizes expectations toward political leaders, particularly the U.S. president. Rather than focusing on immediate events or concrete policy tools, this topic reflects abstract, global framing and responsibility attribution, highlighting leadership, collective struggle, and the broader human impact of the invasion.</li>
 </ol>
 <p>Despite the fact that the topics are not mutually exclusive, they appear
 to be a reasonable approximation of a first tweet categorization (e.g., pro / anti war). The
@@ -1365,13 +1365,13 @@ topics.</p>
 ## 4 231          1 0.329
 ## 5 246          1 0.351
 ## 6 263          1 0.333</code></pre>
-<p>The new column, γ (“gamma”), shows the per-document-per-topic
-probabilities, i.e., the proportion of words from that document that are
+<p>The new column, γ (“gamma”), shows the <strong>per-document-per-topic
+probabilities</strong>, i.e., the proportion of words from that document that are
 generated from the topic under examination. To put it another way, it’s
 the <strong>probability that a topic is common in a certain document</strong>. The
 <strong>document-topic matrix</strong> is used to identify the top documents of a
 topic (i.e., using the documents with the highest probability for that
-topic) and to assign main topics to documents In summary, the word-topic
+topic) and to assign main topics to documents. In summary, the word-topic
 matrix aids in the creation of document-specific topic lists.</p>
 <p>Let’s investigate which documents have the highest probability for Topic
 2, the topic that seems to focus on war deescalation, i.e. stopping the fights.</p>
@@ -1392,22 +1392,22 @@ matrix aids in the creation of document-specific topic lists.</p>
 ##  9 15570        2 0.352
 ## 10 37943        2 0.352
 ## # ℹ 9,657 more rows</code></pre>
-<p><strong>Evaluation:</strong> 36.2% of document 9491, i.e. tweet No. 9491, are
-related to Topic2. This is also true for tweet No. 31167.</p>
+<p><strong>Evaluation:</strong> 35.5% of document 35501, i.e. tweet No. 35501, are
+related to Topic2. This is also true for tweet No. 34451.</p>
 <p>Let’s have a look at both tweets and evaluate their word choice and full
 tweet text.</p>
 <div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="tidy-text-analysis.html#cb394-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
 <span id="cb394-2"><a href="tidy-text-analysis.html#cb394-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
-<span id="cb394-3"><a href="tidy-text-analysis.html#cb394-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">9491</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb394-3"><a href="tidy-text-analysis.html#cb394-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">35501</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb394-4"><a href="tidy-text-analysis.html#cb394-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)  <span class="sc">%&gt;%</span></span>
 <span id="cb394-5"><a href="tidy-text-analysis.html#cb394-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
-<pre><code>## [1] &quot;Russia expects India to support it at the UNSC,when a resolution opposing the military Russian operation against Ukraine comes up for a vote on Friday evening (IST 1:30am saturday)- Babushkin Senior most Russian Diplomat in New Delhi \n\nIndian caught between devil&amp;amp;deep blue sea&quot;</code></pre>
+<pre><code>## [1] &quot;BREAKING | No Russian act will be allowed to participate at Eurovision, according to EBU. \&quot;In light of the unprecedented crisis in Ukraine, the inclusion of a Russian entry in this year’s Contest would bring the competition into disrepute.\&quot; https://t.co/w5u5kJzWuK https://t.co/10QW8FA597&quot;</code></pre>
 <div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="tidy-text-analysis.html#cb396-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
 <span id="cb396-2"><a href="tidy-text-analysis.html#cb396-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
-<span id="cb396-3"><a href="tidy-text-analysis.html#cb396-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">31167</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb396-3"><a href="tidy-text-analysis.html#cb396-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">34451</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb396-4"><a href="tidy-text-analysis.html#cb396-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)  <span class="sc">%&gt;%</span></span>
 <span id="cb396-5"><a href="tidy-text-analysis.html#cb396-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
-<pre><code>## [1] &quot;@mfa_russia @NATO @RussianEmbFinla @Finland_OSCE @GenConFinSPb @Ulkoministerio @EmbFinMoscow @RusEmbNo @natomission_ru @USNATO @StateDept Let’s see, NATO hasn’t invaded anyone to force it to join while Russia has invaded Ukraine to force them to be friendly to Russia. Damn NATO sure is a threat to Russian security.&quot;</code></pre>
+<pre><code>## [1] &quot;⭕️ @EBU_HQ says no Russian act will participate in #Eurovision2022, as “in light of the unprecedented crisis in #Ukraine🇺🇦, the inclusion of a Russian entry in  #ESC2022 would bring the competition into disrepute”\n\nℹ️  Read more 👇\n\nhttps://t.co/TG1wDFs0NN&quot;</code></pre>
 <p>Interesting! Both tweets are about diplomatic (instead of military) actions, i.e. which countries are in support of the Ukraine joining NATO and of the sovereignty of Ukraine. Of course, we should check more tweets to validate this, but it’s a good start.</p>
 <p>For comparison, let’s also look at documents that score high on Topic 1.</p>
 <div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="tidy-text-analysis.html#cb398-1" tabindex="-1"></a>tidy_lda2 <span class="sc">%&gt;%</span></span>
@@ -1427,19 +1427,19 @@ tweet text.</p>
 ##  9 11495        1 0.368
 ## 10 13899        1 0.368
 ## # ℹ 9,657 more rows</code></pre>
-<p>Both tweet No. 7805 and No. 37798 have a high share of topic 1.</p>
+<p>Both tweet No. 6800 and No. 17028 have a high share of topic 1.</p>
 <div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="tidy-text-analysis.html#cb400-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
 <span id="cb400-2"><a href="tidy-text-analysis.html#cb400-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
-<span id="cb400-3"><a href="tidy-text-analysis.html#cb400-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">7805</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb400-3"><a href="tidy-text-analysis.html#cb400-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">6800</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb400-4"><a href="tidy-text-analysis.html#cb400-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)   <span class="sc">%&gt;%</span></span>
 <span id="cb400-5"><a href="tidy-text-analysis.html#cb400-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
-<pre><code>## [1] &quot;#Trump, who was impeached for withholding nearly $400 million in military aid from Ukraine, said &#39;this deadly Ukraine situation would never have happened&#39; if he were in office https://t.co/o258hgvhRw  https://t.co/R7ivJcvg3s https://t.co/JWvVPzTohT&quot;</code></pre>
+<pre><code>## [1] &quot;@MSNBC THE BIDEN ADMINISTRATION AND THE DEMOCRATS HAVE NOTHING THAT THEY CAN POINT TO AS BEING SUCCESSFUL. AFGHAN &amp;amp; UKRAINE CRISES, RISING ENERGY AND COMMODITY PRICES, OPEN BORDERS, SUPPORT FOR SANCTUARY CITIES, CASHLESS BAIL REFORM &amp;amp; POLICE DEFUNDING WITH RESULTANT RISING CRIME.&quot;</code></pre>
 <div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="tidy-text-analysis.html#cb402-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
 <span id="cb402-2"><a href="tidy-text-analysis.html#cb402-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
-<span id="cb402-3"><a href="tidy-text-analysis.html#cb402-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">12781</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb402-3"><a href="tidy-text-analysis.html#cb402-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">17028</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb402-4"><a href="tidy-text-analysis.html#cb402-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)  <span class="sc">%&gt;%</span></span>
 <span id="cb402-5"><a href="tidy-text-analysis.html#cb402-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
-<pre><code>## [1] &quot;@EmbassyofRussia @RussianEmbassy @mfa_russia @PMSimferopol @MID_Kaliningrad @RusEmbUSA @RTUKnews @russiabeyond @RusConsCapetown @Geostrat_ME @RusEmbEst A squad of Chechen special forces &#39;hunters&#39; has been unleashed in Ukraine to detain or KILL a set of specific Ukrainian officials......\nhttps://t.co/PcuTQZeAri&quot;</code></pre>
+<pre><code>## [1] &quot;@POTUS THE BIDEN ADMINISTRATION AND THE DEMOCRATS HAVE NOTHING THAT THEY CAN POINT TO AS BEING SUCCESSFUL. AFGHAN &amp;amp; UKRAINE CRISES, RISING ENERGY AND COMMODITY PRICES, OPEN BORDERS, SUPPORT FOR SANCTUARY CITIES, CASHLESS BAIL REFORM &amp;amp; POLICE DEFUNDING WITH RESULTANT RISING CRIME.&quot;</code></pre>
 <p>Thematically, these two tweets do not fit well together, but they both use a lot of brutal words, e.g., kill and deadly. Most likely this is the reason why they have been clustered together. Obviously, we should rerun this analysis with a greater number of topics because our current model does not differentiate well enough between different geographic regions and prominent actors. In most use cases, we would assume that 20-50 topics are a more accurate reflection of real-world conversations.</p>
 </div>
 <div id="practice-document-topic-probabilities" class="section level4 unnumbered hasAnchor">
@@ -1566,8 +1566,7 @@ the field. One very popular technique is <em>Structural Topic Modeling</em>
 (e.g., author name and creation date) to enhance word assignment to
 latent topics in the corpus.</p>
 <p>You can estimate STMs with the <code>stm</code> package. We will not discuss STMs
-in this tutorial due to time restrictions. However, the <a href="tidy-text-analysis.html#additional-tutorials-6">Additional tutorials</a> section features two excellent
-external STM tutorials that you might want to have a look at.</p>
+in this tutorial due to time restrictions. However, the <a href="tidy-text-analysis.html#additional-tutorials-6">Additional tutorials</a> section features two excellent external STM tutorials that you might want to have a look at.</p>
 </div>
 </div>
 <div id="sentiment-analysis" class="section level2 hasAnchor" number="9.5">
