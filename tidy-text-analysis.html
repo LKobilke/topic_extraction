@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2025-12-11" />
+<meta name="date" content="2026-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -389,11 +389,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#pruning"><i class="fa fa-check"></i><b>9.2.4</b> Pruning</a></li>
 <li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-pruning"><i class="fa fa-check"></i>Practice: Pruning</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#relative-word-frequencies"><i class="fa fa-check"></i><b>9.3</b> (Relative) word frequencies</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#advanced-word-frequency-comparisons"><i class="fa fa-check"></i><b>9.3.1</b> Advanced: Word frequency comparisons</a></li>
-<li class="chapter" data-level="9.3.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#advanced-word-log-odds"><i class="fa fa-check"></i><b>9.3.2</b> Advanced: Word log odds</a></li>
-</ul></li>
+<li class="chapter" data-level="9.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#relative-word-frequencies"><i class="fa fa-check"></i><b>9.3</b> (Relative) word frequencies</a></li>
 <li class="chapter" data-level="9.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#topic-modeling"><i class="fa fa-check"></i><b>9.4</b> Topic modeling</a>
 <ul>
 <li class="chapter" data-level="9.4.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps"><i class="fa fa-check"></i><b>9.4.1</b> First steps</a></li>
@@ -929,14 +925,13 @@ Let’s also add the less active LateNighter5 for the purpose of practice.</p>
 ##  9 DaveClubMember1 russia            30
 ## 10 DaveClubMember1 russiavsukrain    30
 ## # ℹ 129 more rows</code></pre>
-<p><strong>Evaluation:</strong> This is insightful. As we can see, the <em>PorterStemmer</em>
+<p><strong>Evaluation:</strong> When we inspect the frequency object closely in our R environment,
+this is insightful. As we can see, the <em>PorterStemmer</em>
 treats <code>ukranian</code> and <code>ukrain</code>, <code>american</code> and <code>america</code>, as well as
 <code>russian</code> and <code>russia</code> as separate words. Since the part of speech
 (adjective or noun) is not particularly relevant for our analyses, we
-should merge the terms to focus on more meaningful TopWords. In
-addition, treating #ukrain and ukrain as separate words might not be
-hlpful.</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="tidy-text-analysis.html#cb370-1" tabindex="-1"></a>data_tknzd<span class="sc">$</span>word <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_tknzd<span class="sc">$</span>word, <span class="fu">c</span>(<span class="st">&quot;russian&quot;</span> <span class="ot">=</span> <span class="st">&quot;russia&quot;</span>, <span class="st">&quot;ukrainian&quot;</span> <span class="ot">=</span> <span class="st">&quot;ukrain&quot;</span>, <span class="st">&quot;american&quot;</span> <span class="ot">=</span> <span class="st">&quot;america&quot;</span>, <span class="st">&quot;#ukrain&quot;</span> <span class="ot">=</span> <span class="st">&quot;ukrain&quot;</span>, <span class="st">&quot;#russia&quot;</span> <span class="ot">=</span> <span class="st">&quot;russia&quot;</span>))</span>
+should merge the terms to focus on more meaningful TopWords.</p>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="tidy-text-analysis.html#cb370-1" tabindex="-1"></a>data_tknzd<span class="sc">$</span>word <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_tknzd<span class="sc">$</span>word, <span class="fu">c</span>(<span class="st">&quot;russian&quot;</span> <span class="ot">=</span> <span class="st">&quot;russia&quot;</span>, <span class="st">&quot;ukrainian&quot;</span> <span class="ot">=</span> <span class="st">&quot;ukrain&quot;</span>, <span class="st">&quot;american&quot;</span> <span class="ot">=</span> <span class="st">&quot;america&quot;</span>))</span>
 <span id="cb370-2"><a href="tidy-text-analysis.html#cb370-2" tabindex="-1"></a></span>
 <span id="cb370-3"><a href="tidy-text-analysis.html#cb370-3" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
 <span id="cb370-4"><a href="tidy-text-analysis.html#cb370-4" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;DaveClubMember1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;Seyahsm2&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># remove all users that are not the most prominent users</span></span>
@@ -1042,135 +1037,93 @@ you like these kind of visualizations:</p>
 <span id="cb377-6"><a href="tidy-text-analysis.html#cb377-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb377-7"><a href="tidy-text-analysis.html#cb377-7" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>user)</span></code></pre></div>
 <p><img src="Intro-to-R_files/figure-html/unnamed-chunk-236-1.png" width="672" /></p>
-<p><strong>Evaluation:</strong> Most of the Twitter accounts seem to be U.S. American.
-However, they focus on different issues. (1) <em>BaloIreen</em> seems to demand
-for economic actions against Russia, (2) <em>common_sense54</em> seems to focus
-on a Presidential / democratic alliance against Russia and to take the
-perspective of a military defender, (3) <em>DaveClubMember1</em> seems to ask
-for civic aid and engagement, (4) <em>EdCutter1</em> seems to tweet about a mix
-of issues covered by the user 4 users (economy, government action, war
-crimes, etc.), (5) <em>LateNighter5</em> tweets could also be about businesses
-and Republicans, and <em>Seyahsm2</em> focuses on NATO, its border control, and
-hope.</p>
-<div id="advanced-word-frequency-comparisons" class="section level3 hasAnchor" number="9.3.1">
-<h3><span class="header-section-number">9.3.1</span> Advanced: Word frequency comparisons<a href="tidy-text-analysis.html#advanced-word-frequency-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>You can plot the word frequencies against each other and get a real good
-overview, we need to transform the data in a way that every user has
-his/her own column with her/her word frequencies because we need to use
-these frequencies on a y- and y-axis. Therefore, we’ll use the
-<code>pivot_wider</code> function from the <code>tidyr</code> package that comes pre-installed
-with the <code>tidyverse</code>.</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="tidy-text-analysis.html#cb378-1" tabindex="-1"></a>frequency_wide <span class="ot">&lt;-</span> frequency <span class="sc">%&gt;%</span> </span>
-<span id="cb378-2"><a href="tidy-text-analysis.html#cb378-2" tabindex="-1"></a>  <span class="fu">select</span>(user, word, freq) <span class="sc">%&gt;%</span> </span>
-<span id="cb378-3"><a href="tidy-text-analysis.html#cb378-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> user, <span class="at">values_from =</span> freq)</span>
-<span id="cb378-4"><a href="tidy-text-analysis.html#cb378-4" tabindex="-1"></a></span>
-<span id="cb378-5"><a href="tidy-text-analysis.html#cb378-5" tabindex="-1"></a>frequency_wide</span></code></pre></div>
-<pre><code>## # A tibble: 111 × 7
-##    word          Seyahsm2 DaveClubMember1 common_sense54 BaloIreen EdCutter1
-##    &lt;chr&gt;            &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-##  1 america           9.88           NA             NA        NA           NA
-##  2 bio              NA               5.26          NA        NA           NA
-##  3 discord          NA               5.26          NA        NA           NA
-##  4 horribl          NA               5.26          NA        NA           NA
-##  5 imag             NA               5.26          NA        NA           NA
-##  6 join             NA               5.26          NA        NA           NA
-##  7 peopl            NA               5.26           4.68     NA           NA
-##  8 prayforukrain    NA               5.26          NA        NA           NA
-##  9 retweet          NA               5.26          NA        NA           NA
-## 10 russia            4.94            5.26           4.68      9.84        NA
-## # ℹ 101 more rows
-## # ℹ 1 more variable: LateNighter5 &lt;dbl&gt;</code></pre>
-<p>Now, let’s investigate which words are typical for <em>DaveClubMember1</em>
-compared to <em>common_sense54</em>.</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="tidy-text-analysis.html#cb380-1" tabindex="-1"></a>frequency_wide <span class="sc">%&gt;%</span></span>
-<span id="cb380-2"><a href="tidy-text-analysis.html#cb380-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(DaveClubMember1)) <span class="sc">%&gt;%</span> <span class="co"># keep only words that are being used by both Twitter accounts</span></span>
-<span id="cb380-3"><a href="tidy-text-analysis.html#cb380-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(common_sense54)) <span class="sc">%&gt;%</span> </span>
-<span id="cb380-4"><a href="tidy-text-analysis.html#cb380-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>DaveClubMember1, <span class="at">y=</span>common_sense54, <span class="at">label=</span>word)) <span class="sc">+</span></span>
-<span id="cb380-5"><a href="tidy-text-analysis.html#cb380-5" tabindex="-1"></a><span class="co">#  geom_point(alpha = 0.2, size = 4, position=position_jitter(h=0.15,w=0.15)) +</span></span>
-<span id="cb380-6"><a href="tidy-text-analysis.html#cb380-6" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">hjust=</span><span class="dv">0</span>, <span class="at">vjust=</span><span class="dv">0</span>, <span class="at">check_overlap =</span> <span class="cn">TRUE</span>, <span class="at">position=</span><span class="fu">position_jitter</span>(<span class="at">h=</span><span class="fl">0.25</span>,<span class="at">w=</span><span class="fl">0.25</span>), <span class="at">size=</span><span class="fl">3.0</span>) <span class="sc">+</span></span>
-<span id="cb380-7"><a href="tidy-text-analysis.html#cb380-7" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fl">4.5</span>,<span class="fl">6.0</span>) <span class="sc">+</span></span>
-<span id="cb380-8"><a href="tidy-text-analysis.html#cb380-8" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fl">4.5</span>,<span class="fl">6.0</span>) <span class="sc">+</span></span>
-<span id="cb380-9"><a href="tidy-text-analysis.html#cb380-9" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">color =</span> <span class="st">&quot;#67A9B6&quot;</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-238-1.png" width="672" /></p>
-<p><strong>Evaluation:</strong> Both accounts have mentioned all of the words in this
-plot at least once in their tweets. Words along the blue line are used
-approximately equally by both accounts, while words further away from
-the line are used significantly more frequently by one account than the
-other. Here, all terms are more characteristic of <em>DaveClubMember1</em> than
-of <em>common_sense54</em> because they are beneath the blue line.</p>
-</div>
-<div id="advanced-word-log-odds" class="section level3 hasAnchor" number="9.3.2">
-<h3><span class="header-section-number">9.3.2</span> Advanced: Word log odds<a href="tidy-text-analysis.html#advanced-word-log-odds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>So far, we’ve looked at how often a word is used compared to all the
-other words an account has posted (<em>absolute &amp; relative frequencies</em>).
-Next, we’ll look at how probable it is that a word was posted by a
-certain account (<em>log odds</em>). There is only one problem: measurement
-error. Probabilities are more accurate for words that are used
-frequently and less accurate for words that have been measured only a
-few times. A way to correct this measurement error is to use the
-<code>tidylo</code> package that creates weighted, i.e. corrected, log odds ratio
-based on an approach proposed by <a href="https://www.cambridge.org/core/journals/political-analysis/article/fightin-words-lexical-feature-selection-and-evaluation-for-identifying-the-content-of-political-conflict/81B3703230D21620B81EB6E2266C7A66">Monroe, Colaresi, and Quinn (2008)</a>.</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="tidy-text-analysis.html#cb381-1" tabindex="-1"></a><span class="co"># Install / load the tidy log odds package to create weighted log odds</span></span>
-<span id="cb381-2"><a href="tidy-text-analysis.html#cb381-2" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(tidylo)) {</span>
-<span id="cb381-3"><a href="tidy-text-analysis.html#cb381-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidylo&quot;</span>); </span>
-<span id="cb381-4"><a href="tidy-text-analysis.html#cb381-4" tabindex="-1"></a>  <span class="fu">require</span>(tidylo)</span>
-<span id="cb381-5"><a href="tidy-text-analysis.html#cb381-5" tabindex="-1"></a>} <span class="co">#load / install+load tidylo</span></span>
-<span id="cb381-6"><a href="tidy-text-analysis.html#cb381-6" tabindex="-1"></a></span>
-<span id="cb381-7"><a href="tidy-text-analysis.html#cb381-7" tabindex="-1"></a>word_lo <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb381-8"><a href="tidy-text-analysis.html#cb381-8" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;DaveClubMember1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;Seyahsm2&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># remove all users that are not the most prominent users</span></span>
-<span id="cb381-9"><a href="tidy-text-analysis.html#cb381-9" tabindex="-1"></a>  <span class="fu">count</span>(user, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb381-10"><a href="tidy-text-analysis.html#cb381-10" tabindex="-1"></a>  <span class="fu">bind_log_odds</span>(user, word, n, <span class="at">unweighted =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb381-11"><a href="tidy-text-analysis.html#cb381-11" tabindex="-1"></a><span class="co">#  mutate(prblty = (plogis(log_odds)*100)) %&gt;%</span></span>
-<span id="cb381-12"><a href="tidy-text-analysis.html#cb381-12" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(log_odds_weighted))</span>
-<span id="cb381-13"><a href="tidy-text-analysis.html#cb381-13" tabindex="-1"></a></span>
-<span id="cb381-14"><a href="tidy-text-analysis.html#cb381-14" tabindex="-1"></a><span class="fu">head</span>(word_lo)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 5
-##   user            word        n log_odds log_odds_weighted
-##   &lt;chr&gt;           &lt;chr&gt;   &lt;int&gt;    &lt;dbl&gt;             &lt;dbl&gt;
-## 1 Seyahsm2        america    32     2.00             11.3 
-## 2 DaveClubMember1 bio        30     1.51              8.26
-## 3 DaveClubMember1 discord    30     1.51              8.26
-## 4 DaveClubMember1 horribl    30     1.51              8.26
-## 5 DaveClubMember1 imag       30     1.51              8.26
-## 6 DaveClubMember1 join       30     1.51              8.26</code></pre>
-<p>Log odds ratio express the likelihood that a word comes from a certain
-account, compared to all other accounts. As a result, the highest log
-odds indicate words that are extremely distinctive for an account. Using
-a table, let’s compare the weighted log odds for some words across
-accounts.</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="tidy-text-analysis.html#cb383-1" tabindex="-1"></a>word_lo2 <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb383-2"><a href="tidy-text-analysis.html#cb383-2" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;DaveClubMember1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;Seyahsm2&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># remove all users that are not the most prominent users</span></span>
-<span id="cb383-3"><a href="tidy-text-analysis.html#cb383-3" tabindex="-1"></a>  <span class="fu">count</span>(user, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb383-4"><a href="tidy-text-analysis.html#cb383-4" tabindex="-1"></a>  <span class="fu">bind_log_odds</span>(user, word, n) <span class="sc">%&gt;%</span></span>
-<span id="cb383-5"><a href="tidy-text-analysis.html#cb383-5" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span> </span>
-<span id="cb383-6"><a href="tidy-text-analysis.html#cb383-6" tabindex="-1"></a>  <span class="fu">spread</span>(user, log_odds_weighted, <span class="at">fill =</span> <span class="dv">0</span>)</span>
-<span id="cb383-7"><a href="tidy-text-analysis.html#cb383-7" tabindex="-1"></a></span>
-<span id="cb383-8"><a href="tidy-text-analysis.html#cb383-8" tabindex="-1"></a><span class="fu">head</span>(word_lo2)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 7
-##   word  BaloIreen common_sense54 DaveClubMember1 EdCutter1 LateNighter5 Seyahsm2
-##   &lt;chr&gt;     &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;
-## 1 acti…         0           0                  0      0               0     7.86
-## 2 admi…         0           0                  0      7.54            0     0   
-## 3 afgh…         0           0                  0      7.54            0     0   
-## 4 alli          0           7.72               0      0               0     0   
-## 5 amer…         0           0                  0      0               0    11.3 
-## 6 bail          0           0                  0      7.54            0     0</code></pre>
-<p>To get a better overview, let’s create a visualization of the 10 most
-distinctive words per account.</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="tidy-text-analysis.html#cb385-1" tabindex="-1"></a>word_lo <span class="sc">%&gt;%</span></span>
-<span id="cb385-2"><a href="tidy-text-analysis.html#cb385-2" tabindex="-1"></a>  <span class="fu">group_by</span>(user) <span class="sc">%&gt;%</span></span>
-<span id="cb385-3"><a href="tidy-text-analysis.html#cb385-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(log_odds_weighted)) <span class="sc">%&gt;%</span></span>
-<span id="cb385-4"><a href="tidy-text-analysis.html#cb385-4" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb385-5"><a href="tidy-text-analysis.html#cb385-5" tabindex="-1"></a>  ungroup <span class="sc">%&gt;%</span></span>
-<span id="cb385-6"><a href="tidy-text-analysis.html#cb385-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, log_odds_weighted)) <span class="sc">%&gt;%</span></span>
-<span id="cb385-7"><a href="tidy-text-analysis.html#cb385-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, log_odds_weighted, <span class="at">fill =</span> user)) <span class="sc">+</span></span>
-<span id="cb385-8"><a href="tidy-text-analysis.html#cb385-8" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb385-9"><a href="tidy-text-analysis.html#cb385-9" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#9FC6C0&quot;</span>,<span class="st">&quot;#89BFC1&quot;</span>,<span class="st">&quot;#67A9B6&quot;</span>,<span class="st">&quot;#5495AD&quot;</span>,<span class="st">&quot;#377099&quot;</span>,<span class="st">&quot;#08333F&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb385-10"><a href="tidy-text-analysis.html#cb385-10" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>user, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
-<span id="cb385-11"><a href="tidy-text-analysis.html#cb385-11" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb385-12"><a href="tidy-text-analysis.html#cb385-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Log Odds Ratio&quot;</span>, <span class="at">x=</span><span class="cn">NULL</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-241-1.png" width="672" /></p>
-</div>
+<p><strong>Evaluation:</strong> Most of the Twitter accounts appear to be U.S.-based, yet they emphasize different aspects of the Russian invasion of Ukraine. (1) <em>Balolreen</em> mainly focuses on Russia’s military aggression and implies the need for economic and political countermeasures against Russia. (2) <em>common_sense54</em> concentrates on political justifications and alliances, particularly framing the conflict in terms of democratic leadership and presidential responsibility, while adopting a defensive military perspective. (3) <em>DaveClubMember1</em> primarily calls for civic engagement and grassroots support, encouraging users to participate in online communities and solidarity actions. (4) <em>EdCutter1</em> addresses a broad mix of topics, linking the war to U.S. domestic issues such as economic consequences, government action, and policy responses. (5) <em>LateNighter5</em> frames the invasion through a partisan lens, connecting it to Republican politics and business-related concerns. Finally, <em>Seyahsm2</em> focuses on geopolitics, emphasizing NATO, border security, and expressions of hope regarding collective Western action.</p>
+<!-- ### Advanced: Word frequency comparisons -->
+<!-- You can plot the word frequencies against each other and get a real good -->
+<!-- overview, we need to transform the data in a way that every user has -->
+<!-- his/her own column with her/her word frequencies because we need to use -->
+<!-- these frequencies on a x- and y-axis. Therefore, we'll use the -->
+<!-- `pivot_wider` function from the `tidyr` package that comes pre-installed -->
+<!-- with the `tidyverse`. -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- frequency_wide <- frequency %>%  -->
+<!--   select(user, word, freq) %>%  -->
+<!--   pivot_wider(names_from = user, values_from = freq) -->
+<!-- frequency_wide -->
+<!-- ``` -->
+<!-- Now, let's investigate which words are typical for *DaveClubMember1* -->
+<!-- compared to *common_sense54*. -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- frequency_wide %>% -->
+<!--   filter(!is.na(DaveClubMember1)) %>% # keep only words that are being used by both Twitter accounts -->
+<!--   filter(!is.na(common_sense54)) %>%  -->
+<!--   ggplot(aes(x=DaveClubMember1, y=common_sense54, label=word)) + -->
+<!-- #  geom_point(alpha = 0.2, size = 4, position=position_jitter(h=0.15,w=0.15)) + -->
+<!--   geom_text(hjust=0, vjust=0, check_overlap = TRUE, position=position_jitter(h=0.25,w=0.25), size=3.0) + -->
+<!--   ylim(4.5,6.0) + -->
+<!--   xlim(4.5,6.0) + -->
+<!--   geom_abline(color = "#67A9B6", na.rm=TRUE) -->
+<!-- ``` -->
+<!-- **Evaluation:** Both accounts have mentioned all of the words in this -->
+<!-- plot at least once in their tweets. Words along the blue line are used -->
+<!-- approximately equally by both accounts, while words further away from -->
+<!-- the line are used significantly more frequently by one account than the -->
+<!-- other. Here, all terms are more characteristic of *DaveClubMember1* than -->
+<!-- of *common_sense54* because they are beneath the blue line. -->
+<!-- ### Advanced: Word log odds -->
+<!-- So far, we've looked at how often a word is used compared to all the -->
+<!-- other words an account has posted (*absolute & relative frequencies*). -->
+<!-- Next, we'll look at how probable it is that a word was posted by a -->
+<!-- certain account (*log odds*). There is only one problem: measurement -->
+<!-- error. Probabilities are more accurate for words that are used -->
+<!-- frequently and less accurate for words that have been measured only a -->
+<!-- few times. A way to correct this measurement error is to use the -->
+<!-- `tidylo` package that creates weighted, i.e. corrected, log odds ratio -->
+<!-- based on an approach proposed by [Monroe, Colaresi, and Quinn (2008)](https://www.cambridge.org/core/journals/political-analysis/article/fightin-words-lexical-feature-selection-and-evaluation-for-identifying-the-content-of-political-conflict/81B3703230D21620B81EB6E2266C7A66). -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- # Install / load the tidy log odds package to create weighted log odds -->
+<!-- if(!require(tidylo)) { -->
+<!--   install.packages("tidylo");  -->
+<!--   require(tidylo) -->
+<!-- } #load / install+load tidylo -->
+<!-- word_lo <- data_tknzd %>% -->
+<!--   filter(user == "DaveClubMember1" | user == "common_sense54" | user == "EdCutter1" | user == "Seyahsm2" | user == "BaloIreen" | user == "LateNighter5") %>% # remove all users that are not the most prominent users -->
+<!--   count(user, word, sort = TRUE) %>%  -->
+<!--   bind_log_odds(user, word, n, unweighted = TRUE) %>% -->
+<!-- #  mutate(prblty = (plogis(log_odds)*100)) %>% -->
+<!--   arrange(desc(log_odds_weighted)) -->
+<!-- head(word_lo) -->
+<!-- ``` -->
+<!-- Log odds ratio express the likelihood that a word comes from a certain -->
+<!-- account, compared to all other accounts. As a result, the highest log -->
+<!-- odds indicate words that are extremely distinctive for an account. Using -->
+<!-- a table, let's compare the weighted log odds for some words across -->
+<!-- accounts. -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- word_lo2 <- data_tknzd %>% -->
+<!--   filter(user == "DaveClubMember1" | user == "common_sense54" | user == "EdCutter1" | user == "Seyahsm2" | user == "BaloIreen" | user == "LateNighter5") %>% # remove all users that are not the most prominent users -->
+<!--   count(user, word, sort = TRUE) %>%  -->
+<!--   bind_log_odds(user, word, n) %>% -->
+<!--   select(-n) %>%  -->
+<!--   spread(user, log_odds_weighted, fill = 0) -->
+<!-- head(word_lo2) -->
+<!-- ``` -->
+<!-- To get a better overview, let's create a visualization of the 10 most -->
+<!-- distinctive words per account. -->
+<!-- ```{r, eval = TRUE, include=TRUE} -->
+<!-- word_lo %>% -->
+<!--   group_by(user) %>% -->
+<!--   arrange(desc(log_odds_weighted)) %>% -->
+<!--   slice_head(n=10) %>% -->
+<!--   ungroup %>% -->
+<!--   mutate(word = reorder(word, log_odds_weighted)) %>% -->
+<!--   ggplot(aes(word, log_odds_weighted, fill = user)) + -->
+<!--   geom_col(show.legend = FALSE) + -->
+<!--   scale_fill_manual(values = c("#9FC6C0","#89BFC1","#67A9B6","#5495AD","#377099","#08333F")) + -->
+<!--   facet_wrap(~user, scales = "free") + -->
+<!--   coord_flip() + -->
+<!--   labs(y = "Log Odds Ratio", x=NULL) -->
+<!-- ``` -->
 </div>
 <div id="topic-modeling" class="section level2 hasAnchor" number="9.4">
 <h2><span class="header-section-number">9.4</span> Topic modeling<a href="tidy-text-analysis.html#topic-modeling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1211,17 +1164,17 @@ so we will keep using it in this tutorial, too.</p>
 <h3><span class="header-section-number">9.4.1</span> First steps<a href="tidy-text-analysis.html#first-steps" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If you haven’t already, please install / load the <code>quanteda</code> and
 <code>topicmodels</code> packages:</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="tidy-text-analysis.html#cb386-1" tabindex="-1"></a><span class="co"># Install / load the quanteda package for data transformation</span></span>
-<span id="cb386-2"><a href="tidy-text-analysis.html#cb386-2" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(quanteda)) {</span>
-<span id="cb386-3"><a href="tidy-text-analysis.html#cb386-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;quanteda&quot;</span>); </span>
-<span id="cb386-4"><a href="tidy-text-analysis.html#cb386-4" tabindex="-1"></a>  <span class="fu">require</span>(quanteda)</span>
-<span id="cb386-5"><a href="tidy-text-analysis.html#cb386-5" tabindex="-1"></a>} <span class="co">#load / install+load quanteda</span></span>
-<span id="cb386-6"><a href="tidy-text-analysis.html#cb386-6" tabindex="-1"></a></span>
-<span id="cb386-7"><a href="tidy-text-analysis.html#cb386-7" tabindex="-1"></a><span class="co"># Install / load the topicmodels package for topic modeling</span></span>
-<span id="cb386-8"><a href="tidy-text-analysis.html#cb386-8" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(topicmodels)) {</span>
-<span id="cb386-9"><a href="tidy-text-analysis.html#cb386-9" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;topicmodels&quot;</span>); </span>
-<span id="cb386-10"><a href="tidy-text-analysis.html#cb386-10" tabindex="-1"></a>  <span class="fu">require</span>(topicmodels)</span>
-<span id="cb386-11"><a href="tidy-text-analysis.html#cb386-11" tabindex="-1"></a>} <span class="co">#load / install+load topicmodels</span></span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="tidy-text-analysis.html#cb378-1" tabindex="-1"></a><span class="co"># Install / load the quanteda package for data transformation</span></span>
+<span id="cb378-2"><a href="tidy-text-analysis.html#cb378-2" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(quanteda)) {</span>
+<span id="cb378-3"><a href="tidy-text-analysis.html#cb378-3" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;quanteda&quot;</span>); </span>
+<span id="cb378-4"><a href="tidy-text-analysis.html#cb378-4" tabindex="-1"></a>  <span class="fu">require</span>(quanteda)</span>
+<span id="cb378-5"><a href="tidy-text-analysis.html#cb378-5" tabindex="-1"></a>} <span class="co">#load / install+load quanteda</span></span>
+<span id="cb378-6"><a href="tidy-text-analysis.html#cb378-6" tabindex="-1"></a></span>
+<span id="cb378-7"><a href="tidy-text-analysis.html#cb378-7" tabindex="-1"></a><span class="co"># Install / load the topicmodels package for topic modeling</span></span>
+<span id="cb378-8"><a href="tidy-text-analysis.html#cb378-8" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(topicmodels)) {</span>
+<span id="cb378-9"><a href="tidy-text-analysis.html#cb378-9" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;topicmodels&quot;</span>); </span>
+<span id="cb378-10"><a href="tidy-text-analysis.html#cb378-10" tabindex="-1"></a>  <span class="fu">require</span>(topicmodels)</span>
+<span id="cb378-11"><a href="tidy-text-analysis.html#cb378-11" tabindex="-1"></a>} <span class="co">#load / install+load topicmodels</span></span></code></pre></div>
 <p>Next, using the <code>tidytext</code> package, we will convert our tidy text data
 into a document-feature matrix (<em>dfm</em>) that the <code>topicmodels</code> package
 can understand and do calculations with. In a dfm…</p>
@@ -1231,13 +1184,13 @@ can understand and do calculations with. In a dfm…</p>
 <li>…the cells represent the frequency with which a feature appears in
 a specific document.</li>
 </ol>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="tidy-text-analysis.html#cb387-1" tabindex="-1"></a><span class="co"># Cast the tidy text data into a matrix (dfm) that topicmodels can use for calculation:</span></span>
-<span id="cb387-2"><a href="tidy-text-analysis.html#cb387-2" tabindex="-1"></a>dfm <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb387-3"><a href="tidy-text-analysis.html#cb387-3" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span></span>
-<span id="cb387-4"><a href="tidy-text-analysis.html#cb387-4" tabindex="-1"></a>  <span class="fu">count</span>(tweet, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb387-5"><a href="tidy-text-analysis.html#cb387-5" tabindex="-1"></a>  <span class="fu">cast_dfm</span>(tweet, word, n)</span>
-<span id="cb387-6"><a href="tidy-text-analysis.html#cb387-6" tabindex="-1"></a></span>
-<span id="cb387-7"><a href="tidy-text-analysis.html#cb387-7" tabindex="-1"></a><span class="fu">head</span>(dfm)</span></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="tidy-text-analysis.html#cb379-1" tabindex="-1"></a><span class="co"># Cast the tidy text data into a matrix (dfm) that topicmodels can use for calculation:</span></span>
+<span id="cb379-2"><a href="tidy-text-analysis.html#cb379-2" tabindex="-1"></a>dfm <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb379-3"><a href="tidy-text-analysis.html#cb379-3" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span></span>
+<span id="cb379-4"><a href="tidy-text-analysis.html#cb379-4" tabindex="-1"></a>  <span class="fu">count</span>(tweet, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb379-5"><a href="tidy-text-analysis.html#cb379-5" tabindex="-1"></a>  <span class="fu">cast_dfm</span>(tweet, word, n)</span>
+<span id="cb379-6"><a href="tidy-text-analysis.html#cb379-6" tabindex="-1"></a></span>
+<span id="cb379-7"><a href="tidy-text-analysis.html#cb379-7" tabindex="-1"></a><span class="fu">head</span>(dfm)</span></code></pre></div>
 <pre><code>## Document-feature matrix of: 6 documents, 1,758 features (99.26% sparse) and 0 docvars.
 ##      features
 ## docs  ukrain russia america attack eu eu_commiss europ fellow innoc peopl
@@ -1249,10 +1202,10 @@ a specific document.</li>
 ##   263      2      0       0      0  0          0     0      0     0     0
 ## [ reached max_nfeat ... 1,748 more features ]</code></pre>
 <p>Let’s check out the dimensions of this new document-feature matrix:</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="tidy-text-analysis.html#cb389-1" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;We are investigating &quot;</span>, <span class="fu">dim</span>(dfm)[<span class="dv">1</span>], <span class="st">&quot; documents (tweets) and &quot;</span>, <span class="fu">dim</span>(dfm)[<span class="dv">2</span>], <span class="st">&quot; features (unique words).&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="tidy-text-analysis.html#cb381-1" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;We are investigating &quot;</span>, <span class="fu">dim</span>(dfm)[<span class="dv">1</span>], <span class="st">&quot; documents (tweets) and &quot;</span>, <span class="fu">dim</span>(dfm)[<span class="dv">2</span>], <span class="st">&quot; features (unique words).&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;We are investigating  9667  documents (tweets) and  1758  features (unique words).&quot;</code></pre>
 <p>And let’s have a look at our top features:</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="tidy-text-analysis.html#cb391-1" tabindex="-1"></a>quanteda<span class="sc">::</span><span class="fu">topfeatures</span>(dfm, <span class="dv">10</span>) <span class="co"># this is a neat function from quanteda to investigate the top features in a dfm</span></span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="tidy-text-analysis.html#cb383-1" tabindex="-1"></a>quanteda<span class="sc">::</span><span class="fu">topfeatures</span>(dfm, <span class="dv">10</span>) <span class="co"># this is a neat function from quanteda to investigate the top features in a dfm</span></span></code></pre></div>
 <pre><code>##  ukrain    t.co  russia   putin     war   peopl    nato   invas countri support 
 ##    9516    4110    3739    1453    1137    1111    1047     706     644     626</code></pre>
 </div>
@@ -1271,7 +1224,7 @@ overlapping themes, but are also more event- and issue-specific.</p>
 <p>Let’s create a topic model. More specifically, let’s create a three-topic
 LDA model using <code>topicmodels</code>. In practice, you would often use a higher
 <em>K</em>, but for our use case, three should suffice.</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="tidy-text-analysis.html#cb393-1" tabindex="-1"></a>lda <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dfm, <span class="at">k =</span> <span class="dv">3</span>, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">123</span>)) <span class="co"># the control argument uses a random number (123) to seed the assignment of topics to each word in the corpus (this helps to create reproducability in an otherwise random process!)</span></span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="tidy-text-analysis.html#cb385-1" tabindex="-1"></a>lda <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dfm, <span class="at">k =</span> <span class="dv">3</span>, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">123</span>)) <span class="co"># the control argument uses a random number (123) to seed the assignment of topics to each word in the corpus (this helps to create reproducability in an otherwise random process!)</span></span></code></pre></div>
 </div>
 <div id="practice-model-estimation" class="section level3 unnumbered hasAnchor">
 <h3>Practice: Model estimation<a href="tidy-text-analysis.html#practice-model-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1287,11 +1240,11 @@ calculate topic models. Finally, estimate an LDA-based topic model with
 <p>To inspect the topics with the <code>tidytext</code> package, we need to tidy up
 our LDA model first, i.e., bring it back into a data format that works
 for tidy text analysis.</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="tidy-text-analysis.html#cb394-1" tabindex="-1"></a><span class="co"># turn the lda model back into a tidy data frame:</span></span>
-<span id="cb394-2"><a href="tidy-text-analysis.html#cb394-2" tabindex="-1"></a>tidy_lda <span class="ot">&lt;-</span> <span class="fu">tidy</span>(lda, <span class="at">matrix =</span> <span class="st">&quot;beta&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># matrix = &quot;beta&quot; creates the word-topic probabilities</span></span>
-<span id="cb394-3"><a href="tidy-text-analysis.html#cb394-3" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">word =</span> term)</span>
-<span id="cb394-4"><a href="tidy-text-analysis.html#cb394-4" tabindex="-1"></a>  </span>
-<span id="cb394-5"><a href="tidy-text-analysis.html#cb394-5" tabindex="-1"></a><span class="fu">head</span>(tidy_lda)</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="tidy-text-analysis.html#cb386-1" tabindex="-1"></a><span class="co"># turn the lda model back into a tidy data frame:</span></span>
+<span id="cb386-2"><a href="tidy-text-analysis.html#cb386-2" tabindex="-1"></a>tidy_lda <span class="ot">&lt;-</span> <span class="fu">tidy</span>(lda, <span class="at">matrix =</span> <span class="st">&quot;beta&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># matrix = &quot;beta&quot; creates the word-topic probabilities</span></span>
+<span id="cb386-3"><a href="tidy-text-analysis.html#cb386-3" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">word =</span> term)</span>
+<span id="cb386-4"><a href="tidy-text-analysis.html#cb386-4" tabindex="-1"></a>  </span>
+<span id="cb386-5"><a href="tidy-text-analysis.html#cb386-5" tabindex="-1"></a><span class="fu">head</span>(tidy_lda)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ##   topic word      beta
 ##   &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;
@@ -1311,19 +1264,19 @@ topic). In summary, the word-topic matrix aids in the creation of
 topic-specific word lists.</p>
 <p>Let’s create a visualization of the 10 terms that are most common within
 each topic.</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="tidy-text-analysis.html#cb396-1" tabindex="-1"></a>tidy_lda <span class="sc">%&gt;%</span></span>
-<span id="cb396-2"><a href="tidy-text-analysis.html#cb396-2" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
-<span id="cb396-3"><a href="tidy-text-analysis.html#cb396-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
-<span id="cb396-4"><a href="tidy-text-analysis.html#cb396-4" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb396-5"><a href="tidy-text-analysis.html#cb396-5" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb396-6"><a href="tidy-text-analysis.html#cb396-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(word, beta), <span class="at">y=</span>beta, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
-<span id="cb396-7"><a href="tidy-text-analysis.html#cb396-7" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb396-8"><a href="tidy-text-analysis.html#cb396-8" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#9FC6C0&quot;</span>,<span class="st">&quot;#5495AD&quot;</span>,<span class="st">&quot;#08333F&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb396-9"><a href="tidy-text-analysis.html#cb396-9" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb396-10"><a href="tidy-text-analysis.html#cb396-10" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>topic, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>, <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 1&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 2&quot;</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">+</span></span>
-<span id="cb396-11"><a href="tidy-text-analysis.html#cb396-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;word&quot;</span>) <span class="sc">+</span></span>
-<span id="cb396-12"><a href="tidy-text-analysis.html#cb396-12" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-248-1.png" width="672" /></p>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="tidy-text-analysis.html#cb388-1" tabindex="-1"></a>tidy_lda <span class="sc">%&gt;%</span></span>
+<span id="cb388-2"><a href="tidy-text-analysis.html#cb388-2" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb388-3"><a href="tidy-text-analysis.html#cb388-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
+<span id="cb388-4"><a href="tidy-text-analysis.html#cb388-4" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb388-5"><a href="tidy-text-analysis.html#cb388-5" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb388-6"><a href="tidy-text-analysis.html#cb388-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(word, beta), <span class="at">y=</span>beta, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
+<span id="cb388-7"><a href="tidy-text-analysis.html#cb388-7" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb388-8"><a href="tidy-text-analysis.html#cb388-8" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#9FC6C0&quot;</span>,<span class="st">&quot;#5495AD&quot;</span>,<span class="st">&quot;#08333F&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb388-9"><a href="tidy-text-analysis.html#cb388-9" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb388-10"><a href="tidy-text-analysis.html#cb388-10" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>topic, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>, <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 1&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 2&quot;</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb388-11"><a href="tidy-text-analysis.html#cb388-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;word&quot;</span>) <span class="sc">+</span></span>
+<span id="cb388-12"><a href="tidy-text-analysis.html#cb388-12" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-243-1.png" width="672" /></p>
 <p>As we can see, the topics are note really exclusive, i.e., have a lot of
 overlaps. This is a sign that we (a) need more preprocessing / text
 normalization and (b) need to adjust the number of <em>K</em> topics. However,
@@ -1340,20 +1293,20 @@ at the less frequent terms in each topic to check if our interpretation
 of the topics remains logical. Let’s have a look at the issues without
 the “top performers” <code>ukrain</code>, <code>russia</code>, and <code>putin</code> and look at the
 topics again.</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="tidy-text-analysis.html#cb397-1" tabindex="-1"></a>tidy_lda <span class="sc">%&gt;%</span></span>
-<span id="cb397-2"><a href="tidy-text-analysis.html#cb397-2" tabindex="-1"></a>  <span class="fu">filter</span>(word<span class="sc">!=</span><span class="st">&quot;putin&quot;</span>, word<span class="sc">!=</span><span class="st">&quot;ukrain&quot;</span>,  word<span class="sc">!=</span><span class="st">&quot;russia&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb397-3"><a href="tidy-text-analysis.html#cb397-3" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
-<span id="cb397-4"><a href="tidy-text-analysis.html#cb397-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
-<span id="cb397-5"><a href="tidy-text-analysis.html#cb397-5" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb397-6"><a href="tidy-text-analysis.html#cb397-6" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb397-7"><a href="tidy-text-analysis.html#cb397-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(word, beta), <span class="at">y=</span>beta, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
-<span id="cb397-8"><a href="tidy-text-analysis.html#cb397-8" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb397-9"><a href="tidy-text-analysis.html#cb397-9" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#9FC6C0&quot;</span>,<span class="st">&quot;#5495AD&quot;</span>,<span class="st">&quot;#08333F&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb397-10"><a href="tidy-text-analysis.html#cb397-10" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="fl">0.07</span>) <span class="sc">+</span></span>
-<span id="cb397-11"><a href="tidy-text-analysis.html#cb397-11" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>topic, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>, <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 1&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 2&quot;</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">+</span></span>
-<span id="cb397-12"><a href="tidy-text-analysis.html#cb397-12" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;word&quot;</span>) <span class="sc">+</span></span>
-<span id="cb397-13"><a href="tidy-text-analysis.html#cb397-13" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-249-1.png" width="672" /></p>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="tidy-text-analysis.html#cb389-1" tabindex="-1"></a>tidy_lda <span class="sc">%&gt;%</span></span>
+<span id="cb389-2"><a href="tidy-text-analysis.html#cb389-2" tabindex="-1"></a>  <span class="fu">filter</span>(word<span class="sc">!=</span><span class="st">&quot;putin&quot;</span>, word<span class="sc">!=</span><span class="st">&quot;ukrain&quot;</span>,  word<span class="sc">!=</span><span class="st">&quot;russia&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb389-3"><a href="tidy-text-analysis.html#cb389-3" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb389-4"><a href="tidy-text-analysis.html#cb389-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
+<span id="cb389-5"><a href="tidy-text-analysis.html#cb389-5" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb389-6"><a href="tidy-text-analysis.html#cb389-6" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb389-7"><a href="tidy-text-analysis.html#cb389-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(word, beta), <span class="at">y=</span>beta, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
+<span id="cb389-8"><a href="tidy-text-analysis.html#cb389-8" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb389-9"><a href="tidy-text-analysis.html#cb389-9" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#9FC6C0&quot;</span>,<span class="st">&quot;#5495AD&quot;</span>,<span class="st">&quot;#08333F&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb389-10"><a href="tidy-text-analysis.html#cb389-10" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="fl">0.07</span>) <span class="sc">+</span></span>
+<span id="cb389-11"><a href="tidy-text-analysis.html#cb389-11" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>topic, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>, <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 1&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 2&quot;</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb389-12"><a href="tidy-text-analysis.html#cb389-12" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;word&quot;</span>) <span class="sc">+</span></span>
+<span id="cb389-13"><a href="tidy-text-analysis.html#cb389-13" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-244-1.png" width="672" /></p>
 <p>Excluding these top performers gives away more information. We might read the topics somewhat like this:</p>
 <ol style="list-style-type: decimal">
 <li><strong>Topic 1</strong>: The focus seems to be on war escalation (pro war). Here, tweets propose that the world (not U.S. America / NATO!) should join the fight?</li>
@@ -1399,10 +1352,10 @@ analysis to produce better results?</p>
 <p>Now that we know which words are associated with what topics, we also
 want to know what documents (i.e., tweets) are associated with what
 topics.</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="tidy-text-analysis.html#cb398-1" tabindex="-1"></a><span class="co"># again, turn the lda model back into a tidy data frame:</span></span>
-<span id="cb398-2"><a href="tidy-text-analysis.html#cb398-2" tabindex="-1"></a>tidy_lda2 <span class="ot">&lt;-</span> <span class="fu">tidy</span>(lda, <span class="at">matrix =</span> <span class="st">&quot;gamma&quot;</span>) <span class="co"># matrix = &quot;gamma&quot; creates the document-topic probabilities</span></span>
-<span id="cb398-3"><a href="tidy-text-analysis.html#cb398-3" tabindex="-1"></a>  </span>
-<span id="cb398-4"><a href="tidy-text-analysis.html#cb398-4" tabindex="-1"></a><span class="fu">head</span>(tidy_lda2)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="tidy-text-analysis.html#cb390-1" tabindex="-1"></a><span class="co"># again, turn the lda model back into a tidy data frame:</span></span>
+<span id="cb390-2"><a href="tidy-text-analysis.html#cb390-2" tabindex="-1"></a>tidy_lda2 <span class="ot">&lt;-</span> <span class="fu">tidy</span>(lda, <span class="at">matrix =</span> <span class="st">&quot;gamma&quot;</span>) <span class="co"># matrix = &quot;gamma&quot; creates the document-topic probabilities</span></span>
+<span id="cb390-3"><a href="tidy-text-analysis.html#cb390-3" tabindex="-1"></a>  </span>
+<span id="cb390-4"><a href="tidy-text-analysis.html#cb390-4" tabindex="-1"></a><span class="fu">head</span>(tidy_lda2)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ##   document topic gamma
 ##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
@@ -1422,9 +1375,9 @@ topic) and to assign main topics to documents In summary, the word-topic
 matrix aids in the creation of document-specific topic lists.</p>
 <p>Let’s investigate which documents have the highest probability for Topic
 2, the topic that seems to focus on war deescalation, i.e. stopping the fights.</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="tidy-text-analysis.html#cb400-1" tabindex="-1"></a>tidy_lda2 <span class="sc">%&gt;%</span></span>
-<span id="cb400-2"><a href="tidy-text-analysis.html#cb400-2" tabindex="-1"></a>  <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb400-3"><a href="tidy-text-analysis.html#cb400-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma))</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="tidy-text-analysis.html#cb392-1" tabindex="-1"></a>tidy_lda2 <span class="sc">%&gt;%</span></span>
+<span id="cb392-2"><a href="tidy-text-analysis.html#cb392-2" tabindex="-1"></a>  <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb392-3"><a href="tidy-text-analysis.html#cb392-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma))</span></code></pre></div>
 <pre><code>## # A tibble: 9,667 × 3
 ##    document topic gamma
 ##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
@@ -1443,23 +1396,23 @@ matrix aids in the creation of document-specific topic lists.</p>
 related to Topic2. This is also true for tweet No. 31167.</p>
 <p>Let’s have a look at both tweets and evaluate their word choice and full
 tweet text.</p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="tidy-text-analysis.html#cb402-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb402-2"><a href="tidy-text-analysis.html#cb402-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
-<span id="cb402-3"><a href="tidy-text-analysis.html#cb402-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">9491</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb402-4"><a href="tidy-text-analysis.html#cb402-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb402-5"><a href="tidy-text-analysis.html#cb402-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="tidy-text-analysis.html#cb394-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb394-2"><a href="tidy-text-analysis.html#cb394-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
+<span id="cb394-3"><a href="tidy-text-analysis.html#cb394-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">9491</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb394-4"><a href="tidy-text-analysis.html#cb394-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb394-5"><a href="tidy-text-analysis.html#cb394-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
 <pre><code>## [1] &quot;Russia expects India to support it at the UNSC,when a resolution opposing the military Russian operation against Ukraine comes up for a vote on Friday evening (IST 1:30am saturday)- Babushkin Senior most Russian Diplomat in New Delhi \n\nIndian caught between devil&amp;amp;deep blue sea&quot;</code></pre>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="tidy-text-analysis.html#cb404-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb404-2"><a href="tidy-text-analysis.html#cb404-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
-<span id="cb404-3"><a href="tidy-text-analysis.html#cb404-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">31167</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb404-4"><a href="tidy-text-analysis.html#cb404-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb404-5"><a href="tidy-text-analysis.html#cb404-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="tidy-text-analysis.html#cb396-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb396-2"><a href="tidy-text-analysis.html#cb396-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
+<span id="cb396-3"><a href="tidy-text-analysis.html#cb396-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">31167</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb396-4"><a href="tidy-text-analysis.html#cb396-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb396-5"><a href="tidy-text-analysis.html#cb396-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
 <pre><code>## [1] &quot;@mfa_russia @NATO @RussianEmbFinla @Finland_OSCE @GenConFinSPb @Ulkoministerio @EmbFinMoscow @RusEmbNo @natomission_ru @USNATO @StateDept Let’s see, NATO hasn’t invaded anyone to force it to join while Russia has invaded Ukraine to force them to be friendly to Russia. Damn NATO sure is a threat to Russian security.&quot;</code></pre>
 <p>Interesting! Both tweets are about diplomatic (instead of military) actions, i.e. which countries are in support of the Ukraine joining NATO and of the sovereignty of Ukraine. Of course, we should check more tweets to validate this, but it’s a good start.</p>
 <p>For comparison, let’s also look at documents that score high on Topic 1.</p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="tidy-text-analysis.html#cb406-1" tabindex="-1"></a>tidy_lda2 <span class="sc">%&gt;%</span></span>
-<span id="cb406-2"><a href="tidy-text-analysis.html#cb406-2" tabindex="-1"></a>  <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb406-3"><a href="tidy-text-analysis.html#cb406-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma))</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="tidy-text-analysis.html#cb398-1" tabindex="-1"></a>tidy_lda2 <span class="sc">%&gt;%</span></span>
+<span id="cb398-2"><a href="tidy-text-analysis.html#cb398-2" tabindex="-1"></a>  <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb398-3"><a href="tidy-text-analysis.html#cb398-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma))</span></code></pre></div>
 <pre><code>## # A tibble: 9,667 × 3
 ##    document topic gamma
 ##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
@@ -1475,17 +1428,17 @@ tweet text.</p>
 ## 10 13899        1 0.368
 ## # ℹ 9,657 more rows</code></pre>
 <p>Both tweet No. 7805 and No. 37798 have a high share of topic 1.</p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="tidy-text-analysis.html#cb408-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb408-2"><a href="tidy-text-analysis.html#cb408-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
-<span id="cb408-3"><a href="tidy-text-analysis.html#cb408-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">7805</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb408-4"><a href="tidy-text-analysis.html#cb408-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)   <span class="sc">%&gt;%</span></span>
-<span id="cb408-5"><a href="tidy-text-analysis.html#cb408-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="tidy-text-analysis.html#cb400-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb400-2"><a href="tidy-text-analysis.html#cb400-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
+<span id="cb400-3"><a href="tidy-text-analysis.html#cb400-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">7805</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb400-4"><a href="tidy-text-analysis.html#cb400-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)   <span class="sc">%&gt;%</span></span>
+<span id="cb400-5"><a href="tidy-text-analysis.html#cb400-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
 <pre><code>## [1] &quot;#Trump, who was impeached for withholding nearly $400 million in military aid from Ukraine, said &#39;this deadly Ukraine situation would never have happened&#39; if he were in office https://t.co/o258hgvhRw  https://t.co/R7ivJcvg3s https://t.co/JWvVPzTohT&quot;</code></pre>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="tidy-text-analysis.html#cb410-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb410-2"><a href="tidy-text-analysis.html#cb410-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
-<span id="cb410-3"><a href="tidy-text-analysis.html#cb410-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">12781</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb410-4"><a href="tidy-text-analysis.html#cb410-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb410-5"><a href="tidy-text-analysis.html#cb410-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="tidy-text-analysis.html#cb402-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb402-2"><a href="tidy-text-analysis.html#cb402-2" tabindex="-1"></a>  <span class="fu">select</span>(tweet, full_text, word) <span class="sc">%&gt;%</span> </span>
+<span id="cb402-3"><a href="tidy-text-analysis.html#cb402-3" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">12781</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb402-4"><a href="tidy-text-analysis.html#cb402-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb402-5"><a href="tidy-text-analysis.html#cb402-5" tabindex="-1"></a>  <span class="fu">pull</span>(full_text)</span></code></pre></div>
 <pre><code>## [1] &quot;@EmbassyofRussia @RussianEmbassy @mfa_russia @PMSimferopol @MID_Kaliningrad @RusEmbUSA @RTUKnews @russiabeyond @RusConsCapetown @Geostrat_ME @RusEmbEst A squad of Chechen special forces &#39;hunters&#39; has been unleashed in Ukraine to detain or KILL a set of specific Ukrainian officials......\nhttps://t.co/PcuTQZeAri&quot;</code></pre>
 <p>Thematically, these two tweets do not fit well together, but they both use a lot of brutal words, e.g., kill and deadly. Most likely this is the reason why they have been clustered together. Obviously, we should rerun this analysis with a greater number of topics because our current model does not differentiate well enough between different geographic regions and prominent actors. In most use cases, we would assume that 20-50 topics are a more accurate reflection of real-world conversations.</p>
 </div>
@@ -1515,47 +1468,47 @@ organizational standpoint.</p>
 <p>Building on code provided by <a href="https://ianadamsresearch.com/post/tidy-stm/tidying-stm-with-tidytext/">Ian T. Adams</a>,
 we can create a beautiful overview of our extracted topics and the most
 common words that contribute to each topic:</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="tidy-text-analysis.html#cb412-1" tabindex="-1"></a>top_terms <span class="ot">&lt;-</span> tidy_lda <span class="sc">%&gt;%</span></span>
-<span id="cb412-2"><a href="tidy-text-analysis.html#cb412-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
-<span id="cb412-3"><a href="tidy-text-analysis.html#cb412-3" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
-<span id="cb412-4"><a href="tidy-text-analysis.html#cb412-4" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb412-5"><a href="tidy-text-analysis.html#cb412-5" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
-<span id="cb412-6"><a href="tidy-text-analysis.html#cb412-6" tabindex="-1"></a>  <span class="fu">select</span>(topic, word) <span class="sc">%&gt;%</span></span>
-<span id="cb412-7"><a href="tidy-text-analysis.html#cb412-7" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">terms =</span> <span class="fu">list</span>(word)) <span class="sc">%&gt;%</span></span>
-<span id="cb412-8"><a href="tidy-text-analysis.html#cb412-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">terms =</span> <span class="fu">map</span>(terms, paste, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb412-9"><a href="tidy-text-analysis.html#cb412-9" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(terms))</span>
-<span id="cb412-10"><a href="tidy-text-analysis.html#cb412-10" tabindex="-1"></a></span>
-<span id="cb412-11"><a href="tidy-text-analysis.html#cb412-11" tabindex="-1"></a>gamma_terms <span class="ot">&lt;-</span> tidy_lda2 <span class="sc">%&gt;%</span></span>
-<span id="cb412-12"><a href="tidy-text-analysis.html#cb412-12" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
-<span id="cb412-13"><a href="tidy-text-analysis.html#cb412-13" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">gamma =</span> <span class="fu">mean</span>(gamma)) <span class="sc">%&gt;%</span></span>
-<span id="cb412-14"><a href="tidy-text-analysis.html#cb412-14" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma)) <span class="sc">%&gt;%</span></span>
-<span id="cb412-15"><a href="tidy-text-analysis.html#cb412-15" tabindex="-1"></a>  <span class="fu">left_join</span>(top_terms, <span class="at">by =</span> <span class="st">&quot;topic&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb412-16"><a href="tidy-text-analysis.html#cb412-16" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">paste0</span>(<span class="st">&quot;Topic &quot;</span>, topic),</span>
-<span id="cb412-17"><a href="tidy-text-analysis.html#cb412-17" tabindex="-1"></a>         <span class="at">topic =</span> <span class="fu">reorder</span>(topic, gamma))</span>
-<span id="cb412-18"><a href="tidy-text-analysis.html#cb412-18" tabindex="-1"></a></span>
-<span id="cb412-19"><a href="tidy-text-analysis.html#cb412-19" tabindex="-1"></a>gamma_terms <span class="sc">%&gt;%</span></span>
-<span id="cb412-20"><a href="tidy-text-analysis.html#cb412-20" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma)) <span class="sc">%&gt;%</span> </span>
-<span id="cb412-21"><a href="tidy-text-analysis.html#cb412-21" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb412-22"><a href="tidy-text-analysis.html#cb412-22" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">factor</span>(topic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Topic 1&quot;</span>,<span class="st">&quot;Topic 2&quot;</span>,<span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb412-23"><a href="tidy-text-analysis.html#cb412-23" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(topic, gamma, <span class="at">label =</span> terms, <span class="at">fill =</span> topic)) <span class="sc">+</span></span>
-<span id="cb412-24"><a href="tidy-text-analysis.html#cb412-24" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb412-25"><a href="tidy-text-analysis.html#cb412-25" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">hjust =</span> <span class="fl">1.1</span>, <span class="at">nudge_y =</span> <span class="fl">0.0005</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb412-26"><a href="tidy-text-analysis.html#cb412-26" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#9FC6C0&quot;</span>,<span class="st">&quot;#5495AD&quot;</span>,<span class="st">&quot;#08333F&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb412-27"><a href="tidy-text-analysis.html#cb412-27" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb412-28"><a href="tidy-text-analysis.html#cb412-28" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb412-29"><a href="tidy-text-analysis.html#cb412-29" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>)) <span class="sc">+</span></span>
-<span id="cb412-30"><a href="tidy-text-analysis.html#cb412-30" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="fu">expression</span>(gamma),</span>
-<span id="cb412-31"><a href="tidy-text-analysis.html#cb412-31" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;The Three Topics In The Ukrainian Twitter Data (25.02)&quot;</span>,</span>
-<span id="cb412-32"><a href="tidy-text-analysis.html#cb412-32" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;With the top words that contribute to each topic&quot;</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-257-1.png" width="672" /></p>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="tidy-text-analysis.html#cb404-1" tabindex="-1"></a>top_terms <span class="ot">&lt;-</span> tidy_lda <span class="sc">%&gt;%</span></span>
+<span id="cb404-2"><a href="tidy-text-analysis.html#cb404-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
+<span id="cb404-3"><a href="tidy-text-analysis.html#cb404-3" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb404-4"><a href="tidy-text-analysis.html#cb404-4" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb404-5"><a href="tidy-text-analysis.html#cb404-5" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
+<span id="cb404-6"><a href="tidy-text-analysis.html#cb404-6" tabindex="-1"></a>  <span class="fu">select</span>(topic, word) <span class="sc">%&gt;%</span></span>
+<span id="cb404-7"><a href="tidy-text-analysis.html#cb404-7" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">terms =</span> <span class="fu">list</span>(word)) <span class="sc">%&gt;%</span></span>
+<span id="cb404-8"><a href="tidy-text-analysis.html#cb404-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">terms =</span> <span class="fu">map</span>(terms, paste, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb404-9"><a href="tidy-text-analysis.html#cb404-9" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(terms))</span>
+<span id="cb404-10"><a href="tidy-text-analysis.html#cb404-10" tabindex="-1"></a></span>
+<span id="cb404-11"><a href="tidy-text-analysis.html#cb404-11" tabindex="-1"></a>gamma_terms <span class="ot">&lt;-</span> tidy_lda2 <span class="sc">%&gt;%</span></span>
+<span id="cb404-12"><a href="tidy-text-analysis.html#cb404-12" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb404-13"><a href="tidy-text-analysis.html#cb404-13" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">gamma =</span> <span class="fu">mean</span>(gamma)) <span class="sc">%&gt;%</span></span>
+<span id="cb404-14"><a href="tidy-text-analysis.html#cb404-14" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma)) <span class="sc">%&gt;%</span></span>
+<span id="cb404-15"><a href="tidy-text-analysis.html#cb404-15" tabindex="-1"></a>  <span class="fu">left_join</span>(top_terms, <span class="at">by =</span> <span class="st">&quot;topic&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb404-16"><a href="tidy-text-analysis.html#cb404-16" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">paste0</span>(<span class="st">&quot;Topic &quot;</span>, topic),</span>
+<span id="cb404-17"><a href="tidy-text-analysis.html#cb404-17" tabindex="-1"></a>         <span class="at">topic =</span> <span class="fu">reorder</span>(topic, gamma))</span>
+<span id="cb404-18"><a href="tidy-text-analysis.html#cb404-18" tabindex="-1"></a></span>
+<span id="cb404-19"><a href="tidy-text-analysis.html#cb404-19" tabindex="-1"></a>gamma_terms <span class="sc">%&gt;%</span></span>
+<span id="cb404-20"><a href="tidy-text-analysis.html#cb404-20" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma)) <span class="sc">%&gt;%</span> </span>
+<span id="cb404-21"><a href="tidy-text-analysis.html#cb404-21" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb404-22"><a href="tidy-text-analysis.html#cb404-22" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">factor</span>(topic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Topic 1&quot;</span>,<span class="st">&quot;Topic 2&quot;</span>,<span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb404-23"><a href="tidy-text-analysis.html#cb404-23" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(topic, gamma, <span class="at">label =</span> terms, <span class="at">fill =</span> topic)) <span class="sc">+</span></span>
+<span id="cb404-24"><a href="tidy-text-analysis.html#cb404-24" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb404-25"><a href="tidy-text-analysis.html#cb404-25" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">hjust =</span> <span class="fl">1.1</span>, <span class="at">nudge_y =</span> <span class="fl">0.0005</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb404-26"><a href="tidy-text-analysis.html#cb404-26" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#9FC6C0&quot;</span>,<span class="st">&quot;#5495AD&quot;</span>,<span class="st">&quot;#08333F&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb404-27"><a href="tidy-text-analysis.html#cb404-27" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb404-28"><a href="tidy-text-analysis.html#cb404-28" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb404-29"><a href="tidy-text-analysis.html#cb404-29" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>)) <span class="sc">+</span></span>
+<span id="cb404-30"><a href="tidy-text-analysis.html#cb404-30" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="fu">expression</span>(gamma),</span>
+<span id="cb404-31"><a href="tidy-text-analysis.html#cb404-31" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;The Three Topics In The Ukrainian Twitter Data (25.02)&quot;</span>,</span>
+<span id="cb404-32"><a href="tidy-text-analysis.html#cb404-32" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;With the top words that contribute to each topic&quot;</span>)</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-252-1.png" width="672" /></p>
 <p>Or in a table format:</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="tidy-text-analysis.html#cb413-1" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb413-2"><a href="tidy-text-analysis.html#cb413-2" tabindex="-1"></a>gamma_terms <span class="sc">%&gt;%</span></span>
-<span id="cb413-3"><a href="tidy-text-analysis.html#cb413-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">factor</span>(topic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Topic 1&quot;</span>,<span class="st">&quot;Topic 2&quot;</span>,<span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb413-4"><a href="tidy-text-analysis.html#cb413-4" tabindex="-1"></a>  <span class="fu">arrange</span>(topic) <span class="sc">%&gt;%</span> </span>
-<span id="cb413-5"><a href="tidy-text-analysis.html#cb413-5" tabindex="-1"></a>  <span class="fu">select</span>(topic, gamma, terms) <span class="sc">%&gt;%</span></span>
-<span id="cb413-6"><a href="tidy-text-analysis.html#cb413-6" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>, </span>
-<span id="cb413-7"><a href="tidy-text-analysis.html#cb413-7" tabindex="-1"></a>        <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Topic&quot;</span>, <span class="st">&quot;Expected topic proportion&quot;</span>, <span class="st">&quot;Top 6 terms&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="tidy-text-analysis.html#cb405-1" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb405-2"><a href="tidy-text-analysis.html#cb405-2" tabindex="-1"></a>gamma_terms <span class="sc">%&gt;%</span></span>
+<span id="cb405-3"><a href="tidy-text-analysis.html#cb405-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">factor</span>(topic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Topic 1&quot;</span>,<span class="st">&quot;Topic 2&quot;</span>,<span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb405-4"><a href="tidy-text-analysis.html#cb405-4" tabindex="-1"></a>  <span class="fu">arrange</span>(topic) <span class="sc">%&gt;%</span> </span>
+<span id="cb405-5"><a href="tidy-text-analysis.html#cb405-5" tabindex="-1"></a>  <span class="fu">select</span>(topic, gamma, terms) <span class="sc">%&gt;%</span></span>
+<span id="cb405-6"><a href="tidy-text-analysis.html#cb405-6" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>, </span>
+<span id="cb405-7"><a href="tidy-text-analysis.html#cb405-7" tabindex="-1"></a>        <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Topic&quot;</span>, <span class="st">&quot;Expected topic proportion&quot;</span>, <span class="st">&quot;Top 6 terms&quot;</span>))</span></code></pre></div>
 <table>
 <colgroup>
 <col width="7%" />
@@ -1626,7 +1579,7 @@ with a negativity / emotion score. The text’s overall sentiment is
 interpreted as the sum of these individual scores. Professional,
 peer-reviewed “dictionaries” determine what score should be assigned to
 each individual word and they always look somewhat like this example:</p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="tidy-text-analysis.html#cb414-1" tabindex="-1"></a>tidytext<span class="sc">::</span><span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="tidy-text-analysis.html#cb406-1" tabindex="-1"></a>tidytext<span class="sc">::</span><span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 6,786 × 2
 ##    word        sentiment
 ##    &lt;chr&gt;       &lt;chr&gt;    
@@ -1651,12 +1604,12 @@ data.</p>
 <p>First, we need to create a data set that contains the word list of the
 <code>bing</code> dictionary. We will then add the sentiment evaluations of the
 <code>bing</code> word list to our tokenized data set:</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="tidy-text-analysis.html#cb416-1" tabindex="-1"></a>bing <span class="ot">&lt;-</span> tidytext<span class="sc">::</span><span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)</span>
-<span id="cb416-2"><a href="tidy-text-analysis.html#cb416-2" tabindex="-1"></a></span>
-<span id="cb416-3"><a href="tidy-text-analysis.html#cb416-3" tabindex="-1"></a>data_tknzd_bing <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb416-4"><a href="tidy-text-analysis.html#cb416-4" tabindex="-1"></a>  <span class="fu">inner_join</span>(bing)</span>
-<span id="cb416-5"><a href="tidy-text-analysis.html#cb416-5" tabindex="-1"></a></span>
-<span id="cb416-6"><a href="tidy-text-analysis.html#cb416-6" tabindex="-1"></a><span class="fu">head</span>(data_tknzd_bing)</span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="tidy-text-analysis.html#cb408-1" tabindex="-1"></a>bing <span class="ot">&lt;-</span> tidytext<span class="sc">::</span><span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)</span>
+<span id="cb408-2"><a href="tidy-text-analysis.html#cb408-2" tabindex="-1"></a></span>
+<span id="cb408-3"><a href="tidy-text-analysis.html#cb408-3" tabindex="-1"></a>data_tknzd_bing <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb408-4"><a href="tidy-text-analysis.html#cb408-4" tabindex="-1"></a>  <span class="fu">inner_join</span>(bing)</span>
+<span id="cb408-5"><a href="tidy-text-analysis.html#cb408-5" tabindex="-1"></a></span>
+<span id="cb408-6"><a href="tidy-text-analysis.html#cb408-6" tabindex="-1"></a><span class="fu">head</span>(data_tknzd_bing)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 6
 ##   time                user         full_text               tweet word  sentiment
 ##   &lt;dttm&gt;              &lt;chr&gt;        &lt;chr&gt;                   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;    
@@ -1668,16 +1621,16 @@ data.</p>
 ## 6 2022-02-25 18:10:59 ananthoo1    &quot;What a speech! By Ukr…    31 love  positive</code></pre>
 <p>Now we can estimate the sentiment of the tweets over time, i.e., see how
 the sentiment developed over time.</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="tidy-text-analysis.html#cb418-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb418-2"><a href="tidy-text-analysis.html#cb418-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb418-3"><a href="tidy-text-analysis.html#cb418-3" tabindex="-1"></a>  <span class="fu">count</span>(sentiment, time) <span class="sc">%&gt;%</span></span>
-<span id="cb418-4"><a href="tidy-text-analysis.html#cb418-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb418-5"><a href="tidy-text-analysis.html#cb418-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative) <span class="sc">%&gt;%</span></span>
-<span id="cb418-6"><a href="tidy-text-analysis.html#cb418-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb418-7"><a href="tidy-text-analysis.html#cb418-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Bing dictionary&quot;</span>) <span class="sc">+</span></span>
-<span id="cb418-8"><a href="tidy-text-analysis.html#cb418-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb418-9"><a href="tidy-text-analysis.html#cb418-9" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-261-1.png" width="672" /></p>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="tidy-text-analysis.html#cb410-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb410-2"><a href="tidy-text-analysis.html#cb410-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb410-3"><a href="tidy-text-analysis.html#cb410-3" tabindex="-1"></a>  <span class="fu">count</span>(sentiment, time) <span class="sc">%&gt;%</span></span>
+<span id="cb410-4"><a href="tidy-text-analysis.html#cb410-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb410-5"><a href="tidy-text-analysis.html#cb410-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative) <span class="sc">%&gt;%</span></span>
+<span id="cb410-6"><a href="tidy-text-analysis.html#cb410-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb410-7"><a href="tidy-text-analysis.html#cb410-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Bing dictionary&quot;</span>) <span class="sc">+</span></span>
+<span id="cb410-8"><a href="tidy-text-analysis.html#cb410-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb410-9"><a href="tidy-text-analysis.html#cb410-9" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-256-1.png" width="672" /></p>
 <p>Overall, the tone of tweets is negative. Only a few tweets have a
 positive valence. Let’s check whether these results are characteristic
 for the <code>bing</code> dictionary and compare them to another dictionary, namely
@@ -1685,17 +1638,17 @@ the <code>afinn</code> dictionary. Let’s load the <code>afinn</code> dictionar
 included in the <code>tidytext</code> package, so you can agree to the licence and
 load it that way. I have added the <code>afinn</code> dictionary to a .csv to
 import it more effortlessly, so I’ll use this approach.</p>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="tidy-text-analysis.html#cb419-1" tabindex="-1"></a>afinn <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/afinn_dictionary.csv&quot;</span>)</span>
-<span id="cb419-2"><a href="tidy-text-analysis.html#cb419-2" tabindex="-1"></a></span>
-<span id="cb419-3"><a href="tidy-text-analysis.html#cb419-3" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb419-4"><a href="tidy-text-analysis.html#cb419-4" tabindex="-1"></a>  <span class="fu">inner_join</span>(afinn) <span class="sc">%&gt;%</span></span>
-<span id="cb419-5"><a href="tidy-text-analysis.html#cb419-5" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span> </span>
-<span id="cb419-6"><a href="tidy-text-analysis.html#cb419-6" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sentiment =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span> </span>
-<span id="cb419-7"><a href="tidy-text-analysis.html#cb419-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb419-8"><a href="tidy-text-analysis.html#cb419-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Afinn dictionary&quot;</span>) <span class="sc">+</span></span>
-<span id="cb419-9"><a href="tidy-text-analysis.html#cb419-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb419-10"><a href="tidy-text-analysis.html#cb419-10" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-262-1.png" width="672" /></p>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="tidy-text-analysis.html#cb411-1" tabindex="-1"></a>afinn <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/afinn_dictionary.csv&quot;</span>)</span>
+<span id="cb411-2"><a href="tidy-text-analysis.html#cb411-2" tabindex="-1"></a></span>
+<span id="cb411-3"><a href="tidy-text-analysis.html#cb411-3" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb411-4"><a href="tidy-text-analysis.html#cb411-4" tabindex="-1"></a>  <span class="fu">inner_join</span>(afinn) <span class="sc">%&gt;%</span></span>
+<span id="cb411-5"><a href="tidy-text-analysis.html#cb411-5" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span> </span>
+<span id="cb411-6"><a href="tidy-text-analysis.html#cb411-6" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sentiment =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb411-7"><a href="tidy-text-analysis.html#cb411-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb411-8"><a href="tidy-text-analysis.html#cb411-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Afinn dictionary&quot;</span>) <span class="sc">+</span></span>
+<span id="cb411-9"><a href="tidy-text-analysis.html#cb411-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb411-10"><a href="tidy-text-analysis.html#cb411-10" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-257-1.png" width="672" /></p>
 <p>Even though both dictionaries produce similar results, we can see that
 <code>afinn</code> estimates a greater amount of positive tweets, while the <code>bing</code>
 dictionary estimates larger blocks of uninterrupted negative sentiment.
@@ -1714,21 +1667,21 @@ negative text.” (Silge &amp; Robinson,
 estimate 1) negative and positive valence or 2) emotions such anger,
 sadness, joy, etc. For now, let’s import the valence word lists from
 <code>nrc</code>and repeat our analysis one last time.</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="tidy-text-analysis.html#cb420-1" tabindex="-1"></a>nrc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/nrc_dictionary.csv&quot;</span>)</span>
-<span id="cb420-2"><a href="tidy-text-analysis.html#cb420-2" tabindex="-1"></a></span>
-<span id="cb420-3"><a href="tidy-text-analysis.html#cb420-3" tabindex="-1"></a>nrc <span class="ot">&lt;-</span> nrc <span class="sc">%&gt;%</span> </span>
-<span id="cb420-4"><a href="tidy-text-analysis.html#cb420-4" tabindex="-1"></a>  <span class="fu">filter</span>(sentiment <span class="sc">==</span> <span class="st">&quot;positive&quot;</span> <span class="sc">|</span> sentiment <span class="sc">==</span> <span class="st">&quot;negative&quot;</span>)</span>
-<span id="cb420-5"><a href="tidy-text-analysis.html#cb420-5" tabindex="-1"></a></span>
-<span id="cb420-6"><a href="tidy-text-analysis.html#cb420-6" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb420-7"><a href="tidy-text-analysis.html#cb420-7" tabindex="-1"></a>  <span class="fu">inner_join</span>(nrc) <span class="sc">%&gt;%</span></span>
-<span id="cb420-8"><a href="tidy-text-analysis.html#cb420-8" tabindex="-1"></a>  <span class="fu">count</span>(sentiment, time) <span class="sc">%&gt;%</span></span>
-<span id="cb420-9"><a href="tidy-text-analysis.html#cb420-9" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb420-10"><a href="tidy-text-analysis.html#cb420-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative) <span class="sc">%&gt;%</span></span>
-<span id="cb420-11"><a href="tidy-text-analysis.html#cb420-11" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb420-12"><a href="tidy-text-analysis.html#cb420-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;NRC dictionary&quot;</span>) <span class="sc">+</span></span>
-<span id="cb420-13"><a href="tidy-text-analysis.html#cb420-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb420-14"><a href="tidy-text-analysis.html#cb420-14" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-263-1.png" width="672" /></p>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="tidy-text-analysis.html#cb412-1" tabindex="-1"></a>nrc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/nrc_dictionary.csv&quot;</span>)</span>
+<span id="cb412-2"><a href="tidy-text-analysis.html#cb412-2" tabindex="-1"></a></span>
+<span id="cb412-3"><a href="tidy-text-analysis.html#cb412-3" tabindex="-1"></a>nrc <span class="ot">&lt;-</span> nrc <span class="sc">%&gt;%</span> </span>
+<span id="cb412-4"><a href="tidy-text-analysis.html#cb412-4" tabindex="-1"></a>  <span class="fu">filter</span>(sentiment <span class="sc">==</span> <span class="st">&quot;positive&quot;</span> <span class="sc">|</span> sentiment <span class="sc">==</span> <span class="st">&quot;negative&quot;</span>)</span>
+<span id="cb412-5"><a href="tidy-text-analysis.html#cb412-5" tabindex="-1"></a></span>
+<span id="cb412-6"><a href="tidy-text-analysis.html#cb412-6" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb412-7"><a href="tidy-text-analysis.html#cb412-7" tabindex="-1"></a>  <span class="fu">inner_join</span>(nrc) <span class="sc">%&gt;%</span></span>
+<span id="cb412-8"><a href="tidy-text-analysis.html#cb412-8" tabindex="-1"></a>  <span class="fu">count</span>(sentiment, time) <span class="sc">%&gt;%</span></span>
+<span id="cb412-9"><a href="tidy-text-analysis.html#cb412-9" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb412-10"><a href="tidy-text-analysis.html#cb412-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative) <span class="sc">%&gt;%</span></span>
+<span id="cb412-11"><a href="tidy-text-analysis.html#cb412-11" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb412-12"><a href="tidy-text-analysis.html#cb412-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;NRC dictionary&quot;</span>) <span class="sc">+</span></span>
+<span id="cb412-13"><a href="tidy-text-analysis.html#cb412-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb412-14"><a href="tidy-text-analysis.html#cb412-14" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-258-1.png" width="672" /></p>
 <p>Obviously, the <code>nrc</code> dictionary estimates a much greater amount of positive tweets than <code>bing</code> and <code>afinn</code>. This is why you should handle dictionary-based approaches carefully. As <a href="https://www.tandfonline.com/doi/full/10.1080/21670811.2022.2036623">Pipal et al. (2022)</a> put it:</p>
 <blockquote>
 <p>“Many widely used tools for sentiment analysis have been developed by psychologists to measure emotions in free-form writing (such as in product reviews and micro blogs) in the form of pre-defined lexicons (e.g. Tausczik and Pennebaker 2010), yet they are often conveniently used to measure complex latent constructs in highly structured news articles and speeches despite the content-dependent nature of the tools (Puschmann and Powell 2018; Pipal, Schoonvelde, and Schumacher 2022). Different tools embody different methodological assumptions and particular contexts within which they are initially developed from, leading to diverging consequences across different tools.”</p>
@@ -1748,15 +1701,15 @@ time frame. Let’s create three time periods (1 = first 3 min, 2 = 3rd to
 6th min, 3 = whole 10 min) and compare the sentiment that both <em>bing</em>
 and <em>afinn</em> estimate for these three time periods.</p>
 <p>Here are the results for <em>bing</em>:</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="tidy-text-analysis.html#cb421-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb421-2"><a href="tidy-text-analysis.html#cb421-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb421-3"><a href="tidy-text-analysis.html#cb421-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period =</span> <span class="fu">case_when</span>(</span>
-<span id="cb421-4"><a href="tidy-text-analysis.html#cb421-4" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 1&quot;</span>,</span>
-<span id="cb421-5"><a href="tidy-text-analysis.html#cb421-5" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:31&#39;</span>) <span class="sc">&amp;</span> </span>
-<span id="cb421-6"><a href="tidy-text-analysis.html#cb421-6" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 2&quot;</span>,</span>
-<span id="cb421-7"><a href="tidy-text-analysis.html#cb421-7" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:31&#39;</span>) <span class="sc">&amp;</span> </span>
-<span id="cb421-8"><a href="tidy-text-analysis.html#cb421-8" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:10:59&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 3&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb421-9"><a href="tidy-text-analysis.html#cb421-9" tabindex="-1"></a>  <span class="fu">count</span>(period, sentiment)</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="tidy-text-analysis.html#cb413-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb413-2"><a href="tidy-text-analysis.html#cb413-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb413-3"><a href="tidy-text-analysis.html#cb413-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period =</span> <span class="fu">case_when</span>(</span>
+<span id="cb413-4"><a href="tidy-text-analysis.html#cb413-4" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 1&quot;</span>,</span>
+<span id="cb413-5"><a href="tidy-text-analysis.html#cb413-5" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:31&#39;</span>) <span class="sc">&amp;</span> </span>
+<span id="cb413-6"><a href="tidy-text-analysis.html#cb413-6" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 2&quot;</span>,</span>
+<span id="cb413-7"><a href="tidy-text-analysis.html#cb413-7" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:31&#39;</span>) <span class="sc">&amp;</span> </span>
+<span id="cb413-8"><a href="tidy-text-analysis.html#cb413-8" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:10:59&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 3&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb413-9"><a href="tidy-text-analysis.html#cb413-9" tabindex="-1"></a>  <span class="fu">count</span>(period, sentiment)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ##   period   sentiment     n
 ##   &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt;
@@ -1767,19 +1720,19 @@ and <em>afinn</em> estimate for these three time periods.</p>
 ## 5 Period 3 negative   2545
 ## 6 Period 3 positive   1516</code></pre>
 <p>And here are the results for <em>afinn</em>:</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="tidy-text-analysis.html#cb423-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb423-2"><a href="tidy-text-analysis.html#cb423-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(afinn) <span class="sc">%&gt;%</span></span>
-<span id="cb423-3"><a href="tidy-text-analysis.html#cb423-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period =</span> <span class="fu">case_when</span>(</span>
-<span id="cb423-4"><a href="tidy-text-analysis.html#cb423-4" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 1&quot;</span>,</span>
-<span id="cb423-5"><a href="tidy-text-analysis.html#cb423-5" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:31&#39;</span>) <span class="sc">&amp;</span> </span>
-<span id="cb423-6"><a href="tidy-text-analysis.html#cb423-6" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 2&quot;</span>,</span>
-<span id="cb423-7"><a href="tidy-text-analysis.html#cb423-7" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:31&#39;</span>) <span class="sc">&amp;</span> </span>
-<span id="cb423-8"><a href="tidy-text-analysis.html#cb423-8" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:10:59&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 3&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb423-9"><a href="tidy-text-analysis.html#cb423-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> <span class="fu">case_when</span>(</span>
-<span id="cb423-10"><a href="tidy-text-analysis.html#cb423-10" tabindex="-1"></a>    value <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;negative&quot;</span>,</span>
-<span id="cb423-11"><a href="tidy-text-analysis.html#cb423-11" tabindex="-1"></a>    value <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;positive&quot;</span></span>
-<span id="cb423-12"><a href="tidy-text-analysis.html#cb423-12" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
-<span id="cb423-13"><a href="tidy-text-analysis.html#cb423-13" tabindex="-1"></a>  <span class="fu">count</span>(period, sentiment)</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="tidy-text-analysis.html#cb415-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb415-2"><a href="tidy-text-analysis.html#cb415-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(afinn) <span class="sc">%&gt;%</span></span>
+<span id="cb415-3"><a href="tidy-text-analysis.html#cb415-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period =</span> <span class="fu">case_when</span>(</span>
+<span id="cb415-4"><a href="tidy-text-analysis.html#cb415-4" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 1&quot;</span>,</span>
+<span id="cb415-5"><a href="tidy-text-analysis.html#cb415-5" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:03:31&#39;</span>) <span class="sc">&amp;</span> </span>
+<span id="cb415-6"><a href="tidy-text-analysis.html#cb415-6" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:30&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 2&quot;</span>,</span>
+<span id="cb415-7"><a href="tidy-text-analysis.html#cb415-7" tabindex="-1"></a>    time <span class="sc">&gt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:06:31&#39;</span>) <span class="sc">&amp;</span> </span>
+<span id="cb415-8"><a href="tidy-text-analysis.html#cb415-8" tabindex="-1"></a>    time <span class="sc">&lt;=</span> <span class="fu">ymd_hms</span>(<span class="st">&#39;2022-02-25 18:10:59&#39;</span>) <span class="sc">~</span> <span class="st">&quot;Period 3&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb415-9"><a href="tidy-text-analysis.html#cb415-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> <span class="fu">case_when</span>(</span>
+<span id="cb415-10"><a href="tidy-text-analysis.html#cb415-10" tabindex="-1"></a>    value <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;negative&quot;</span>,</span>
+<span id="cb415-11"><a href="tidy-text-analysis.html#cb415-11" tabindex="-1"></a>    value <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;positive&quot;</span></span>
+<span id="cb415-12"><a href="tidy-text-analysis.html#cb415-12" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb415-13"><a href="tidy-text-analysis.html#cb415-13" tabindex="-1"></a>  <span class="fu">count</span>(period, sentiment)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ##   period   sentiment     n
 ##   &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt;
@@ -1798,13 +1751,13 @@ and <em>afinn</em> estimate for these three time periods.</p>
 <h3><span class="header-section-number">9.5.3</span> Sentiment of individual users<a href="tidy-text-analysis.html#sentiment-of-individual-users" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now we can calculate the sentiment for each individual user. Let’s try
 it.</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="tidy-text-analysis.html#cb425-1" tabindex="-1"></a>data_tknzd_bing <span class="ot">&lt;-</span> data_tknzd_bing <span class="sc">%&gt;%</span></span>
-<span id="cb425-2"><a href="tidy-text-analysis.html#cb425-2" tabindex="-1"></a>  <span class="fu">count</span>(user, sentiment, time) <span class="sc">%&gt;%</span></span>
-<span id="cb425-3"><a href="tidy-text-analysis.html#cb425-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb425-4"><a href="tidy-text-analysis.html#cb425-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative)</span>
-<span id="cb425-5"><a href="tidy-text-analysis.html#cb425-5" tabindex="-1"></a></span>
-<span id="cb425-6"><a href="tidy-text-analysis.html#cb425-6" tabindex="-1"></a>data_tknzd_bing <span class="sc">%&gt;%</span></span>
-<span id="cb425-7"><a href="tidy-text-analysis.html#cb425-7" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="tidy-text-analysis.html#cb417-1" tabindex="-1"></a>data_tknzd_bing <span class="ot">&lt;-</span> data_tknzd_bing <span class="sc">%&gt;%</span></span>
+<span id="cb417-2"><a href="tidy-text-analysis.html#cb417-2" tabindex="-1"></a>  <span class="fu">count</span>(user, sentiment, time) <span class="sc">%&gt;%</span></span>
+<span id="cb417-3"><a href="tidy-text-analysis.html#cb417-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb417-4"><a href="tidy-text-analysis.html#cb417-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative)</span>
+<span id="cb417-5"><a href="tidy-text-analysis.html#cb417-5" tabindex="-1"></a></span>
+<span id="cb417-6"><a href="tidy-text-analysis.html#cb417-6" tabindex="-1"></a>data_tknzd_bing <span class="sc">%&gt;%</span></span>
+<span id="cb417-7"><a href="tidy-text-analysis.html#cb417-7" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 63 × 5
 ##    user      time                positive negative sentiment
 ##    &lt;chr&gt;     &lt;dttm&gt;                 &lt;int&gt;    &lt;int&gt;     &lt;int&gt;
@@ -1820,30 +1773,30 @@ it.</p>
 ## 10 BaloIreen 2022-02-25 18:06:08        1        0         1
 ## # ℹ 53 more rows</code></pre>
 <p>…and turn it into a visualization of our most active users over time:</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="tidy-text-analysis.html#cb427-1" tabindex="-1"></a>data_tknzd_bing <span class="sc">%&gt;%</span> </span>
-<span id="cb427-2"><a href="tidy-text-analysis.html#cb427-2" tabindex="-1"></a>  <span class="fu">group_by</span>(user, time) <span class="sc">%&gt;%</span></span>
-<span id="cb427-3"><a href="tidy-text-analysis.html#cb427-3" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb427-4"><a href="tidy-text-analysis.html#cb427-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment, <span class="at">fill =</span> user)) <span class="sc">+</span></span>
-<span id="cb427-5"><a href="tidy-text-analysis.html#cb427-5" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb427-6"><a href="tidy-text-analysis.html#cb427-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Bing: The sentiment of the most active users&quot;</span>) <span class="sc">+</span></span>
-<span id="cb427-7"><a href="tidy-text-analysis.html#cb427-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb427-8"><a href="tidy-text-analysis.html#cb427-8" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>user)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-267-1.png" width="672" /></p>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="tidy-text-analysis.html#cb419-1" tabindex="-1"></a>data_tknzd_bing <span class="sc">%&gt;%</span> </span>
+<span id="cb419-2"><a href="tidy-text-analysis.html#cb419-2" tabindex="-1"></a>  <span class="fu">group_by</span>(user, time) <span class="sc">%&gt;%</span></span>
+<span id="cb419-3"><a href="tidy-text-analysis.html#cb419-3" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb419-4"><a href="tidy-text-analysis.html#cb419-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment, <span class="at">fill =</span> user)) <span class="sc">+</span></span>
+<span id="cb419-5"><a href="tidy-text-analysis.html#cb419-5" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb419-6"><a href="tidy-text-analysis.html#cb419-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Bing: The sentiment of the most active users&quot;</span>) <span class="sc">+</span></span>
+<span id="cb419-7"><a href="tidy-text-analysis.html#cb419-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb419-8"><a href="tidy-text-analysis.html#cb419-8" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>user)</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-262-1.png" width="672" /></p>
 <p>According to the <em>bing</em> dictionary the sentiment of our most active
 twitter users was positive and stayed positive over the 10-minute time
 frame that we are currently looking at. Positive sentiment while talking
 about the outbreak of war? Those are odd results. Maybe the positive
 sentiment is characteristic of more active users?</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="tidy-text-analysis.html#cb428-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb428-2"><a href="tidy-text-analysis.html#cb428-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb428-3"><a href="tidy-text-analysis.html#cb428-3" tabindex="-1"></a>  <span class="fu">count</span>(sentiment, time) <span class="sc">%&gt;%</span></span>
-<span id="cb428-4"><a href="tidy-text-analysis.html#cb428-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb428-5"><a href="tidy-text-analysis.html#cb428-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative) <span class="sc">%&gt;%</span></span>
-<span id="cb428-6"><a href="tidy-text-analysis.html#cb428-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb428-7"><a href="tidy-text-analysis.html#cb428-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Bing dictionary&quot;</span>) <span class="sc">+</span></span>
-<span id="cb428-8"><a href="tidy-text-analysis.html#cb428-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb428-9"><a href="tidy-text-analysis.html#cb428-9" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-268-1.png" width="672" /></p>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="tidy-text-analysis.html#cb420-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb420-2"><a href="tidy-text-analysis.html#cb420-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb420-3"><a href="tidy-text-analysis.html#cb420-3" tabindex="-1"></a>  <span class="fu">count</span>(sentiment, time) <span class="sc">%&gt;%</span></span>
+<span id="cb420-4"><a href="tidy-text-analysis.html#cb420-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb420-5"><a href="tidy-text-analysis.html#cb420-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative) <span class="sc">%&gt;%</span></span>
+<span id="cb420-6"><a href="tidy-text-analysis.html#cb420-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb420-7"><a href="tidy-text-analysis.html#cb420-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Bing dictionary&quot;</span>) <span class="sc">+</span></span>
+<span id="cb420-8"><a href="tidy-text-analysis.html#cb420-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb420-9"><a href="tidy-text-analysis.html#cb420-9" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-263-1.png" width="672" /></p>
 <p>Overall, the tone of tweets is negative, which implies that the most
 active users are characterized by a more positive sentiment. That’s an
 interesting result and might be an indicator that very active accounts
@@ -1852,17 +1805,17 @@ could run more in-depth analyses of more users and longer time-periods
 to prove that, but for now we want to focus on alternative dictionaries.</p>
 <p>Knowing this, let’s check how similar the results are for our most
 active users.</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="tidy-text-analysis.html#cb429-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span> </span>
-<span id="cb429-2"><a href="tidy-text-analysis.html#cb429-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(afinn) <span class="sc">%&gt;%</span></span>
-<span id="cb429-3"><a href="tidy-text-analysis.html#cb429-3" tabindex="-1"></a>  <span class="fu">group_by</span>(user, time) <span class="sc">%&gt;%</span></span>
-<span id="cb429-4"><a href="tidy-text-analysis.html#cb429-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sentiment =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span></span>
-<span id="cb429-5"><a href="tidy-text-analysis.html#cb429-5" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb429-6"><a href="tidy-text-analysis.html#cb429-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment, <span class="at">fill =</span> user)) <span class="sc">+</span></span>
-<span id="cb429-7"><a href="tidy-text-analysis.html#cb429-7" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb429-8"><a href="tidy-text-analysis.html#cb429-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Afinn: The sentiment of the most active users&quot;</span>) <span class="sc">+</span></span>
-<span id="cb429-9"><a href="tidy-text-analysis.html#cb429-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb429-10"><a href="tidy-text-analysis.html#cb429-10" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>user)</span></code></pre></div>
-<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-269-1.png" width="672" /></p>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="tidy-text-analysis.html#cb421-1" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span> </span>
+<span id="cb421-2"><a href="tidy-text-analysis.html#cb421-2" tabindex="-1"></a>  <span class="fu">inner_join</span>(afinn) <span class="sc">%&gt;%</span></span>
+<span id="cb421-3"><a href="tidy-text-analysis.html#cb421-3" tabindex="-1"></a>  <span class="fu">group_by</span>(user, time) <span class="sc">%&gt;%</span></span>
+<span id="cb421-4"><a href="tidy-text-analysis.html#cb421-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sentiment =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb421-5"><a href="tidy-text-analysis.html#cb421-5" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb421-6"><a href="tidy-text-analysis.html#cb421-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment, <span class="at">fill =</span> user)) <span class="sc">+</span></span>
+<span id="cb421-7"><a href="tidy-text-analysis.html#cb421-7" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb421-8"><a href="tidy-text-analysis.html#cb421-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Afinn: The sentiment of the most active users&quot;</span>) <span class="sc">+</span></span>
+<span id="cb421-9"><a href="tidy-text-analysis.html#cb421-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb421-10"><a href="tidy-text-analysis.html#cb421-10" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>user)</span></code></pre></div>
+<p><img src="Intro-to-R_files/figure-html/unnamed-chunk-264-1.png" width="672" /></p>
 <p>That looks good, both <code>bing</code> and <code>afinn</code> come to similar conclusions,
 i.e., the most active users publish tweets with a positive sentiment.
 The dictionary approaches that treat sentiment as the sum of the
